@@ -12,3 +12,28 @@
       description: |-
         Burgers equation
       ratio: is-4by3
+    - link: images/results/Gas Dynamics.svg
+      large_link: images/results/Gas Dynamics.svg
+      alt: The results for Gas Dynamics
+      description: |-
+        Gas Dynamics equation
+      ratio: is-4by3
+    - link: images/results/Kuramoto-Sivashinsky.svg
+      large_link: images/results/Kuramoto-Sivashinsky.svg
+      alt: The results for Kuramoto-Sivashinsky
+      description: |-
+        Kuramoto-Sivashinsky equation
+      ratio: is-4by3
+    - link: images/results/Reaction-Diffusion.svg
+      large_link: images/results/Reaction-Diffusion.svg
+      alt: The results for Reaction-Diffusion
+      description: |-
+        Reaction-Diffusion equation
+      ratio: is-4by3
+    - link: images/results/Wave.svg
+      large_link: images/results/Wave.svg
+      alt: The results for Wave
+      description: |-
+        Wave equation
+      ratio: is-4by3
+
