@@ -1,9 +1,9 @@
 - label: Getting started
   items:
-    - name: Installation
-      link: /docs/getting_started/installation
     - name: Quick Start
       link: /docs/getting_started/quick_start
+    - name: Installation
+      link: /docs/getting_started/installation
     - name: First Example
       link: /docs/getting_started/first_example
 - label: Guides
