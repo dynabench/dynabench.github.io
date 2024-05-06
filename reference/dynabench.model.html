@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.model &mdash; dynabench 0.3.0 documentation</title>
+  <title>dynabench.model &mdash; dynabench 0.3.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=e259d695"></script>
+        <script src="../_static/documentation_options.js?v=4621528c"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/design-tabs.js?v=36754332"></script>
@@ -55,7 +55,21 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="dynabench.dataset.html">dynabench.dataset</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dynabench.equation.html">dynabench.equation</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">dynabench.model</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">dynabench.model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dynabench.model.CNN"><code class="docutils literal notranslate"><span class="pre">CNN</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.model.CNN.forward"><code class="docutils literal notranslate"><span class="pre">CNN.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dynabench.model.NeuralPDE"><code class="docutils literal notranslate"><span class="pre">NeuralPDE</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.model.NeuralPDE.forward"><code class="docutils literal notranslate"><span class="pre">NeuralPDE.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dynabench.model.ResNet"><code class="docutils literal notranslate"><span class="pre">ResNet</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.model.ResNet.forward"><code class="docutils literal notranslate"><span class="pre">ResNet.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -88,6 +102,137 @@
   <section id="module-dynabench.model">
 <span id="dynabench-model"></span><h1>dynabench.model<a class="headerlink" href="#module-dynabench.model" title="Link to this heading"></a></h1>
 <p>Module containing the models used in the DynaBench benchmark.</p>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.model.CNN" title="dynabench.model.CNN"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CNN</span></code></a>(input_size, output_size[, ...])</p></td>
+<td><p>Simple 2D CNN model for grid data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.model.NeuralPDE" title="dynabench.model.NeuralPDE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NeuralPDE</span></code></a>(input_dim[, hidden_channels, ...])</p></td>
+<td><p>Neural PDE model for grid data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.model.ResNet" title="dynabench.model.ResNet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ResNet</span></code></a>(input_size, output_size[, ...])</p></td>
+<td><p>Simple 2D ResNet model for grid data.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="dynabench.model.CNN">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.model.</span></span><span class="sig-name descname"><span class="pre">CNN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_layers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_channels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'same'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'circular'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ReLU'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/model/_grid/cnn.html#CNN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.model.CNN" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>Simple 2D CNN model for grid data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_size</strong> (<em>int</em>) – Number of input channels.</p></li>
+<li><p><strong>output_size</strong> (<em>int</em>) – Number of output channels.</p></li>
+<li><p><strong>hidden_layers</strong> (<em>int</em>) – Number of hidden layers. Default is 1.</p></li>
+<li><p><strong>hidden_channels</strong> (<em>int</em>) – Number of channels in each hidden layer. Default is 64.</p></li>
+<li><p><strong>padding</strong> (<em>int</em><em> | </em><em>str</em><em> | </em><em>Tuple</em><em>[</em><em>int</em><em>]</em>) – Padding size. If ‘same’, padding is calculated to keep the input size the same as the output size. Default is ‘same’.</p></li>
+<li><p><strong>padding_mode</strong> (<em>str</em>) – What value to pad with. Can be ‘zeros’, ‘reflect’, ‘replicate’ or ‘circular’. Default: ‘zeros’</p></li>
+<li><p><strong>kernel_size</strong> (<em>int</em>) – Size of the kernel. Default is 3.</p></li>
+<li><p><strong>activation</strong> (<em>str</em>) – Activation function to use. Can be one of <a class="reference external" href="https://pytorch.org/docs/stable/nn.html#non-linear-activations-weighted-sum-nonlinearity">torch.nn activation functions</a>. Default is ‘relu’.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dynabench.model.CNN.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/model/_grid/cnn.html#CNN.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.model.CNN.forward" title="Link to this definition"></a></dt>
+<dd><p>Forward pass of the model. Should not be called directly, instead call the model instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>torch.Tensor</em>) – Input tensor of shape (batch_size, input_size, height, width).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output tensor of shape (batch_size, output_size, height, width).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dynabench.model.NeuralPDE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.model.</span></span><span class="sig-name descname"><span class="pre">NeuralPDE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_channels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_layers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solver</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'method':</span> <span class="pre">'dopri5'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_adjoint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/model/_grid/neuralpde.html#NeuralPDE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.model.NeuralPDE" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>Neural PDE model for grid data. The model combines a CNN with a differentiable ODE solver to learn the dynamics of the data using the method of lines. The CNN is used to approximate the spatial derivatives of the data, while the ODE solver is used to approximate the temporal evolution of the data.
+The model has been taken from <a class="reference external" href="https://arxiv.org/abs/2111.07671">NeuralPDE: Modelling Dynamical Systems from Data</a> by Dulny et al.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dim</strong> (<em>int</em>) – Number of input channels.</p></li>
+<li><p><strong>hidden_channels</strong> (<em>int</em>) – Number of channels in each hidden layer of the CNN. Default is 64.</p></li>
+<li><p><strong>hidden_layers</strong> (<em>int</em>) – Number of hidden layers in the CNN. Default is 1.</p></li>
+<li><p><strong>solver</strong> (<em>dict</em>) – Dictionary of solver parameters. Default is {“method”: “dopri5”}.</p></li>
+<li><p><strong>use_adjoint</strong> (<em>bool</em>) – Whether to use the adjoint method for backpropagation. Default is True.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dynabench.model.NeuralPDE.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_eval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/model/_grid/neuralpde.html#NeuralPDE.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.model.NeuralPDE.forward" title="Link to this definition"></a></dt>
+<dd><p>Forward pass of the model. Should not be called directly, instead call the model instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>torch.Tensor</em>) – Input tensor of shape (batch_size, input_size, height, width).</p></li>
+<li><p><strong>t_eval</strong> (<em>List</em><em>[</em><em>float</em><em>]</em><em>, </em><em>default</em><em> [</em><em>0.0</em><em>, </em><em>1.0</em><em>]</em>) – List of times to evaluate the ODE solver at. Default is [0.0, 1.0].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output tensor of shape (batch_size, output_size, height, width).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dynabench.model.ResNet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.model.</span></span><span class="sig-name descname"><span class="pre">ResNet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resblock_layers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resblock_channels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resblock_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'simple'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'same'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'circular'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ReLU'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/model/_grid/resnet.html#ResNet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.model.ResNet" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>Simple 2D ResNet model for grid data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_size</strong> (<em>int</em>) – Number of input channels.</p></li>
+<li><p><strong>output_size</strong> (<em>int</em>) – Number of output channels.</p></li>
+<li><p><strong>resblock_layers</strong> (<em>int</em>) – Number of residual blocks. Default is 1.</p></li>
+<li><p><strong>resblock_channels</strong> (<em>int</em>) – Number of channels in each residual block. Default is 64.</p></li>
+<li><p><strong>resblock_type</strong> (<em>str</em>) – Type of residual block to use. Can be ‘simple’ or ‘bottleneck’. Default is ‘simple’.</p></li>
+<li><p><strong>padding</strong> (<em>int</em><em> | </em><em>str</em><em> | </em><em>Tuple</em><em>[</em><em>int</em><em>]</em>) – Padding size. If ‘same’, padding is calculated to keep the input size the same as the output size. Default is ‘same’.</p></li>
+<li><p><strong>padding_mode</strong> (<em>str</em>) – What value to pad with. Can be ‘zeros’, ‘reflect’, ‘replicate’ or ‘circular’. Default: ‘zeros’</p></li>
+<li><p><strong>kernel_size</strong> (<em>int</em>) – Size of the kernel. Default is 3.</p></li>
+<li><p><strong>activation</strong> (<em>str</em>) – <p>Activation function to use. Can be one of <a class="reference external" href="https://pytorch.org/docs/stable/nn.html#non-linear-activations-weighted-sum-nonlinearity">torch.nn activation functions</a>. Default is ‘relu’.</p>
+</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dynabench.model.ResNet.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/model/_grid/resnet.html#ResNet.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.model.ResNet.forward" title="Link to this definition"></a></dt>
+<dd><p>Forward pass of the model. Should not be called directly, instead call the model instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>torch.Tensor</em>) – Input tensor of shape (batch_size, input_size, height, width).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output tensor of shape (batch_size, output_size, height, width).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 

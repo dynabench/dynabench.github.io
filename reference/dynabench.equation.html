@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.equation &mdash; dynabench 0.3.0 documentation</title>
+  <title>dynabench.equation &mdash; dynabench 0.3.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=e259d695"></script>
+        <script src="../_static/documentation_options.js?v=4621528c"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/design-tabs.js?v=36754332"></script>
@@ -57,8 +57,14 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="dynabench.dataset.html">dynabench.dataset</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">dynabench.equation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#dynabench.equation.AdvectionEquation"><code class="docutils literal notranslate"><span class="pre">AdvectionEquation</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dynabench.equation.AdvectionEquation"><code class="docutils literal notranslate"><span class="pre">AdvectionEquation</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.AdvectionEquation.linear_terms"><code class="docutils literal notranslate"><span class="pre">AdvectionEquation.linear_terms</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.AdvectionEquation.nonlinear_terms"><code class="docutils literal notranslate"><span class="pre">AdvectionEquation.nonlinear_terms</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#dynabench.equation.BaseEquation"><code class="docutils literal notranslate"><span class="pre">BaseEquation</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.BaseEquation.linear_terms"><code class="docutils literal notranslate"><span class="pre">BaseEquation.linear_terms</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.BaseEquation.nonlinear_terms"><code class="docutils literal notranslate"><span class="pre">BaseEquation.nonlinear_terms</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.BaseEquation.variables"><code class="docutils literal notranslate"><span class="pre">BaseEquation.variables</span></code></a></li>
 </ul>
 </li>
@@ -116,26 +122,38 @@
 <dt class="sig sig-object py" id="dynabench.equation.AdvectionEquation">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.equation.</span></span><span class="sig-name descname"><span class="pre">AdvectionEquation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spatial_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'velocity_x':</span> <span class="pre">1.0,</span> <span class="pre">'velocity_y':</span> <span class="pre">1.0}</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/equation/_advection.html#AdvectionEquation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.equation.AdvectionEquation" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#dynabench.equation.BaseEquation" title="dynabench.equation._base.BaseEquation"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEquation</span></code></a></p>
-<p>Advection equation of the form <span class="math notranslate nohighlight">\(u_t + c_x * u_x + c_y * u_y = 0\)</span>. 
+<p>Advection equation of the form <span class="math notranslate nohighlight">\(u_t + c_x * u_x + c_y * u_y = 0\)</span>.
 Where <span class="math notranslate nohighlight">\(c_x\)</span> and <span class="math notranslate nohighlight">\(c_y\)</span> are the velocities in the x and y directions respectively.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>spatial_dim</strong><span class="classifier">int, default 2</span></dt><dd><p>Spatial dimension of the equation. Defaults to 2.</p>
-</dd>
-<dt><strong>parameters</strong><span class="classifier">dict, default {‘velocity_x’: ‘1.0’, ‘velocity_y’: ‘1.0’}</span></dt><dd><p>Dictionary of parameters for the equation.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Attributes<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>linear_terms</strong><span class="classifier">List[str]</span></dt><dd><p>List of linear terms in the equation.</p>
-</dd>
-<dt><strong>nonlinear_terms</strong><span class="classifier">List[str]</span></dt><dd><p>List of nonlinear terms in the equation.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spatial_dim</strong> (<em>int</em><em>, </em><em>default 2</em>) – Spatial dimension of the equation. Defaults to 2.</p></li>
+<li><p><strong>parameters</strong> (<em>dict</em><em>, </em><em>default {'velocity_x': '1.0'</em><em>, </em><em>'velocity_y': '1.0'}</em>) – Dictionary of parameters for the equation.</p></li>
+</ul>
 </dd>
 </dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dynabench.equation.AdvectionEquation.linear_terms">
+<span class="sig-name descname"><span class="pre">linear_terms</span></span><a class="headerlink" href="#dynabench.equation.AdvectionEquation.linear_terms" title="Link to this definition"></a></dt>
+<dd><p>List of linear terms in the equation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dynabench.equation.AdvectionEquation.nonlinear_terms">
+<span class="sig-name descname"><span class="pre">nonlinear_terms</span></span><a class="headerlink" href="#dynabench.equation.AdvectionEquation.nonlinear_terms" title="Link to this definition"></a></dt>
+<dd><p>List of nonlinear terms in the equation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -145,22 +163,34 @@ Where <span class="math notranslate nohighlight">\(c_x\)</span> and <span class=
 <p>Base class for all equations.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>spatial_dim</strong><span class="classifier">int, default 2</span></dt><dd><p>Spatial dimension of the equation. Defaults to 2.</p>
-</dd>
-<dt><strong>parameters</strong><span class="classifier">dict, default {}</span></dt><dd><p>Dictionary of parameters for the equation.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Attributes<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>linear_terms</strong><span class="classifier">List[str]</span></dt><dd><p>List of linear terms in the equation.</p>
-</dd>
-<dt><strong>nonlinear_terms</strong><span class="classifier">List[str]</span></dt><dd><p>List of nonlinear terms in the equation.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spatial_dim</strong> (<em>int</em><em>, </em><em>default 2</em>) – Spatial dimension of the equation. Defaults to 2.</p></li>
+<li><p><strong>parameters</strong> (<em>dict</em><em>, </em><em>default {}</em>) – Dictionary of parameters for the equation.</p></li>
+</ul>
 </dd>
 </dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dynabench.equation.BaseEquation.linear_terms">
+<span class="sig-name descname"><span class="pre">linear_terms</span></span><a class="headerlink" href="#dynabench.equation.BaseEquation.linear_terms" title="Link to this definition"></a></dt>
+<dd><p>List of linear terms in the equation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dynabench.equation.BaseEquation.nonlinear_terms">
+<span class="sig-name descname"><span class="pre">nonlinear_terms</span></span><a class="headerlink" href="#dynabench.equation.BaseEquation.nonlinear_terms" title="Link to this definition"></a></dt>
+<dd><p>List of nonlinear terms in the equation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="dynabench.equation.BaseEquation.variables">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">variables</span></span><a class="headerlink" href="#dynabench.equation.BaseEquation.variables" title="Link to this definition"></a></dt>
@@ -176,12 +206,10 @@ Where <span class="math notranslate nohighlight">\(c_x\)</span> and <span class=
 <p>Represents a term in an equation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>term</strong><span class="classifier">str</span></dt><dd><p>The term to be represented.</p>
-</dd>
-<dt><strong>linear</strong><span class="classifier">bool, default True</span></dt><dd><p>Whether the term is linear. Defaults to True.</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>term</strong> (<em>str</em>) – The term to be represented.</p></li>
+<li><p><strong>linear</strong> (<em>bool</em><em>, </em><em>default True</em>) – Whether the term is linear. Defaults to True.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
