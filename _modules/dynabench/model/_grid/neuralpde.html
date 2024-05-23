@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.model._grid.neuralpde &mdash; dynabench 0.3.1 documentation</title>
+  <title>dynabench.model._grid.neuralpde &mdash; dynabench 0.3.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
@@ -16,7 +16,7 @@
   
         <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../_static/documentation_options.js?v=4621528c"></script>
+        <script src="../../../../_static/documentation_options.js?v=71d9d8e6"></script>
         <script src="../../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../../_static/design-tabs.js?v=36754332"></script>
@@ -149,17 +149,19 @@
 <span class="sd">            Returns</span>
 <span class="sd">            -------</span>
 <span class="sd">            torch.Tensor</span>
-<span class="sd">                Output tensor of shape (batch_size, output_size, height, width).</span>
+<span class="sd">                Output tensor of shape (batch_size, rollout, output_size, height, width).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">t_eval</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">t_eval</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_adjoint</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">odeint_adjoint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ode</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t_eval</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="p">,</span> <span class="n">adjoint_params</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cnn</span><span class="o">.</span><span class="n">parameters</span><span class="p">())[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="n">odeint_adjoint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ode</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t_eval</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="p">,</span> <span class="n">adjoint_params</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cnn</span><span class="o">.</span><span class="n">parameters</span><span class="p">())[</span><span class="mi">1</span><span class="p">:]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">odeint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ode</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t_eval</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span></div>
+            <span class="n">pred</span> <span class="o">=</span>  <span class="n">odeint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ode</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t_eval</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
+        
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pred</span></div>
 </div>
 
-        
 </pre></div>
 
            </div>

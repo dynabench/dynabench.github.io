@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Example 1: NeuralPDE &mdash; dynabench 0.3.1 documentation</title>
+  <title>Example 1: NeuralPDE &mdash; dynabench 0.3.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=4621528c"></script>
+        <script src="../_static/documentation_options.js?v=71d9d8e6"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/design-tabs.js?v=36754332"></script>
@@ -116,14 +116,14 @@ Additionally, we will use torch.utils.data.DataLoader to create a data loader fo
 
 <span class="n">download_equation</span><span class="p">(</span><span class="s1">&#39;burgers&#39;</span><span class="p">,</span> <span class="n">structure</span><span class="o">=</span><span class="s1">&#39;grid&#39;</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;low&#39;</span><span class="p">)</span>
 
-<span class="n">advection_train_iterator</span> <span class="o">=</span> <span class="n">DynabenchIterator</span><span class="p">(</span><span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">,</span>
-                                            <span class="n">equation</span><span class="o">=</span><span class="s1">&#39;burgers&#39;</span><span class="p">,</span>
-                                            <span class="n">structure</span><span class="o">=</span><span class="s1">&#39;grid&#39;</span><span class="p">,</span>
-                                            <span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;low&#39;</span><span class="p">,</span>
-                                            <span class="n">lookback</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                                            <span class="n">rollout</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">burgers_train_iterator</span> <span class="o">=</span> <span class="n">DynabenchIterator</span><span class="p">(</span><span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">,</span>
+                                           <span class="n">equation</span><span class="o">=</span><span class="s1">&#39;burgers&#39;</span><span class="p">,</span>
+                                           <span class="n">structure</span><span class="o">=</span><span class="s1">&#39;grid&#39;</span><span class="p">,</span>
+                                           <span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;low&#39;</span><span class="p">,</span>
+                                           <span class="n">lookback</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                           <span class="n">rollout</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">advection_train_iterator</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">burgers_train_iterator</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -133,7 +133,7 @@ Additionally, we will use torch.utils.data.DataLoader to create a data loader fo
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dynabench.model</span> <span class="kn">import</span> <span class="n">NeuralPDE</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">NeuralPDE</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">hidden_channels</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">hidden_layers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-                <span class="n">solver</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;euler&#39;</span><span class="p">,</span> <span class="s1">&#39;options&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;step_size&#39;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">}},</span>
+                <span class="n">solver</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;euler&#39;</span><span class="p">,</span> <span class="s1">&#39;options&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;step_size&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">}},</span>
                 <span class="n">use_adjoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -164,21 +164,24 @@ Additionally, we will use torch.utils.data.DataLoader to create a data loader fo
 <span id="evaluate"></span><h2>Evaluate the model<a class="headerlink" href="#evaluate-the-model" title="Link to this heading"></a></h2>
 <p>Finally, we will evaluate the model on the test dataset. We will use the test dataset to evaluate the model’s performance on unseen data.
 To do this we need to load the test dataset and create a data loader for the test dataset.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">advection_test_iterator</span> <span class="o">=</span> <span class="n">DynabenchIterator</span><span class="p">(</span><span class="n">split</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">,</span>
-                                            <span class="n">equation</span><span class="o">=</span><span class="s1">&#39;burgers&#39;</span><span class="p">,</span>
-                                            <span class="n">structure</span><span class="o">=</span><span class="s1">&#39;grid&#39;</span><span class="p">,</span>
-                                            <span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;low&#39;</span><span class="p">,</span>
-                                            <span class="n">lookback</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                                            <span class="n">rollout</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<p>We want to evaluate the model’s performance over a longer time horizon, so we will set the rollout parameter to 16.
+This means that the model will have to predict the next 16 time steps given the input data.
+We can specify this in the forward pass of the model by passing the t_eval parameter to the model.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">burgers_test_iterator</span> <span class="o">=</span> <span class="n">DynabenchIterator</span><span class="p">(</span><span class="n">split</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">,</span>
+                                          <span class="n">equation</span><span class="o">=</span><span class="s1">&#39;burgers&#39;</span><span class="p">,</span>
+                                          <span class="n">structure</span><span class="o">=</span><span class="s1">&#39;grid&#39;</span><span class="p">,</span>
+                                          <span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;low&#39;</span><span class="p">,</span>
+                                          <span class="n">lookback</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                          <span class="n">rollout</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 
-<span class="n">test_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">advection_test_iterator</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">test_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">burgers_test_iterator</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
 
 <span class="n">loss_values</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">test_loader</span><span class="p">):</span>
     <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">float</span><span class="p">()</span> <span class="c1"># only use the first channel and convert to float32</span>
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">17</span><span class="p">))</span>
     <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
     <span class="n">loss_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
 
@@ -198,17 +201,17 @@ To do this we need to load the test dataset and create a data loader for the tes
 
 <span class="n">download_equation</span><span class="p">(</span><span class="s1">&#39;burgers&#39;</span><span class="p">,</span> <span class="n">structure</span><span class="o">=</span><span class="s1">&#39;grid&#39;</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;low&#39;</span><span class="p">)</span>
 
-<span class="n">advection_train_iterator</span> <span class="o">=</span> <span class="n">DynabenchIterator</span><span class="p">(</span><span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">,</span>
-                                            <span class="n">equation</span><span class="o">=</span><span class="s1">&#39;burgers&#39;</span><span class="p">,</span>
-                                            <span class="n">structure</span><span class="o">=</span><span class="s1">&#39;grid&#39;</span><span class="p">,</span>
-                                            <span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;low&#39;</span><span class="p">,</span>
-                                            <span class="n">lookback</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                                            <span class="n">rollout</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">burgers_train_iterator</span> <span class="o">=</span> <span class="n">DynabenchIterator</span><span class="p">(</span><span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">,</span>
+                                           <span class="n">equation</span><span class="o">=</span><span class="s1">&#39;burgers&#39;</span><span class="p">,</span>
+                                           <span class="n">structure</span><span class="o">=</span><span class="s1">&#39;grid&#39;</span><span class="p">,</span>
+                                           <span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;low&#39;</span><span class="p">,</span>
+                                           <span class="n">lookback</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                           <span class="n">rollout</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">advection_train_iterator</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">burgers_train_iterator</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">NeuralPDE</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">hidden_channels</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">hidden_layers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-                <span class="n">solver</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;euler&#39;</span><span class="p">,</span> <span class="s1">&#39;options&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;step_size&#39;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">}},</span>
+                <span class="n">solver</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;euler&#39;</span><span class="p">,</span> <span class="s1">&#39;options&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;step_size&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">}},</span>
                 <span class="n">use_adjoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
@@ -225,21 +228,21 @@ To do this we need to load the test dataset and create a data loader for the tes
         <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch: </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s2">, Batch: </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">, Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="n">advection_test_iterator</span> <span class="o">=</span> <span class="n">DynabenchIterator</span><span class="p">(</span><span class="n">split</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">,</span>
-                                            <span class="n">equation</span><span class="o">=</span><span class="s1">&#39;burgers&#39;</span><span class="p">,</span>
-                                            <span class="n">structure</span><span class="o">=</span><span class="s1">&#39;grid&#39;</span><span class="p">,</span>
-                                            <span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;low&#39;</span><span class="p">,</span>
-                                            <span class="n">lookback</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                                            <span class="n">rollout</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">burgers_test_iterator</span> <span class="o">=</span> <span class="n">DynabenchIterator</span><span class="p">(</span><span class="n">split</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">,</span>
+                                          <span class="n">equation</span><span class="o">=</span><span class="s1">&#39;burgers&#39;</span><span class="p">,</span>
+                                          <span class="n">structure</span><span class="o">=</span><span class="s1">&#39;grid&#39;</span><span class="p">,</span>
+                                          <span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;low&#39;</span><span class="p">,</span>
+                                          <span class="n">lookback</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                          <span class="n">rollout</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 
-<span class="n">test_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">advection_test_iterator</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">test_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">burgers_test_iterator</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
 
 <span class="n">loss_values</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">test_loader</span><span class="p">):</span>
     <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">float</span><span class="p">()</span> <span class="c1"># only use the first channel and convert to float32</span>
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">17</span><span class="p">))</span>
     <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
     <span class="n">loss_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
 
