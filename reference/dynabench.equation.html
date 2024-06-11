@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.equation &mdash; dynabench 0.3.3 documentation</title>
+  <title>dynabench.equation &mdash; dynabench 0.3.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
@@ -17,8 +17,8 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=d5a15cff"></script>
-        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/documentation_options.js?v=71d9d8e6"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/design-tabs.js?v=36754332"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -65,38 +65,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#dynabench.equation.BaseEquation"><code class="docutils literal notranslate"><span class="pre">BaseEquation</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.BaseEquation.linear_terms"><code class="docutils literal notranslate"><span class="pre">BaseEquation.linear_terms</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.BaseEquation.nonlinear_terms"><code class="docutils literal notranslate"><span class="pre">BaseEquation.nonlinear_terms</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.BaseEquation.equations"><code class="docutils literal notranslate"><span class="pre">BaseEquation.equations</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.BaseEquation.export_as_pypde_equation"><code class="docutils literal notranslate"><span class="pre">BaseEquation.export_as_pypde_equation()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.BaseEquation.lhs"><code class="docutils literal notranslate"><span class="pre">BaseEquation.lhs</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.BaseEquation.name"><code class="docutils literal notranslate"><span class="pre">BaseEquation.name</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.BaseEquation.num_variables"><code class="docutils literal notranslate"><span class="pre">BaseEquation.num_variables</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.BaseEquation.rhs"><code class="docutils literal notranslate"><span class="pre">BaseEquation.rhs</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.BaseEquation.simplify_equation"><code class="docutils literal notranslate"><span class="pre">BaseEquation.simplify_equation()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.BaseEquation.variables"><code class="docutils literal notranslate"><span class="pre">BaseEquation.variables</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#dynabench.equation.CahnHilliardEquation"><code class="docutils literal notranslate"><span class="pre">CahnHilliardEquation</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.CahnHilliardEquation.linear_terms"><code class="docutils literal notranslate"><span class="pre">CahnHilliardEquation.linear_terms</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.CahnHilliardEquation.nonlinear_terms"><code class="docutils literal notranslate"><span class="pre">CahnHilliardEquation.nonlinear_terms</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#dynabench.equation.DiffusionEquation"><code class="docutils literal notranslate"><span class="pre">DiffusionEquation</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.DiffusionEquation.linear_terms"><code class="docutils literal notranslate"><span class="pre">DiffusionEquation.linear_terms</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.DiffusionEquation.nonlinear_terms"><code class="docutils literal notranslate"><span class="pre">DiffusionEquation.nonlinear_terms</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#dynabench.equation.FitzhughNagumoEquation"><code class="docutils literal notranslate"><span class="pre">FitzhughNagumoEquation</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dynabench.equation.WaveEquation"><code class="docutils literal notranslate"><span class="pre">WaveEquation</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.WaveEquation.linear_terms"><code class="docutils literal notranslate"><span class="pre">WaveEquation.linear_terms</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.WaveEquation.nonlinear_terms"><code class="docutils literal notranslate"><span class="pre">WaveEquation.nonlinear_terms</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#dynabench.equation.Term"><code class="docutils literal notranslate"><span class="pre">Term</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="dynabench.model.html">dynabench.model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dynabench.solver.html">dynabench.solver</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dynabench.initial.html">dynabench.initial</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dynabench.grid.html">dynabench.grid</a></li>
 </ul>
 </li>
 </ul>
@@ -129,63 +104,32 @@
   <section id="module-dynabench.equation">
 <span id="dynabench-equation"></span><h1>dynabench.equation<a class="headerlink" href="#module-dynabench.equation" title="Link to this heading"></a></h1>
 <p>Module for representing partial differential equations.</p>
-<p class="rubric">Functions</p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">expand</span></code>(e[, deep, modulus, power_base, ...])</p></td>
-<td><p>Expand an expression using methods given as hints.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sympify</span></code>(a[, locals, convert_xor, strict, ...])</p></td>
-<td><p>Converts an arbitrary expression to a type that can be used inside SymPy.</p></td>
-</tr>
-</tbody>
-</table>
 <p class="rubric">Classes</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.equation.AdvectionEquation" title="dynabench.equation.AdvectionEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AdvectionEquation</span></code></a>([c_x, c_y, evolution_rate])</p></td>
-<td><p>Advection equation in 2D.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.equation.AdvectionEquation" title="dynabench.equation.AdvectionEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AdvectionEquation</span></code></a>([spatial_dim, parameters])</p></td>
+<td><p>Advection equation of the form <span class="math notranslate nohighlight">\(u_t + c_x * u_x + c_y * u_y = 0\)</span>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.equation.BaseEquation" title="dynabench.equation.BaseEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseEquation</span></code></a>([equations, parameters, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.equation.BaseEquation" title="dynabench.equation.BaseEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseEquation</span></code></a>([spatial_dim, parameters])</p></td>
 <td><p>Base class for all equations.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.equation.CahnHilliardEquation" title="dynabench.equation.CahnHilliardEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CahnHilliardEquation</span></code></a>([D, gamma, evolution_rate])</p></td>
-<td><p>Cahn-Hilliard equation in 2D.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.equation.DiffusionEquation" title="dynabench.equation.DiffusionEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DiffusionEquation</span></code></a>([D, evolution_rate])</p></td>
-<td><p>Diffusion equation in 2D.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Eq</span></code></p></td>
-<td><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Equality</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.equation.FitzhughNagumoEquation" title="dynabench.equation.FitzhughNagumoEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FitzhughNagumoEquation</span></code></a>([stimulus, a, b, ...])</p></td>
-<td><p>FitzHugh–Nagumo model with diffusive coupling given by the following equations:</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Function</span></code>(*args)</p></td>
-<td><p>Base class for applied mathematical functions.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PDE</span></code>(rhs, *[, bc, bc_ops, user_funcs, ...])</p></td>
-<td><p>PDE defined by mathematical expressions</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Symbol</span></code>(name, **assumptions)</p></td>
-<td><p>Assumptions:</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.equation.WaveEquation" title="dynabench.equation.WaveEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WaveEquation</span></code></a>([c, evolution_rate])</p></td>
-<td><p>Wave equation in 2D.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.equation.Term" title="dynabench.equation.Term"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Term</span></code></a>(term[, linear])</p></td>
+<td><p>Represents a term in an equation.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py class">
 <dt class="sig sig-object py" id="dynabench.equation.AdvectionEquation">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.equation.</span></span><span class="sig-name descname"><span class="pre">AdvectionEquation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evolution_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/equation.html#AdvectionEquation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.equation.AdvectionEquation" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#dynabench.equation.BaseEquation" title="dynabench.equation.BaseEquation"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEquation</span></code></a></p>
-<p>Advection equation in 2D. The equation is given by:</p>
-<div class="math notranslate nohighlight">
-\[\frac{\partial u}{\partial t} = -c_x \frac{\partial u}{\partial x} - c_y \frac{\partial u}{\partial y}\]</div>
-<p>where c_x and c_y are the speeds of the advection in the x and y directions respectively.</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.equation.</span></span><span class="sig-name descname"><span class="pre">AdvectionEquation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spatial_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'velocity_x':</span> <span class="pre">1.0,</span> <span class="pre">'velocity_y':</span> <span class="pre">1.0}</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/equation/_advection.html#AdvectionEquation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.equation.AdvectionEquation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dynabench.equation.BaseEquation" title="dynabench.equation._base.BaseEquation"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEquation</span></code></a></p>
+<p>Advection equation of the form <span class="math notranslate nohighlight">\(u_t + c_x * u_x + c_y * u_y = 0\)</span>.
+Where <span class="math notranslate nohighlight">\(c_x\)</span> and <span class="math notranslate nohighlight">\(c_y\)</span> are the velocities in the x and y directions respectively.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>parameters</strong> (<em>dict</em><em>, </em><em>default {c_x: 1</em><em>, </em><em>c_y: 1}</em>) – Dictionary of parameters for the equations.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spatial_dim</strong> (<em>int</em><em>, </em><em>default 2</em>) – Spatial dimension of the equation. Defaults to 2.</p></li>
+<li><p><strong>parameters</strong> (<em>dict</em><em>, </em><em>default {'velocity_x': '1.0'</em><em>, </em><em>'velocity_y': '1.0'}</em>) – Dictionary of parameters for the equation.</p></li>
+</ul>
 </dd>
 </dl>
 <dl class="py attribute">
@@ -214,15 +158,14 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="dynabench.equation.BaseEquation">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.equation.</span></span><span class="sig-name descname"><span class="pre">BaseEquation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">equations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">['dt(u)</span> <span class="pre">=</span> <span class="pre">0']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evolution_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/equation.html#BaseEquation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.equation.BaseEquation" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.equation.</span></span><span class="sig-name descname"><span class="pre">BaseEquation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spatial_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/equation/_base.html#BaseEquation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.equation.BaseEquation" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Base class for all equations. Represents the equation in the form of a dictionary which can be used with the
-py-pde library.</p>
+<p>Base class for all equations.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>equations</strong> (<em>List</em><em>[</em><em>str</em><em>] </em><em>| </em><em>str</em><em>, </em><em>default</em><em> [</em><em>&quot;u_t = 0&quot;</em><em>]</em>) – List of equations to be represented.</p></li>
-<li><p><strong>parameters</strong> (<em>dict</em><em>, </em><em>default {}</em>) – Dictionary of parameters for the equations.</p></li>
+<li><p><strong>spatial_dim</strong> (<em>int</em><em>, </em><em>default 2</em>) – Spatial dimension of the equation. Defaults to 2.</p></li>
+<li><p><strong>parameters</strong> (<em>dict</em><em>, </em><em>default {}</em>) – Dictionary of parameters for the equation.</p></li>
 </ul>
 </dd>
 </dl>
@@ -249,186 +192,26 @@ py-pde library.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="dynabench.equation.BaseEquation.equations">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">equations</span></span><a class="headerlink" href="#dynabench.equation.BaseEquation.equations" title="Link to this definition"></a></dt>
-<dd><p>Get the equations of the equation.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="dynabench.equation.BaseEquation.export_as_pypde_equation">
-<span class="sig-name descname"><span class="pre">export_as_pypde_equation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/equation.html#BaseEquation.export_as_pypde_equation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.equation.BaseEquation.export_as_pypde_equation" title="Link to this definition"></a></dt>
-<dd><p>Export the equation as a py-pde equation.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="dynabench.equation.BaseEquation.lhs">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lhs</span></span><a class="headerlink" href="#dynabench.equation.BaseEquation.lhs" title="Link to this definition"></a></dt>
-<dd><p>Get the left-hand side of the equation.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="dynabench.equation.BaseEquation.name">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#dynabench.equation.BaseEquation.name" title="Link to this definition"></a></dt>
-<dd><p>Get the name of the equation.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="dynabench.equation.BaseEquation.num_variables">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">num_variables</span></span><a class="headerlink" href="#dynabench.equation.BaseEquation.num_variables" title="Link to this definition"></a></dt>
-<dd><p>Get the number of variables in the equation.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="dynabench.equation.BaseEquation.rhs">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rhs</span></span><a class="headerlink" href="#dynabench.equation.BaseEquation.rhs" title="Link to this definition"></a></dt>
-<dd><p>Get the right-hand side of the equation.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="dynabench.equation.BaseEquation.simplify_equation">
-<span class="sig-name descname"><span class="pre">simplify_equation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/dynabench/equation.html#BaseEquation.simplify_equation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.equation.BaseEquation.simplify_equation" title="Link to this definition"></a></dt>
-<dd><p>Simplify the equation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>eq</strong> (<em>str</em>) – The equation to be simplified.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The simplified equation.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
 <dt class="sig sig-object py" id="dynabench.equation.BaseEquation.variables">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">variables</span></span><a class="headerlink" href="#dynabench.equation.BaseEquation.variables" title="Link to this definition"></a></dt>
-<dd><p>Get the variables of the equation.</p>
+<dd><p>Get the number of variables of the equation.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="dynabench.equation.CahnHilliardEquation">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.equation.</span></span><span class="sig-name descname"><span class="pre">CahnHilliardEquation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evolution_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/equation.html#CahnHilliardEquation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.equation.CahnHilliardEquation" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#dynabench.equation.BaseEquation" title="dynabench.equation.BaseEquation"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEquation</span></code></a></p>
-<p>Cahn-Hilliard equation in 2D. The equation is given by:</p>
-<div class="math notranslate nohighlight">
-\[\frac{\partial u}{\partial t} = D \nabla^2(u^3 - u - \gamma \nabla^2(u))\]</div>
-<p>where D and gamma are parameters of the equation.</p>
+<dt class="sig sig-object py" id="dynabench.equation.Term">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.equation.</span></span><span class="sig-name descname"><span class="pre">Term</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">term</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linear</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/equation/_base.html#Term"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.equation.Term" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a term in an equation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>parameters</strong> (<em>dict</em><em>, </em><em>default {D: 1</em><em>, </em><em>gamma: 1}</em>) – Dictionary of parameters for the equations.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>term</strong> (<em>str</em>) – The term to be represented.</p></li>
+<li><p><strong>linear</strong> (<em>bool</em><em>, </em><em>default True</em>) – Whether the term is linear. Defaults to True.</p></li>
+</ul>
 </dd>
 </dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dynabench.equation.CahnHilliardEquation.linear_terms">
-<span class="sig-name descname"><span class="pre">linear_terms</span></span><a class="headerlink" href="#dynabench.equation.CahnHilliardEquation.linear_terms" title="Link to this definition"></a></dt>
-<dd><p>List of linear terms in the equation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[str]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dynabench.equation.CahnHilliardEquation.nonlinear_terms">
-<span class="sig-name descname"><span class="pre">nonlinear_terms</span></span><a class="headerlink" href="#dynabench.equation.CahnHilliardEquation.nonlinear_terms" title="Link to this definition"></a></dt>
-<dd><p>List of nonlinear terms in the equation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[str]</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="dynabench.equation.DiffusionEquation">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.equation.</span></span><span class="sig-name descname"><span class="pre">DiffusionEquation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evolution_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/equation.html#DiffusionEquation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.equation.DiffusionEquation" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#dynabench.equation.BaseEquation" title="dynabench.equation.BaseEquation"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEquation</span></code></a></p>
-<p>Diffusion equation in 2D. The equation is given by:</p>
-<div class="math notranslate nohighlight">
-\[\frac{\partial u}{\partial t} = D \nabla^2 u\]</div>
-<p>where D is the diffusion coefficient.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>parameters</strong> (<em>dict</em><em>, </em><em>default {D: 1}</em>) – Dictionary of parameters for the equations.</p>
-</dd>
-</dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dynabench.equation.DiffusionEquation.linear_terms">
-<span class="sig-name descname"><span class="pre">linear_terms</span></span><a class="headerlink" href="#dynabench.equation.DiffusionEquation.linear_terms" title="Link to this definition"></a></dt>
-<dd><p>List of linear terms in the equation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[str]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dynabench.equation.DiffusionEquation.nonlinear_terms">
-<span class="sig-name descname"><span class="pre">nonlinear_terms</span></span><a class="headerlink" href="#dynabench.equation.DiffusionEquation.nonlinear_terms" title="Link to this definition"></a></dt>
-<dd><p>List of nonlinear terms in the equation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[str]</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="dynabench.equation.FitzhughNagumoEquation">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.equation.</span></span><span class="sig-name descname"><span class="pre">FitzhughNagumoEquation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stimulus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">τ</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evolution_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/equation.html#FitzhughNagumoEquation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.equation.FitzhughNagumoEquation" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#dynabench.equation.BaseEquation" title="dynabench.equation.BaseEquation"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEquation</span></code></a></p>
-<p>FitzHugh–Nagumo model with diffusive coupling given by the following equations:</p>
-<div class="math notranslate nohighlight">
-\[\frac{\partial v}{\partial t} = \nabla^2 v + v - \frac{v^3}{3} - w + stimulus
-\frac{\partial w}{\partial t} = \frac{v + a - b * w}{\tau}\]</div>
-<p>where v is the membrane potential and w is the recovery variable, and stimulus, a, b, and tau are parameters of the equation.</p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="dynabench.equation.WaveEquation">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.equation.</span></span><span class="sig-name descname"><span class="pre">WaveEquation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evolution_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/equation.html#WaveEquation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.equation.WaveEquation" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#dynabench.equation.BaseEquation" title="dynabench.equation.BaseEquation"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEquation</span></code></a></p>
-<p>Wave equation in 2D. The equation is given by:</p>
-<div class="math notranslate nohighlight">
-\[\frac{\partial^2 u}{\partial t^2} = c^2 \nabla^2 u\]</div>
-<p>where c is the speed of the wave.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>parameters</strong> (<em>dict</em><em>, </em><em>default {c: 1}</em>) – Dictionary of parameters for the equations.</p>
-</dd>
-</dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dynabench.equation.WaveEquation.linear_terms">
-<span class="sig-name descname"><span class="pre">linear_terms</span></span><a class="headerlink" href="#dynabench.equation.WaveEquation.linear_terms" title="Link to this definition"></a></dt>
-<dd><p>List of linear terms in the equation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[str]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dynabench.equation.WaveEquation.nonlinear_terms">
-<span class="sig-name descname"><span class="pre">nonlinear_terms</span></span><a class="headerlink" href="#dynabench.equation.WaveEquation.nonlinear_terms" title="Link to this definition"></a></dt>
-<dd><p>List of nonlinear terms in the equation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[str]</p>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 </section>

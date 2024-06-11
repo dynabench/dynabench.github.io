@@ -9,13 +9,6 @@
 
    
    
-   .. rubric:: Functions
-
-   .. autosummary::
-   
-      expand
-      sympify
-   
    
 
    
@@ -26,14 +19,7 @@
    
       AdvectionEquation
       BaseEquation
-      CahnHilliardEquation
-      DiffusionEquation
-      Eq
-      FitzhughNagumoEquation
-      Function
-      PDE
-      Symbol
-      WaveEquation
+      Term
    
    
 

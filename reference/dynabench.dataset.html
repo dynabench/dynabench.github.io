@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.dataset &mdash; dynabench 0.3.3 documentation</title>
+  <title>dynabench.dataset &mdash; dynabench 0.3.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
@@ -17,8 +17,8 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=d5a15cff"></script>
-        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/documentation_options.js?v=71d9d8e6"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/design-tabs.js?v=36754332"></script>
     <script src="../_static/js/theme.js"></script>
@@ -62,9 +62,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="dynabench.equation.html">dynabench.equation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dynabench.model.html">dynabench.model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dynabench.solver.html">dynabench.solver</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dynabench.initial.html">dynabench.initial</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dynabench.grid.html">dynabench.grid</a></li>
 </ul>
 </li>
 </ul>
@@ -109,7 +106,7 @@
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.dataset.DynabenchIterator" title="dynabench.dataset.DynabenchIterator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DynabenchIterator</span></code></a>([split, equation, ...])</p></td>
-<td><p>Iterator for the Dynabench dataset.</p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#dynabench.dataset.DynabenchSimulationIterator" title="dynabench.dataset.DynabenchSimulationIterator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DynabenchSimulationIterator</span></code></a>([split, ...])</p></td>
 <td><p></p></td>
@@ -120,28 +117,6 @@
 <dt class="sig sig-object py" id="dynabench.dataset.DynabenchIterator">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.dataset.</span></span><span class="sig-name descname"><span class="pre">DynabenchIterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">split</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'train'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'wave'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'cloud'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'low'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lookback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rollout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">download</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/_iterator.html#DynabenchIterator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.DynabenchIterator" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Iterator for the Dynabench dataset. This iterator will iterate over each simulation in the dataset,
-by moving a window over the simulation data.
-The window size is defined by the lookback and rollout parameters, which define the number of timesteps
-to be used as input and output, respectively.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>split</strong> (<em>str</em>) – The split of the dataset to use. Can be “train”, “val” or “test”.</p></li>
-<li><p><strong>equation</strong> (<em>str</em>) – The equation to use. Can be “advection”, “burgers”, “gasdynamics”, “kuramotosivashinsky”, “reactiondiffustion” or “wave”.</p></li>
-<li><p><strong>structure</strong> (<em>str</em>) – The structure of the dataset. Can be “cloud” or “grid”.</p></li>
-<li><p><strong>resolution</strong> (<em>str</em>) – The resolution of the dataset. Can be <em>low</em>, <em>medium</em>, <em>high</em> or <em>full</em>.
-Low resolution corresponds to 225 points in total (aranged in a 15x15 grid for the grid structure).
-Medium resolution corresponds to 484 points in total (aranged in a 22x22 grid for the grid structure).
-High resolution corresponds to 900 points in total (aranged in a 30x30 grid for the grid structure).
-Full resolution uses the full simulation grid of shape (64x64) that has been used to numerically solve the simulations.</p></li>
-<li><p><strong>base_path</strong> (<em>str</em>) – Location where the data is stored. Defaults to “data”.</p></li>
-<li><p><strong>lookback</strong> (<em>int</em>) – Number of timesteps to use for the input data. Defaults to 1.</p></li>
-<li><p><strong>rollout</strong> (<em>int</em>) – Number of timesteps to use for the target data. Defaults to 1.</p></li>
-<li><p><strong>download</strong> (<em>int</em>) – Whether to download the data. Defaults to False.</p></li>
-</ul>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py class">
@@ -162,10 +137,8 @@ Full resolution uses the full simulation grid of shape (64x64) that has been use
 <li><p><strong>resolution</strong> (<em>str</em>) – Resolution of the dataset. Can be “low”, “medium”, or “high”.</p></li>
 <li><p><strong>out_dir</strong> (<em>str</em>) – Directory where the dataset should be saved. Defaults to “data/”.</p></li>
 <li><p><strong>tmp_dir</strong> (<em>str</em>) – Directory where the temporary files should be saved. Defaults to “data/tmp/”. This directory will be deleted after the dataset is unpacked.</p></li>
+<li><p><strong>return</strong> (<em>None</em>) – </p></li>
 </ul>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
