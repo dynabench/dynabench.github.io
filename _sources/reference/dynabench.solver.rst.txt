@@ -1,0 +1,38 @@
+﻿dynabench.solver
+================
+
+.. automodule:: dynabench.solver
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      BaseSolver
+      PyPDESolver
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   dynabench.solver.diff
+

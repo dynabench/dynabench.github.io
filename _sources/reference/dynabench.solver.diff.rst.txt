@@ -1,0 +1,29 @@
+dynabench.solver.diff
+=====================
+
+.. automodule:: dynabench.solver.diff
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      DifferentialOperator
+   
+   
+
+   
+   
+   
+
+
+
