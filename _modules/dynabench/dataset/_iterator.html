@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.dataset._iterator &mdash; dynabench 0.3.2 documentation</title>
+  <title>dynabench.dataset._iterator &mdash; dynabench 0.3.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
@@ -16,8 +16,8 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=71d9d8e6"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/documentation_options.js?v=d5a15cff"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -85,11 +85,40 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">._download</span> <span class="kn">import</span> <span class="n">download_equation</span>
+<span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
 
 <div class="viewcode-block" id="DynabenchIterator">
 <a class="viewcode-back" href="../../../reference/dynabench.dataset.html#dynabench.dataset.DynabenchIterator">[docs]</a>
 <span class="k">class</span> <span class="nc">DynabenchIterator</span><span class="p">:</span>
-
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Iterator for the Dynabench dataset. This iterator will iterate over each simulation in the dataset, </span>
+<span class="sd">    by moving a window over the simulation data. </span>
+<span class="sd">    The window size is defined by the lookback and rollout parameters, which define the number of timesteps</span>
+<span class="sd">    to be used as input and output, respectively.</span>
+<span class="sd">       </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    split : str</span>
+<span class="sd">        The split of the dataset to use. Can be &quot;train&quot;, &quot;val&quot; or &quot;test&quot;.</span>
+<span class="sd">    equation : str</span>
+<span class="sd">        The equation to use. Can be &quot;advection&quot;, &quot;burgers&quot;, &quot;gasdynamics&quot;, &quot;kuramotosivashinsky&quot;, &quot;reactiondiffustion&quot; or &quot;wave&quot;.</span>
+<span class="sd">    structure : str</span>
+<span class="sd">        The structure of the dataset. Can be &quot;cloud&quot; or &quot;grid&quot;.</span>
+<span class="sd">    resolution : str</span>
+<span class="sd">        The resolution of the dataset. Can be *low*, *medium*, *high* or *full*. </span>
+<span class="sd">        Low resolution corresponds to 225 points in total (aranged in a 15x15 grid for the grid structure).</span>
+<span class="sd">        Medium resolution corresponds to 484 points in total (aranged in a 22x22 grid for the grid structure).   </span>
+<span class="sd">        High resolution corresponds to 900 points in total (aranged in a 30x30 grid for the grid structure).</span>
+<span class="sd">        Full resolution uses the full simulation grid of shape (64x64) that has been used to numerically solve the simulations.</span>
+<span class="sd">    base_path : str</span>
+<span class="sd">        Location where the data is stored. Defaults to &quot;data&quot;.</span>
+<span class="sd">    lookback : int</span>
+<span class="sd">        Number of timesteps to use for the input data. Defaults to 1.</span>
+<span class="sd">    rollout : int</span>
+<span class="sd">        Number of timesteps to use for the target data. Defaults to 1.</span>
+<span class="sd">    download: int</span>
+<span class="sd">        Whether to download the data. Defaults to False.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">split</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">,</span>
@@ -103,6 +132,8 @@
         <span class="o">*</span><span class="n">args</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># deprecation</span>
+        <span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1"> will be deprecated. Please use DynabechGridIterator and DynabenchCloudIterator.&#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
         <span class="c1"># download</span>
         <span class="k">if</span> <span class="n">download</span><span class="p">:</span>

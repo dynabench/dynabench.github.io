@@ -1,0 +1,35 @@
+﻿dynabench.initial
+=================
+
+.. automodule:: dynabench.initial
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Composite
+      Constant
+      InitialCondition
+      RandomUniform
+      SumOfGaussians
+      WrappedGaussians
+      product
+   
+   
+
+   
+   
+   
+
+
+
