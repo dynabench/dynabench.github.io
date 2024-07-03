@@ -28,11 +28,3 @@
 
 
 
-.. rubric:: Modules
-
-.. autosummary::
-   :toctree:
-   :recursive:
-
-   dynabench.solver.diff
-

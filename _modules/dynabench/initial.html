@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.initial &mdash; dynabench 0.3.3 documentation</title>
+  <title>dynabench.initial &mdash; dynabench 0.3.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
@@ -16,7 +16,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=d5a15cff"></script>
+        <script src="../../_static/documentation_options.js?v=1e28cc32"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/design-tabs.js?v=36754332"></script>
@@ -48,7 +48,7 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../start.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guide.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results.html">Benchmark Results</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API reference</a></li>
 </ul>
@@ -86,10 +86,7 @@
 <span class="kn">import</span> <span class="nn">dynabench.grid</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
-
-
+<span class="kn">import</span> <span class="nn">itertools</span>
 
 
 <div class="viewcode-block" id="InitialCondition">
@@ -139,8 +136,8 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;The generate method must be implemented in the subclass.&quot;</span><span class="p">)</span></div>
 
     
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid</span><span class="p">:</span> <span class="n">dynabench</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">Grid</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid</span><span class="p">:</span> <span class="n">dynabench</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">Grid</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
     
 <div class="viewcode-block" id="Composite">
@@ -168,8 +165,10 @@
         
 <div class="viewcode-block" id="Composite.generate">
 <a class="viewcode-back" href="../../reference/dynabench.initial.html#dynabench.initial.Composite.generate">[docs]</a>
-    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid</span><span class="p">:</span> <span class="n">dynabench</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">Grid</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">component</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid</span><span class="p">:</span> <span class="n">dynabench</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">Grid</span><span class="p">,</span> <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">):</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
+        <span class="n">seeds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1e6</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">))</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">component</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span> <span class="k">for</span> <span class="n">component</span><span class="p">,</span> <span class="n">seed</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">,</span> <span class="n">seeds</span><span class="p">)]</span></div>
 </div>
 
     
@@ -294,7 +293,7 @@
 <span class="sd">        zero_level : float, default 0.0</span>
 <span class="sd">            The zero level of the initial condition.</span>
 <span class="sd">        periodic_levels : int or list, default 10</span>
-<span class="sd">            The number of periodic levels to calculate the wrapped distribution. :math:`p_w(\theta)=\sum_{k=-\infty}^\infty {p(\theta+2\pi k)}`</span>
+<span class="sd">            The number of periodic levels to calculate the wrapped distribution. :math:`p_w(\\theta)=\\sum_{k=-\\infty}^\\infty {p(\\theta+2\\pi k)}`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
@@ -318,7 +317,7 @@
         <span class="n">dLx</span> <span class="o">=</span> <span class="n">limits_x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">limits_x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">dLy</span> <span class="o">=</span> <span class="n">limits_y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">limits_y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="n">components</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">gaussian_2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">mu</span><span class="o">+</span><span class="p">[</span><span class="n">dLx</span><span class="o">*</span><span class="n">k_x</span><span class="p">,</span> <span class="n">dLy</span><span class="o">*</span><span class="n">k_y</span><span class="p">],</span> <span class="n">sigma</span><span class="p">)</span> <span class="k">for</span> <span class="n">k_x</span><span class="p">,</span> <span class="n">k_y</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">)])</span>
+        <span class="n">components</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">gaussian_2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">mu</span><span class="o">+</span><span class="p">[</span><span class="n">dLx</span><span class="o">*</span><span class="n">k_x</span><span class="p">,</span> <span class="n">dLy</span><span class="o">*</span><span class="n">k_y</span><span class="p">],</span> <span class="n">sigma</span><span class="p">)</span> <span class="k">for</span> <span class="n">k_x</span><span class="p">,</span> <span class="n">k_y</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">)])</span>
         <span class="k">return</span> <span class="n">components</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     
 <div class="viewcode-block" id="WrappedGaussians.generate">
@@ -340,22 +339,6 @@
         <span class="k">return</span> <span class="n">u</span></div>
 </div>
 
-    
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-    <span class="kn">from</span> <span class="nn">dynabench.solver.diff</span> <span class="kn">import</span> <span class="n">differential_operator</span>
-    <span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">convolve2d</span>
-
-    <span class="n">initial_condition</span> <span class="o">=</span> <span class="n">WrappedGaussians</span><span class="p">((</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">),</span> <span class="n">components</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="n">initial_condition</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
-    <span class="n">d_u</span> <span class="o">=</span> <span class="n">differential_operator</span><span class="p">(</span><span class="s2">&quot;u_x_1_y_0&quot;</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">512</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">512</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">d_u</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-        <span class="n">u</span> <span class="o">=</span> <span class="n">convolve2d</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">d_u</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span> <span class="n">boundary</span><span class="o">=</span><span class="s2">&quot;wrap&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;initial_condition.png&quot;</span><span class="p">)</span>
 </pre></div>
 
            </div>

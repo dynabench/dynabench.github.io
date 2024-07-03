@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.initial &mdash; dynabench 0.3.3 documentation</title>
+  <title>dynabench.initial &mdash; dynabench 0.3.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=d5a15cff"></script>
+        <script src="../_static/documentation_options.js?v=1e28cc32"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/design-tabs.js?v=36754332"></script>
@@ -27,7 +27,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="dynabench.grid" href="dynabench.grid.html" />
-    <link rel="prev" title="dynabench.solver.diff" href="dynabench.solver.diff.html" /> 
+    <link rel="prev" title="dynabench.solver" href="dynabench.solver.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -52,7 +52,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../start.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results.html">Benchmark Results</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="dynabench.dataset.html">dynabench.dataset</a></li>
@@ -142,9 +142,6 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#dynabench.initial.WrappedGaussians" title="dynabench.initial.WrappedGaussians"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WrappedGaussians</span></code></a>([components, zero_level, ...])</p></td>
 <td><p>Initial condition generator for the sum of wrapped gaussians.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">product</span></code></p></td>
-<td><p>product(<a href="#id1"><span class="problematic" id="id2">*</span></a>iterables, repeat=1) --&gt; product object</p></td>
-</tr>
 </tbody>
 </table>
 <dl class="py class">
@@ -160,7 +157,7 @@ Convenience class to generate multiple initial conditions for different variable
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="dynabench.initial.Composite.generate">
-<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dynabench.grid.html#dynabench.grid.Grid" title="dynabench.grid.Grid"><span class="pre">Grid</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/initial.html#Composite.generate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.initial.Composite.generate" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dynabench.grid.html#dynabench.grid.Grid" title="dynabench.grid.Grid"><span class="pre">Grid</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/initial.html#Composite.generate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.initial.Composite.generate" title="Link to this definition"></a></dt>
 <dd><p>Generate the initial condition.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -322,7 +319,7 @@ Convenience class to generate multiple initial conditions for different variable
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>components</strong> (<em>int</em><em>, </em><em>default 1</em>) – The number of gaussian components.</p></li>
 <li><p><strong>zero_level</strong> (<em>float</em><em>, </em><em>default 0.0</em>) – The zero level of the initial condition.</p></li>
-<li><p><strong>periodic_levels</strong> (<em>int</em><em> or </em><em>list</em><em>, </em><em>default 10</em>) – The number of periodic levels to calculate the wrapped distribution. <span class="math notranslate nohighlight">\(p_w(    heta)=\sum_{k=-\infty}^\infty {p(       heta+2\pi k)}\)</span></p></li>
+<li><p><strong>periodic_levels</strong> (<em>int</em><em> or </em><em>list</em><em>, </em><em>default 10</em>) – The number of periodic levels to calculate the wrapped distribution. <span class="math notranslate nohighlight">\(p_w(\theta)=\sum_{k=-\infty}^\infty {p(\theta+2\pi k)}\)</span></p></li>
 </ul>
 </dd>
 </dl>
@@ -351,7 +348,7 @@ Convenience class to generate multiple initial conditions for different variable
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="dynabench.solver.diff.html" class="btn btn-neutral float-left" title="dynabench.solver.diff" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dynabench.solver.html" class="btn btn-neutral float-left" title="dynabench.solver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="dynabench.grid.html" class="btn btn-neutral float-right" title="dynabench.grid" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
