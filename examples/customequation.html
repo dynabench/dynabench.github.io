@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Example 3: Custom Equation DataLoader &mdash; dynabench 0.3.4 documentation</title>
+  <title>Example 3: Custom Equation DataLoader &mdash; dynabench 0.3.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=1e28cc32"></script>
+        <script src="../_static/documentation_options.js?v=ba50482b"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/design-tabs.js?v=36754332"></script>
@@ -100,9 +100,10 @@ We will use the <a class="reference internal" href="../reference/dynabench.datas
 the <a class="reference internal" href="../reference/dynabench.equation.html#dynabench.equation.FitzhughNagumoEquation" title="dynabench.equation.FitzhughNagumoEquation"><code class="xref py py-class docutils literal notranslate"><span class="pre">dynabench.equation.FitzhughNagumoEquation</span></code></a>. The Fitzhugh-Nagumo equation is a simplified model of the electrical activity in a
 neuron. The equation is given by:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\\frac{\\partial v}{\\partial t} = \\nabla^2 v + v - \\frac{v^3}{3} - w + stimulus
-\\frac{\\partial w}{\\partial t} = \\frac{v + a - b * w}{\\tau}\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(v\)</span> is the membrane potential and <span class="math notranslate nohighlight">\(w\)</span> is the recovery variable, and <span class="math notranslate nohighlight">\(stimulus\)</span>, <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, and <span class="math notranslate nohighlight">\(\tau\)</span> are parameters of the equation.</p>
+\[\frac{\partial v}{\partial t} = \nabla^2 v + v - \frac{v^3}{3} - w + s\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{\partial w}{\partial t} = \frac{v + a - b * w}{\tau}\]</div>
+<p>where <span class="math notranslate nohighlight">\(v\)</span> is the membrane potential and <span class="math notranslate nohighlight">\(w\)</span> is the recovery variable, and <span class="math notranslate nohighlight">\(s\)</span> (stimulus), <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, and <span class="math notranslate nohighlight">\(\tau\)</span> are parameters of the equation.</p>
 <p>We will generate the data for the Fitzhugh-Nagumo equation in a similar way to the previous example for the <a class="reference internal" href="cahnhiliard.html"><span class="doc">Cahn-Hilliard Equation</span></a>.</p>
 <p>This example consists of the following steps:</p>
 <ol class="arabic simple">
