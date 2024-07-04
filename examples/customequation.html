@@ -117,7 +117,12 @@ neuron. The equation is given by:</p>
 <p>Similar to <a class="reference internal" href="cahnhiliard.html"><span class="doc">Cahn-Hilliard Equation</span></a> using the <a class="reference internal" href="../reference/dynabench.solver.html#dynabench.solver.PyPDESolver" title="dynabench.solver.PyPDESolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">dynabench.solver.PyPDESolver</span></code></a> solver.
 As the Fitzhugh-Nagumo equation is a two-component equation, we will use the <a class="reference internal" href="../reference/dynabench.initial.html#dynabench.initial.Composite" title="dynabench.initial.Composite"><code class="xref py py-class docutils literal notranslate"><span class="pre">dynabench.initial.Composite</span></code></a> class to generate the
 initial condition for both components of the equation.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate data for the Fitzhugh-Nagumo equation</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dynabench.equation</span> <span class="kn">import</span> <span class="n">FitzhughNagumoEquation</span>
+<span class="kn">from</span> <span class="nn">dynabench.initial</span> <span class="kn">import</span> <span class="n">RandomUniform</span><span class="p">,</span> <span class="n">Composite</span>
+<span class="kn">from</span> <span class="nn">dynabench.grid</span> <span class="kn">import</span> <span class="n">Grid</span>
+<span class="kn">from</span> <span class="nn">dynabench.solver</span> <span class="kn">import</span> <span class="n">PyPDESolver</span>
+
+<span class="c1"># Generate data for the Fitzhugh-Nagumo equation</span>
 <span class="n">pde_equation</span> <span class="o">=</span> <span class="n">FitzhughNagumoEquation</span><span class="p">()</span>
 <span class="n">grid</span> <span class="o">=</span> <span class="n">Grid</span><span class="p">(</span><span class="n">grid_limits</span><span class="o">=</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">64</span><span class="p">)),</span> <span class="n">grid_size</span><span class="o">=</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">))</span>
 <span class="n">intitial</span> <span class="o">=</span> <span class="n">Composite</span><span class="p">(</span><span class="n">RandomUniform</span><span class="p">(),</span> <span class="n">RandomUniform</span><span class="p">())</span>
@@ -142,20 +147,22 @@ To load the data, we will need to specify the path to the saved equation data, a
 <p>The <a class="reference internal" href="../reference/dynabench.solver.html#dynabench.solver.PyPDESolver" title="dynabench.solver.PyPDESolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">dynabench.solver.PyPDESolver</span></code></a> saves the data in h5 format to the output directory specified by the <cite>out_dir</cite> parameter with a default value of “data/raw”.
 The name of the file is generated based on the equation name and the parameters of the equation. In our case the file name is <cite>fitzhughnagumo_357b852b_dt_1_trange_0_100_seed_42.h5</cite>,
 but it might be different in your case. For the <cite>lookback</cite> and <cite>rollout</cite> parameters, we will use the default values of 1.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dynabench.grid</span> <span class="kn">import</span> <span class="n">Grid</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dynabench.dataset</span> <span class="kn">import</span> <span class="n">EquationMovingWindowIterator</span>
 
-<span class="c1"># Create an instance of grid with default parameters</span>
-<span class="n">grid</span> <span class="o">=</span> <span class="n">Grid</span><span class="p">(</span><span class="n">grid_limits</span><span class="o">=</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">64</span><span class="p">)),</span> <span class="n">grid_size</span><span class="o">=</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">))</span>
+<span class="c1"># initialize the equation iterator</span>
+<span class="n">eq_iterator</span> <span class="o">=</span> <span class="n">EquationMovingWindowIterator</span><span class="p">(</span>
+    <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;data/raw/fitzhughnagumo_357b852b_dt_1_trange_0_100_seed_42.h5&quot;</span><span class="p">,</span> <span class="c1"># path to the data file, generated by the solver. Might be different for you.</span>
+    <span class="n">lookback</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">rollout</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
-<p>In this case spatial domain is defined by the grid_limits parameter,
-which specifies the limits of the grid in each dimension.
-The grid_size parameter specifies the number of grid points in each dimension.</p>
-<p>In this case, as dx = dy = 1, the <a class="reference internal" href="../reference/dynabench.grid.html#dynabench.grid.UnitGrid" title="dynabench.grid.UnitGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">dynabench.grid.UnitGrid</span></code></a> class can be used to define the same grid:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dynabench.grid</span> <span class="kn">import</span> <span class="n">UnitGrid</span>
+<p>The equation iterator can be used in a similar way to the <code class="xref py py-class docutils literal notranslate"><span class="pre">dynabench.dataset.DynaBenchIterator</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tqdm</span>
 
-<span class="c1"># Create an instance of a unit grid</span>
-<span class="n">grid</span> <span class="o">=</span> <span class="n">UnitGrid</span><span class="p">(</span><span class="n">grid_limits</span><span class="o">=</span><span class="n">grid_size</span><span class="o">=</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">))</span>
+<span class="c1"># iterate over the data</span>
+<span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">eq_iterator</span><span class="p">):</span>
+    <span class="n">input_data</span><span class="p">,</span> <span class="n">target_data</span><span class="p">,</span> <span class="n">points</span> <span class="o">=</span> <span class="n">sample</span>
 </pre></div>
 </div>
 </section>
