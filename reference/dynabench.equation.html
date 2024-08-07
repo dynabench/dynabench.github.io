@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.equation &mdash; dynabench 0.3.5 documentation</title>
+  <title>dynabench.equation &mdash; dynabench 0.3.6 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=ba50482b"></script>
+        <script src="../_static/documentation_options.js?v=8da8c241"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/design-tabs.js?v=36754332"></script>
@@ -86,6 +86,16 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#dynabench.equation.FitzhughNagumoEquation"><code class="docutils literal notranslate"><span class="pre">FitzhughNagumoEquation</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dynabench.equation.KuramotoSivashinskyEquation"><code class="docutils literal notranslate"><span class="pre">KuramotoSivashinskyEquation</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.KuramotoSivashinskyEquation.linear_terms"><code class="docutils literal notranslate"><span class="pre">KuramotoSivashinskyEquation.linear_terms</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.KuramotoSivashinskyEquation.nonlinear_terms"><code class="docutils literal notranslate"><span class="pre">KuramotoSivashinskyEquation.nonlinear_terms</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dynabench.equation.SimpleBurgersEquation"><code class="docutils literal notranslate"><span class="pre">SimpleBurgersEquation</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.SimpleBurgersEquation.linear_terms"><code class="docutils literal notranslate"><span class="pre">SimpleBurgersEquation.linear_terms</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.SimpleBurgersEquation.nonlinear_terms"><code class="docutils literal notranslate"><span class="pre">SimpleBurgersEquation.nonlinear_terms</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#dynabench.equation.WaveEquation"><code class="docutils literal notranslate"><span class="pre">WaveEquation</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.WaveEquation.linear_terms"><code class="docutils literal notranslate"><span class="pre">WaveEquation.linear_terms</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.WaveEquation.nonlinear_terms"><code class="docutils literal notranslate"><span class="pre">WaveEquation.nonlinear_terms</span></code></a></li>
@@ -164,8 +174,14 @@
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Function</span></code>(*args)</p></td>
 <td><p>Base class for applied mathematical functions.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PDE</span></code>(rhs, *[, bc, bc_ops, user_funcs, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.equation.KuramotoSivashinskyEquation" title="dynabench.equation.KuramotoSivashinskyEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KuramotoSivashinskyEquation</span></code></a>([evolution_rate])</p></td>
+<td><p>Kuramoto-Sivashinsky equation in 2D.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PDE</span></code>(rhs, *[, bc, bc_ops, user_funcs, ...])</p></td>
 <td><p>PDE defined by mathematical expressions</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.equation.SimpleBurgersEquation" title="dynabench.equation.SimpleBurgersEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SimpleBurgersEquation</span></code></a>([nu, evolution_rate])</p></td>
+<td><p>Simple Burgers equation in 2D.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Symbol</span></code>(name, **assumptions)</p></td>
 <td><p>Assumptions:</p></td>
@@ -392,6 +408,79 @@ py-pde library.</p>
 \[\frac{\partial v}{\partial t} = \nabla^2 v + v - \frac{v^3}{3} - w + stimulus
 \frac{\partial w}{\partial t} = \frac{v + a - b * w}{\tau}\]</div>
 <p>where v is the membrane potential and w is the recovery variable, and stimulus, a, b, and tau are parameters of the equation.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dynabench.equation.KuramotoSivashinskyEquation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.equation.</span></span><span class="sig-name descname"><span class="pre">KuramotoSivashinskyEquation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evolution_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/equation.html#KuramotoSivashinskyEquation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.equation.KuramotoSivashinskyEquation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dynabench.equation.BaseEquation" title="dynabench.equation.BaseEquation"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEquation</span></code></a></p>
+<p>Kuramoto-Sivashinsky equation in 2D. The equation is given by:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial u}{\partial t} = -\nabla^2 u - \nabla^4 u - \frac{1}{2}|\nabla u|^2\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>parameters</strong> (<em>dict</em><em>, </em><em>default {}</em>) – Dictionary of parameters for the equations.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dynabench.equation.KuramotoSivashinskyEquation.linear_terms">
+<span class="sig-name descname"><span class="pre">linear_terms</span></span><a class="headerlink" href="#dynabench.equation.KuramotoSivashinskyEquation.linear_terms" title="Link to this definition"></a></dt>
+<dd><p>List of linear terms in the equation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dynabench.equation.KuramotoSivashinskyEquation.nonlinear_terms">
+<span class="sig-name descname"><span class="pre">nonlinear_terms</span></span><a class="headerlink" href="#dynabench.equation.KuramotoSivashinskyEquation.nonlinear_terms" title="Link to this definition"></a></dt>
+<dd><p>List of nonlinear terms in the equation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dynabench.equation.SimpleBurgersEquation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.equation.</span></span><span class="sig-name descname"><span class="pre">SimpleBurgersEquation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evolution_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/equation.html#SimpleBurgersEquation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.equation.SimpleBurgersEquation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dynabench.equation.BaseEquation" title="dynabench.equation.BaseEquation"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEquation</span></code></a></p>
+<p>Simple Burgers equation in 2D. The equation is given by:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial u}{\partial t} = -u (\frac{\partial u}{\partial x}+\frac{\partial u}{\partial y}) + \nu \nabla^2 u\]</div>
+<p>where nu is the viscosity of the fluid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>parameters</strong> (<em>dict</em><em>, </em><em>default {nu: 1}</em>) – Dictionary of parameters for the equations.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dynabench.equation.SimpleBurgersEquation.linear_terms">
+<span class="sig-name descname"><span class="pre">linear_terms</span></span><a class="headerlink" href="#dynabench.equation.SimpleBurgersEquation.linear_terms" title="Link to this definition"></a></dt>
+<dd><p>List of linear terms in the equation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dynabench.equation.SimpleBurgersEquation.nonlinear_terms">
+<span class="sig-name descname"><span class="pre">nonlinear_terms</span></span><a class="headerlink" href="#dynabench.equation.SimpleBurgersEquation.nonlinear_terms" title="Link to this definition"></a></dt>
+<dd><p>List of nonlinear terms in the equation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">

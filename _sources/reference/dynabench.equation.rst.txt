@@ -31,7 +31,9 @@
       Eq
       FitzhughNagumoEquation
       Function
+      KuramotoSivashinskyEquation
       PDE
+      SimpleBurgersEquation
       Symbol
       WaveEquation
    
