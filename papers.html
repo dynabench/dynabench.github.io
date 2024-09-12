@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Papers using the benchmark &mdash; dynabench 0.3.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+      <link rel="stylesheet" type="text/css" href="_static/dynabench.css?v=cb3fec7a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=29d04658"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/design-tabs.js?v=36754332"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Benchmark Results" href="results.html" />
+    <link rel="prev" title="Example 1: NeuralPDE" href="examples/grind.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            dynabench
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Papers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dynabench">DynaBench</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#grind">GrINd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#your-paper-missing">Your paper missing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">Benchmark Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">dynabench</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Papers using the benchmark</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/papers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="papers-using-the-benchmark">
+<h1>Papers using the benchmark<a class="headerlink" href="#papers-using-the-benchmark" title="Link to this heading"></a></h1>
+<p>Here we give an overview of all the papers that have used the DynaBench benchmark in their research.</p>
+<section id="dynabench">
+<h2>DynaBench<a class="headerlink" href="#dynabench" title="Link to this heading"></a></h2>
+<p><strong>Full title</strong>: DynaBench: A benchmark dataset for learning dynamical systems from low-resolution data.</p>
+<p>The original DynaBench paper can be found <a class="reference external" href="https://arxiv.org/abs/2306.05805">here</a>.</p>
+<p><strong>Abstract</strong> Previous work on learning physical systems from data has focused on high-resolution
+grid-structured measurements. However, real-world k
+nowledge of such systems (e.g. weather data) relies on sparsely
+scattered measuring stations. In this paper, we introduce a novel simulated benchmark dataset,
+DynaBench, for learning dynamical systems
+directly from sparsely scattered data without prior knowledge of the
+equations. The dataset focuses on predicting the evolution of a dynamical system from low-resolution,
+unstructured measurements. We simulate
+six different partial differential equations covering a variety of physical
+systems commonly used in the literature and evaluate several machine
+learning models, including traditional graph neural networks and point
+cloud processing models, with the task of predicting the evolution of
+the system. The proposed benchmark dataset is expected to advance the
+state of art as an out-of-the-box easy-to-use tool for evaluating models in
+a setting where only unstructured low-resolution observations are available.</p>
+</section>
+<section id="grind">
+<h2>GrINd<a class="headerlink" href="#grind" title="Link to this heading"></a></h2>
+<p><strong>Full title</strong>: GrINd: GrINd: Grid Interpolation Network for Scattered Observations</p>
+<p>The original GrINd paper can be found on <a class="reference external" href="https://arxiv.org/abs/2403.19570">Arxiv</a>.
+The original code is available on <a class="reference external" href="https://github.com/badulion/grind">GitHub</a>.</p>
+<p><strong>Abstract</strong> Predicting the evolution of spatiotemporal physical systems from sparse and scattered observational
+data poses a significant challenge in various scientific domains.
+Traditional methods rely on dense grid-structured data, limiting their
+applicability in scenarios with sparse observations. To address this challenge, we introduce
+GrINd (Grid Interpolation Network for Scattered Observations), a novel network architecture
+that leverages the high-performance of grid-based models by mapping scattered observations
+onto a high-resolution grid using a Fourier Interpolation Layer. In the high-resolution space,
+a NeuralPDE-class model predicts the system’s state at future timepoints using differentiable
+ODE solvers and fully convolutional neural networks parametrizing the system’s dynamics.
+We empirically evaluate GrINd on the DynaBench benchmark dataset, comprising six different
+physical systems observed at scattered locations, demonstrating its state-of-the-art
+performance compared to existing models. GrINd offers a promising approach for
+forecasting physical systems from sparse, scattered observational data, extending
+the applicability of deep learning methods to real-world scenarios with limited data availability.</p>
+</section>
+<section id="your-paper-missing">
+<h2>Your paper missing<a class="headerlink" href="#your-paper-missing" title="Link to this heading"></a></h2>
+<p>Have you used the DynaBench benchmark in your paper and cannot find it here?
+Please let us know by creating a pull request or an issue on our <a class="reference external" href="https://github.com/badulion/dynabench">GitHub repository</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="examples/grind.html" class="btn btn-neutral float-left" title="Example 1: NeuralPDE" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="results.html" class="btn btn-neutral float-right" title="Benchmark Results" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Andrzej Dulny.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

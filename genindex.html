@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; dynabench 0.3.6 documentation</title>
+  <title>Index &mdash; dynabench 0.3.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
@@ -16,7 +16,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=8da8c241"></script>
+        <script src="_static/documentation_options.js?v=29d04658"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/design-tabs.js?v=36754332"></script>
@@ -49,6 +49,7 @@
 <li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guide.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="papers.html">Papers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="results.html">Benchmark Results</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a></li>
 </ul>
@@ -185,6 +186,13 @@
 </li>
       </ul></li>
       <li>
+    dynabench.model.grind
+
+      <ul>
+        <li><a href="reference/dynabench.model.grind.html#module-dynabench.model.grind">module</a>
+</li>
+      </ul></li>
+      <li>
     dynabench.solver
 
       <ul>
@@ -222,11 +230,19 @@
       <li><a href="reference/dynabench.model.html#dynabench.model.CNN.forward">forward() (dynabench.model.CNN method)</a>
 
       <ul>
+        <li><a href="reference/dynabench.model.grind.html#dynabench.model.grind.FourierInterpolator.forward">(dynabench.model.grind.FourierInterpolator method)</a>
+</li>
+        <li><a href="reference/dynabench.model.grind.html#dynabench.model.grind.GrIND.forward">(dynabench.model.grind.GrIND method)</a>
+</li>
         <li><a href="reference/dynabench.model.html#dynabench.model.NeuralPDE.forward">(dynabench.model.NeuralPDE method)</a>
 </li>
         <li><a href="reference/dynabench.model.html#dynabench.model.ResNet.forward">(dynabench.model.ResNet method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/dynabench.model.grind.html#dynabench.model.grind.FourierInterpolator">FourierInterpolator (class in dynabench.model.grind)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -247,9 +263,15 @@
         <li><a href="reference/dynabench.initial.html#dynabench.initial.WrappedGaussians.generate">(dynabench.initial.WrappedGaussians method)</a>
 </li>
       </ul></li>
+      <li><a href="reference/dynabench.solver.html#dynabench.solver.BaseSolver.generate_filename">generate_filename() (dynabench.solver.BaseSolver method)</a>
+</li>
+      <li><a href="reference/dynabench.model.grind.html#dynabench.model.grind.FourierInterpolator.generate_fourier_basis">generate_fourier_basis() (dynabench.model.grind.FourierInterpolator method)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/dynabench.solver.html#dynabench.solver.BaseSolver.generate_filename">generate_filename() (dynabench.solver.BaseSolver method)</a>
+      <li><a href="reference/dynabench.model.grind.html#dynabench.model.grind.FourierInterpolator.generate_fourier_ks">generate_fourier_ks() (dynabench.model.grind.FourierInterpolator method)</a>
+</li>
+      <li><a href="reference/dynabench.model.grind.html#dynabench.model.grind.GrIND.generate_interpolation_points">generate_interpolation_points() (dynabench.model.grind.GrIND method)</a>
 </li>
       <li><a href="reference/dynabench.dataset.html#dynabench.dataset.EquationMovingWindowIterator.get_full_simulation_data">get_full_simulation_data() (dynabench.dataset.EquationMovingWindowIterator method)</a>
 </li>
@@ -260,6 +282,8 @@
       <li><a href="reference/dynabench.grid.html#dynabench.grid.Grid.get_random_point_within_domain">get_random_point_within_domain() (dynabench.grid.Grid method)</a>
 </li>
       <li><a href="reference/dynabench.grid.html#dynabench.grid.Grid">Grid (class in dynabench.grid)</a>
+</li>
+      <li><a href="reference/dynabench.model.grind.html#dynabench.model.grind.GrIND">GrIND (class in dynabench.model.grind)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -320,6 +344,8 @@
         <li><a href="reference/dynabench.initial.html#module-dynabench.initial">dynabench.initial</a>
 </li>
         <li><a href="reference/dynabench.model.html#module-dynabench.model">dynabench.model</a>
+</li>
+        <li><a href="reference/dynabench.model.grind.html#module-dynabench.model.grind">dynabench.model.grind</a>
 </li>
         <li><a href="reference/dynabench.solver.html#module-dynabench.solver">dynabench.solver</a>
 </li>
@@ -402,6 +428,8 @@
         <li><a href="reference/dynabench.solver.html#dynabench.solver.PyPDESolver.solve">(dynabench.solver.PyPDESolver method)</a>
 </li>
       </ul></li>
+      <li><a href="reference/dynabench.model.grind.html#dynabench.model.grind.FourierInterpolator.solve_for_fourier_coefficients">solve_for_fourier_coefficients() (dynabench.model.grind.FourierInterpolator method)</a>
+</li>
       <li><a href="reference/dynabench.initial.html#dynabench.initial.SumOfGaussians">SumOfGaussians (class in dynabench.initial)</a>
 </li>
   </ul></td>
