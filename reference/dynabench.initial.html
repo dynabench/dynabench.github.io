@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.initial &mdash; dynabench 0.3.7 documentation</title>
+  <title>dynabench.initial &mdash; dynabench 0.4.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=29d04658"></script>
+        <script src="../_static/documentation_options.js?v=c87aa342"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/design-tabs.js?v=36754332"></script>
@@ -122,6 +122,14 @@
   <section id="module-dynabench.initial">
 <span id="dynabench-initial"></span><h1>dynabench.initial<a class="headerlink" href="#module-dynabench.initial" title="Link to this heading"></a></h1>
 <p>Module containing different initial condition generators.</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">warn</span></code></p></td>
+<td><p>Issue a warning, or maybe ignore it or raise an exception.</p></td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Classes</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
@@ -193,7 +201,7 @@ Convenience class to generate multiple initial conditions for different variable
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="dynabench.initial.Constant.generate">
-<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dynabench.grid.html#dynabench.grid.Grid" title="dynabench.grid.Grid"><span class="pre">Grid</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/initial.html#Constant.generate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.initial.Constant.generate" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dynabench.grid.html#dynabench.grid.Grid" title="dynabench.grid.Grid"><span class="pre">Grid</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/initial.html#Constant.generate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.initial.Constant.generate" title="Link to this definition"></a></dt>
 <dd><p>Generate the initial condition.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>

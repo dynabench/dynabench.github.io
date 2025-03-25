@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.model &mdash; dynabench 0.3.7 documentation</title>
+  <title>dynabench.model &mdash; dynabench 0.4.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=29d04658"></script>
+        <script src="../_static/documentation_options.js?v=c87aa342"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/design-tabs.js?v=36754332"></script>
@@ -66,11 +66,16 @@
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.model.NeuralPDE.forward"><code class="docutils literal notranslate"><span class="pre">NeuralPDE.forward()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#dynabench.model.PointTransformerV1"><code class="docutils literal notranslate"><span class="pre">PointTransformerV1</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.model.PointTransformerV1.forward"><code class="docutils literal notranslate"><span class="pre">PointTransformerV1.forward()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#dynabench.model.ResNet"><code class="docutils literal notranslate"><span class="pre">ResNet</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.model.ResNet.forward"><code class="docutils literal notranslate"><span class="pre">ResNet.forward()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="dynabench.model.grind.html">dynabench.model.grind</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dynabench.model.utils.html">dynabench.model.utils</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="dynabench.solver.html">dynabench.solver</a></li>
@@ -117,7 +122,10 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#dynabench.model.NeuralPDE" title="dynabench.model.NeuralPDE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NeuralPDE</span></code></a>(input_dim[, hidden_channels, ...])</p></td>
 <td><p>Neural PDE model for grid data.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.model.ResNet" title="dynabench.model.ResNet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ResNet</span></code></a>(input_size, output_size[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.model.PointTransformerV1" title="dynabench.model.PointTransformerV1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PointTransformerV1</span></code></a>(input_dim, num_points[, ...])</p></td>
+<td><p>Point Transformer model V1 form the Paper [Point Transformer](<a class="reference external" href="https://arxiv.org/abs/2012.09164">https://arxiv.org/abs/2012.09164</a>).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.model.ResNet" title="dynabench.model.ResNet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ResNet</span></code></a>(input_size, output_size[, ...])</p></td>
 <td><p>Simple 2D ResNet model for grid data.</p></td>
 </tr>
 </tbody>
@@ -200,6 +208,43 @@ The model has been taken from <a class="reference external" href="https://arxiv.
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="dynabench.model.PointTransformerV1">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.model.</span></span><span class="sig-name descname"><span class="pre">PointTransformerV1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_blocks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_neighbors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformer_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">512</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/model/point/point_transformer/_v1.html#PointTransformerV1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.model.PointTransformerV1" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>Point Transformer model V1 form the Paper [Point Transformer](<a class="reference external" href="https://arxiv.org/abs/2012.09164">https://arxiv.org/abs/2012.09164</a>).
+The model is unchanged to the original implementation in the [Git](<a class="reference external" href="https://github.com/qq456cvb/Point-Transformers">https://github.com/qq456cvb/Point-Transformers</a>).
+The in and out channels need to be specified to fit the data structure in dynabench.
+E.g. the Advection equation has 1 channel.</p>
+<p>!! Time intervals need to stay constant !!</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_points</strong> (<em>int</em>) – The number of points in the data.</p></li>
+<li><p><strong>channels</strong> (<em>int</em>) – The number of channels of the data.</p></li>
+<li><p><strong>knn</strong> (<em>int</em>) – The number of k-nearest neighbors to use in the Point Transformer Layer.</p></li>
+<li><p><strong>num_blocks</strong> (<em>int</em>) – The number of blocks in the Point Transformer Layer. (depends on the number of points)</p></li>
+<li><p><strong>transformer_dim</strong> (<em>int</em>) – The dimension of the transformer.</p></li>
+<li><p><strong>input_dim</strong> (<em>int</em>) – The dimension of the input data.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dynabench.model.PointTransformerV1.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/model/point/point_transformer/_v1.html#PointTransformerV1.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.model.PointTransformerV1.forward" title="Link to this definition"></a></dt>
+<dd><p>Define the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="dynabench.model.ResNet">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.model.</span></span><span class="sig-name descname"><span class="pre">ResNet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resblock_layers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resblock_channels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resblock_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'simple'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'same'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'circular'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ReLU'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/model/_grid/resnet.html#ResNet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.model.ResNet" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
@@ -243,6 +288,9 @@ The model has been taken from <a class="reference external" href="https://arxiv.
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="dynabench.model.grind.html#module-dynabench.model.grind" title="dynabench.model.grind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dynabench.model.grind</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="dynabench.model.utils.html#module-dynabench.model.utils" title="dynabench.model.utils"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dynabench.model.utils</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>

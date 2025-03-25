@@ -19,6 +19,7 @@
    
       CNN
       NeuralPDE
+      PointTransformerV1
       ResNet
    
    
@@ -36,4 +37,5 @@
    :recursive:
 
    dynabench.model.grind
+   dynabench.model.utils
 
