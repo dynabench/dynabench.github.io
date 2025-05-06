@@ -4,8 +4,8 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Example 3: Custom Equation DataLoader &mdash; dynabench 0.4.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+  <title>Example 3: Custom Equation DataLoader &mdash; dynabench 0.4.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
       <link rel="stylesheet" type="text/css" href="../_static/dynabench.css?v=cb3fec7a" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=c87aa342"></script>
+        <script src="../_static/documentation_options.js?v=ff822928"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/design-tabs.js?v=36754332"></script>
@@ -119,10 +119,10 @@ neuron. The equation is given by:</p>
 <p>Similar to <a class="reference internal" href="cahnhiliard.html"><span class="doc">Cahn-Hilliard Equation</span></a> using the <a class="reference internal" href="../reference/dynabench.solver.html#dynabench.solver.PyPDESolver" title="dynabench.solver.PyPDESolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">dynabench.solver.PyPDESolver</span></code></a> solver.
 As the Fitzhugh-Nagumo equation is a two-component equation, we will use the <a class="reference internal" href="../reference/dynabench.initial.html#dynabench.initial.Composite" title="dynabench.initial.Composite"><code class="xref py py-class docutils literal notranslate"><span class="pre">dynabench.initial.Composite</span></code></a> class to generate the
 initial condition for both components of the equation.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dynabench.equation</span> <span class="kn">import</span> <span class="n">FitzhughNagumoEquation</span>
-<span class="kn">from</span> <span class="nn">dynabench.initial</span> <span class="kn">import</span> <span class="n">RandomUniform</span><span class="p">,</span> <span class="n">Composite</span>
-<span class="kn">from</span> <span class="nn">dynabench.grid</span> <span class="kn">import</span> <span class="n">Grid</span>
-<span class="kn">from</span> <span class="nn">dynabench.solver</span> <span class="kn">import</span> <span class="n">PyPDESolver</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dynabench.equation</span><span class="w"> </span><span class="kn">import</span> <span class="n">FitzhughNagumoEquation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dynabench.initial</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomUniform</span><span class="p">,</span> <span class="n">Composite</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dynabench.grid</span><span class="w"> </span><span class="kn">import</span> <span class="n">Grid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dynabench.solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">PyPDESolver</span>
 
 <span class="c1"># Generate data for the Fitzhugh-Nagumo equation</span>
 <span class="n">pde_equation</span> <span class="o">=</span> <span class="n">FitzhughNagumoEquation</span><span class="p">()</span>
@@ -149,7 +149,7 @@ To load the data, we will need to specify the path to the saved equation data, a
 <p>The <a class="reference internal" href="../reference/dynabench.solver.html#dynabench.solver.PyPDESolver" title="dynabench.solver.PyPDESolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">dynabench.solver.PyPDESolver</span></code></a> saves the data in h5 format to the output directory specified by the <cite>out_dir</cite> parameter with a default value of “data/raw”.
 The name of the file is generated based on the equation name and the parameters of the equation. In our case the file name is <cite>fitzhughnagumo_357b852b_dt_1_trange_0_100_seed_42.h5</cite>,
 but it might be different in your case. For the <cite>lookback</cite> and <cite>rollout</cite> parameters, we will use the default values of 1.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dynabench.dataset</span> <span class="kn">import</span> <span class="n">EquationMovingWindowIterator</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dynabench.dataset</span><span class="w"> </span><span class="kn">import</span> <span class="n">EquationMovingWindowIterator</span>
 
 <span class="c1"># initialize the equation iterator</span>
 <span class="n">eq_iterator</span> <span class="o">=</span> <span class="n">EquationMovingWindowIterator</span><span class="p">(</span>
@@ -160,7 +160,7 @@ but it might be different in your case. For the <cite>lookback</cite> and <cite>
 </pre></div>
 </div>
 <p>The equation iterator can be used in a similar way to the <code class="xref py py-class docutils literal notranslate"><span class="pre">dynabench.dataset.DynaBenchIterator</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tqdm</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tqdm</span>
 
 <span class="c1"># iterate over the data</span>
 <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">eq_iterator</span><span class="p">):</span>
@@ -171,7 +171,7 @@ but it might be different in your case. For the <cite>lookback</cite> and <cite>
 <section id="load-the-whole-simulation">
 <span id="get-whole-simulation"></span><h2>Load the whole simulation<a class="headerlink" href="#load-the-whole-simulation" title="Link to this heading"></a></h2>
 <p>For some applications (e.g. sparse discovery of goverining equations using <a class="reference external" href="https://pysindy.readthedocs.io">SINDy</a>) it might be useful to load the whole simulation length.
-This can be done using the <a class="reference internal" href="../reference/dynabench.dataset.html#dynabench.dataset.EquationMovingWindowIterator.get_full_simulation_data" title="dynabench.dataset.EquationMovingWindowIterator.get_full_simulation_data"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dynabench.dataset.EquationMovingWindowIterator.get_full_simulation_data()</span></code></a> method:</p>
+This can be done using the <code class="xref py py-meth docutils literal notranslate"><span class="pre">dynabench.dataset.EquationMovingWindowIterator.get_full_simulation_data()</span></code> method:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">points</span> <span class="o">=</span> <span class="n">eq_iterator</span><span class="o">.</span><span class="n">get_full_simulation_data</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
@@ -182,14 +182,14 @@ In this case T is the number of time steps in the whole simulation, F is the num
 <section id="summary">
 <span id="summary-customequation"></span><h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
 <p>Overall the code for using the <a class="reference internal" href="../reference/dynabench.dataset.html#dynabench.dataset.EquationMovingWindowIterator" title="dynabench.dataset.EquationMovingWindowIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">dynabench.dataset.EquationMovingWindowIterator</span></code></a> is as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dynabench.equation</span> <span class="kn">import</span> <span class="n">FitzhughNagumoEquation</span>
-<span class="kn">from</span> <span class="nn">dynabench.initial</span> <span class="kn">import</span> <span class="n">RandomUniform</span><span class="p">,</span> <span class="n">Composite</span>
-<span class="kn">from</span> <span class="nn">dynabench.grid</span> <span class="kn">import</span> <span class="n">Grid</span>
-<span class="kn">from</span> <span class="nn">dynabench.solver</span> <span class="kn">import</span> <span class="n">PyPDESolver</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dynabench.equation</span><span class="w"> </span><span class="kn">import</span> <span class="n">FitzhughNagumoEquation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dynabench.initial</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomUniform</span><span class="p">,</span> <span class="n">Composite</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dynabench.grid</span><span class="w"> </span><span class="kn">import</span> <span class="n">Grid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dynabench.solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">PyPDESolver</span>
 
-<span class="kn">from</span> <span class="nn">dynabench.dataset</span> <span class="kn">import</span> <span class="n">EquationMovingWindowIterator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dynabench.dataset</span><span class="w"> </span><span class="kn">import</span> <span class="n">EquationMovingWindowIterator</span>
 
-<span class="kn">import</span> <span class="nn">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tqdm</span>
 
 
 <span class="c1"># Generate data for the Fitzhugh-Nagumo equation</span>

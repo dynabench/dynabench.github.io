@@ -4,8 +4,8 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Getting Started &mdash; dynabench 0.4.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+  <title>Getting Started &mdash; dynabench 0.4.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
       <link rel="stylesheet" type="text/css" href="_static/dynabench.css?v=cb3fec7a" />
@@ -17,7 +17,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=c87aa342"></script>
+        <script src="_static/documentation_options.js?v=ff822928"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/design-tabs.js?v=36754332"></script>
@@ -122,7 +122,7 @@ This can be done by providing the git repository with the pip command:</p>
 <h2>Downloading the data<a class="headerlink" href="#downloading-the-data" title="Link to this heading"></a></h2>
 <p>The DynaBench data is available for download from the <a class="reference external" href="https://wuedata.uni-wuerzburg.de/radar/de/dataset/sSEeRraAYDgQCgBP">WueData repository</a>.
 The data can be easily downloaded using the <a class="reference internal" href="reference/dynabench.dataset.html#dynabench.dataset.download_equation" title="dynabench.dataset.download_equation"><code class="xref py py-func docutils literal notranslate"><span class="pre">dynabench.dataset.download_equation()</span></code></a> function as shown below:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dynabench.dataset</span> <span class="kn">import</span> <span class="n">download_equation</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dynabench.dataset</span><span class="w"> </span><span class="kn">import</span> <span class="n">download_equation</span>
 
 <span class="n">download_equation</span><span class="p">(</span><span class="s1">&#39;advection&#39;</span><span class="p">,</span> <span class="n">structure</span><span class="o">=</span><span class="s1">&#39;cloud&#39;</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;low&#39;</span><span class="p">)</span>
 </pre></div>
@@ -132,7 +132,7 @@ The data can be easily downloaded using the <a class="reference internal" href="
 <section id="using-the-data">
 <h2>Using the data<a class="headerlink" href="#using-the-data" title="Link to this heading"></a></h2>
 <p>To easily load the data the dynabench package provides the <a class="reference internal" href="reference/dynabench.dataset.html#dynabench.dataset.DynabenchIterator" title="dynabench.dataset.DynabenchIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">dynabench.dataset.DynabenchIterator</span></code></a> iterator:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dynabench.dataset</span> <span class="kn">import</span> <span class="n">DynabenchIterator</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dynabench.dataset</span><span class="w"> </span><span class="kn">import</span> <span class="n">DynabenchIterator</span>
 
 <span class="n">advection_iterator</span> <span class="o">=</span> <span class="n">DynabenchIterator</span><span class="p">(</span><span class="n">equation</span><span class="o">=</span><span class="s1">&#39;advection&#39;</span><span class="p">,</span>
                                        <span class="n">structure</span><span class="o">=</span><span class="s1">&#39;cloud&#39;</span><span class="p">,</span>

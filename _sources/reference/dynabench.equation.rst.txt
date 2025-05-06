@@ -4,21 +4,12 @@
 .. automodule:: dynabench.equation
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
    
       expand
       sympify
-   
-   
-
-   
    
    .. rubric:: Classes
 
@@ -37,11 +28,3 @@
       Symbol
       WaveEquation
    
-   
-
-   
-   
-   
-
-
-

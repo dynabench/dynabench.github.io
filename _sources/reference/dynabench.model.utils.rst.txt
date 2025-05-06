@@ -4,27 +4,11 @@ dynabench.model.utils
 .. automodule:: dynabench.model.utils
 
    
-   
-   
-
-   
-   
-   
-
-   
-   
    .. rubric:: Classes
 
    .. autosummary::
    
-      GridIterativeWrapper
-      PointIterativeWrapper
+      CloudRolloutWrapper
+      GridRolloutWrapper
+      RolloutWrapper
    
-   
-
-   
-   
-   
-
-
-

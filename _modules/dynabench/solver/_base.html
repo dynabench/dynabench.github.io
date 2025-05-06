@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.solver._base &mdash; dynabench 0.4.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+  <title>dynabench.solver._base &mdash; dynabench 0.4.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/dynabench.css?v=cb3fec7a" />
@@ -16,7 +16,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=c87aa342"></script>
+        <script src="../../../_static/documentation_options.js?v=ff822928"></script>
         <script src="../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
@@ -79,16 +79,17 @@
            <div itemprop="articleBody">
              
   <h1>Source code for dynabench.solver._base</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">dynabench.equation</span>
-<span class="kn">import</span> <span class="nn">dynabench.initial</span>
-<span class="kn">import</span> <span class="nn">dynabench.grid</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">dynabench.equation</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dynabench.initial</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dynabench.grid</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">joblib</span> <span class="kn">import</span> <span class="nb">hash</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">joblib</span><span class="w"> </span><span class="kn">import</span> <span class="nb">hash</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
 
 <div class="viewcode-block" id="BaseSolver">
 <a class="viewcode-back" href="../../../reference/dynabench.solver.html#dynabench.solver.BaseSolver">[docs]</a>
-<span class="k">class</span> <span class="nc">BaseSolver</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BaseSolver</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Base class for all solvers.</span>
 
@@ -104,7 +105,7 @@
 <span class="sd">            Dictionary of parameters for the solver.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
                  <span class="n">equation</span><span class="p">:</span> <span class="n">dynabench</span><span class="o">.</span><span class="n">equation</span><span class="o">.</span><span class="n">BaseEquation</span><span class="p">,</span>
                  <span class="n">grid</span><span class="p">:</span> <span class="n">dynabench</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">Grid</span><span class="p">,</span>
                  <span class="n">initial_generator</span><span class="p">:</span> <span class="n">dynabench</span><span class="o">.</span><span class="n">initial</span><span class="o">.</span><span class="n">InitialCondition</span><span class="p">,</span>
@@ -116,27 +117,50 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">spatial_dim</span> <span class="o">=</span> <span class="mi">2</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="n">parameters</span>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;Base Equation Solver&quot;</span>
     
-<div class="viewcode-block" id="BaseSolver.generate_filename">
-<a class="viewcode-back" href="../../../reference/dynabench.solver.html#dynabench.solver.BaseSolver.generate_filename">[docs]</a>
-    <span class="k">def</span> <span class="nf">generate_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                          <span class="n">t_span</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
-                          <span class="n">dt_eval</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-                          <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-                          <span class="n">hash_truncate</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseSolver.generate_descriptors">
+<a class="viewcode-back" href="../../../reference/dynabench.solver.html#dynabench.solver.BaseSolver.generate_descriptors">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_descriptors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                            <span class="n">t_span</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+                            <span class="n">dt_eval</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                            <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                            <span class="n">hash_truncate</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">):</span>
         <span class="n">eq_params</span> <span class="o">=</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">equation</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">initial_generator</span>
         <span class="p">)</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">equation</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">hash</span><span class="p">(</span><span class="n">eq_params</span><span class="p">)[:</span><span class="n">hash_truncate</span><span class="p">]</span><span class="si">}</span><span class="s2">_dt_</span><span class="si">{</span><span class="n">dt_eval</span><span class="si">}</span><span class="s2">_trange_</span><span class="si">{</span><span class="n">t_span</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">t_span</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">_seed_</span><span class="si">{</span><span class="n">random_state</span><span class="si">}</span><span class="s2">.h5&quot;</span></div>
+        <span class="c1">#</span>
+        <span class="n">eq_descriptor</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">equation</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">hash</span><span class="p">(</span><span class="n">eq_params</span><span class="p">)[:</span><span class="n">hash_truncate</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">solver_descriptor</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;dt_</span><span class="si">{</span><span class="n">dt_eval</span><span class="si">}</span><span class="s2">_trange_</span><span class="si">{</span><span class="n">t_span</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">t_span</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">seed_descriptor</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;seed_</span><span class="si">{</span><span class="n">random_state</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">eq_descriptor</span><span class="p">,</span> <span class="n">solver_descriptor</span><span class="p">,</span> <span class="n">seed_descriptor</span></div>
+
+    
+<div class="viewcode-block" id="BaseSolver.generate_filename">
+<a class="viewcode-back" href="../../../reference/dynabench.solver.html#dynabench.solver.BaseSolver.generate_filename">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                          <span class="n">t_span</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+                          <span class="n">dt_eval</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                          <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                          <span class="n">hash_truncate</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+                          <span class="n">out_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;data/raw&quot;</span><span class="p">):</span>
+        <span class="n">eq_descriptor</span><span class="p">,</span> <span class="n">solver_descriptor</span><span class="p">,</span> <span class="n">seed_descriptor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_descriptors</span><span class="p">(</span>
+            <span class="n">t_span</span><span class="o">=</span><span class="n">t_span</span><span class="p">,</span>
+            <span class="n">dt_eval</span><span class="o">=</span><span class="n">dt_eval</span><span class="p">,</span>
+            <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">,</span>
+            <span class="n">hash_truncate</span><span class="o">=</span><span class="n">hash_truncate</span>
+        <span class="p">)</span>
+        <span class="n">out_dir</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">out_dir</span> <span class="o">/</span> <span class="n">eq_descriptor</span> <span class="o">/</span> <span class="n">solver_descriptor</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">seed_descriptor</span><span class="si">}</span><span class="s2">.h5&quot;</span>
+        <span class="k">return</span> <span class="n">path</span></div>
 
     
 <div class="viewcode-block" id="BaseSolver.solve">
 <a class="viewcode-back" href="../../../reference/dynabench.solver.html#dynabench.solver.BaseSolver.solve">[docs]</a>
-    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+    <span class="k">def</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
               <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span>
               <span class="n">t_span</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
               <span class="n">dt_eval</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>

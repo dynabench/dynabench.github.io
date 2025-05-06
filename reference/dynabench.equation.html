@@ -4,8 +4,8 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.equation &mdash; dynabench 0.4.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+  <title>dynabench.equation &mdash; dynabench 0.4.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
       <link rel="stylesheet" type="text/css" href="../_static/dynabench.css?v=cb3fec7a" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=c87aa342"></script>
+        <script src="../_static/documentation_options.js?v=ff822928"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/design-tabs.js?v=36754332"></script>
@@ -146,7 +146,7 @@
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">expand</span></code>(e[, deep, modulus, power_base, ...])</p></td>
 <td><p>Expand an expression using methods given as hints.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sympify</span></code>(a[, locals, convert_xor, strict, ...])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sympify</span></code>()</p></td>
 <td><p>Converts an arbitrary expression to a type that can be used inside SymPy.</p></td>
 </tr>
 </tbody>
@@ -178,14 +178,14 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#dynabench.equation.KuramotoSivashinskyEquation" title="dynabench.equation.KuramotoSivashinskyEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KuramotoSivashinskyEquation</span></code></a>([evolution_rate])</p></td>
 <td><p>Kuramoto-Sivashinsky equation in 2D.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PDE</span></code>(rhs, *[, bc, bc_ops, user_funcs, ...])</p></td>
-<td><p>PDE defined by mathematical expressions</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PDE</span></code>(rhs, *[, bc, bc_ops, post_step_hook, ...])</p></td>
+<td><p>PDE defined by mathematical expressions.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#dynabench.equation.SimpleBurgersEquation" title="dynabench.equation.SimpleBurgersEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SimpleBurgersEquation</span></code></a>([nu, evolution_rate])</p></td>
 <td><p>Simple Burgers equation in 2D.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Symbol</span></code>(name, **assumptions)</p></td>
-<td><p>Assumptions:</p></td>
+<td><p>Symbol class is used to create symbolic variables.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#dynabench.equation.WaveEquation" title="dynabench.equation.WaveEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WaveEquation</span></code></a>([c, evolution_rate])</p></td>
 <td><p>Wave equation in 2D.</p></td>

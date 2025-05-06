@@ -4,38 +4,21 @@
 .. automodule:: dynabench.model
 
    
-   
-   
-
-   
-   
-   
-
-   
-   
    .. rubric:: Classes
 
    .. autosummary::
    
       CNN
+      FourierNeuralOperator
       NeuralPDE
       PointTransformerV1
       ResNet
    
-   
-
-   
-   
-   
-
-
-
 .. rubric:: Modules
 
 .. autosummary::
    :toctree:
    :recursive:
 
-   dynabench.model.grind
-   dynabench.model.utils
-
+   grind
+   utils

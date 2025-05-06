@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.grid &mdash; dynabench 0.4.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+  <title>dynabench.grid &mdash; dynabench 0.4.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
       <link rel="stylesheet" type="text/css" href="../../_static/dynabench.css?v=cb3fec7a" />
@@ -16,7 +16,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=c87aa342"></script>
+        <script src="../../_static/documentation_options.js?v=ff822928"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/design-tabs.js?v=36754332"></script>
@@ -84,13 +84,13 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">pde</span> <span class="kn">import</span> <span class="n">CartesianGrid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pde</span><span class="w"> </span><span class="kn">import</span> <span class="n">CartesianGrid</span>
 
 <div class="viewcode-block" id="Grid">
 <a class="viewcode-back" href="../../reference/dynabench.grid.html#dynabench.grid.Grid">[docs]</a>
-<span class="k">class</span> <span class="nc">Grid</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Grid</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Base class for all grids.</span>
 
@@ -101,7 +101,7 @@
 <span class="sd">        grid_limits : tuple, default ((0, 1), (0, 1))</span>
 <span class="sd">            Limits of the grid. Defaults to ((0, 1), (0, 1)).</span>
 <span class="sd">    &quot;&quot;&quot;</span> 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
                  <span class="n">grid_size</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> 
                  <span class="n">grid_limits</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">64</span><span class="p">)),</span>
                  <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -111,25 +111,25 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">grid_limits</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">grid_limits</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">grid_size</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Grid of size </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">grid_size</span><span class="si">}</span><span class="s2"> and limits </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">grid_limits</span><span class="si">}</span><span class="s2">.&quot;</span>
     
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Get the shape of the grid.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid_size</span>
     
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">dx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Get the step size in the x direction.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">dy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Get the step size in the y direction.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -137,7 +137,7 @@
     
 <div class="viewcode-block" id="Grid.get_meshgrid">
 <a class="viewcode-back" href="../../reference/dynabench.grid.html#dynabench.grid.Grid.get_meshgrid">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_meshgrid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_meshgrid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Get the meshgrid of the grid.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -146,7 +146,7 @@
     
 <div class="viewcode-block" id="Grid.get_random_point">
 <a class="viewcode-back" href="../../reference/dynabench.grid.html#dynabench.grid.Grid.get_random_point">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_random_point</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_random_point</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Get a random point on the grid.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -155,7 +155,7 @@
     
 <div class="viewcode-block" id="Grid.get_random_point_within_domain">
 <a class="viewcode-back" href="../../reference/dynabench.grid.html#dynabench.grid.Grid.get_random_point_within_domain">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_random_point_within_domain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_points</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_random_point_within_domain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_points</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Get a random point within the domain of the grid, but not necessarily on the grid.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -172,7 +172,7 @@
     
 <div class="viewcode-block" id="Grid.export_as_pypde_grid">
 <a class="viewcode-back" href="../../reference/dynabench.grid.html#dynabench.grid.Grid.export_as_pypde_grid">[docs]</a>
-    <span class="k">def</span> <span class="nf">export_as_pypde_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">export_as_pypde_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Export the grid as a PyPDE grid.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -183,7 +183,7 @@
 
 <div class="viewcode-block" id="UnitGrid">
 <a class="viewcode-back" href="../../reference/dynabench.grid.html#dynabench.grid.UnitGrid">[docs]</a>
-<span class="k">class</span> <span class="nc">UnitGrid</span><span class="p">(</span><span class="n">Grid</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">UnitGrid</span><span class="p">(</span><span class="n">Grid</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Class for a unit grid. For a given grid size N, M, the grid limits are (0, N) and (0, M).</span>
 
@@ -192,10 +192,10 @@
 <span class="sd">        grid_size : tuple, default (64, 64)</span>
 <span class="sd">            Size of the grid. Defaults to (64, 64).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid_size</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid_size</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">grid_size</span><span class="o">=</span><span class="n">grid_size</span><span class="p">,</span> <span class="n">grid_limits</span><span class="o">=</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">grid_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">grid_size</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Unit Grid of size </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">grid_size</span><span class="si">}</span><span class="s2">.&quot;</span></div>
 
 </pre></div>

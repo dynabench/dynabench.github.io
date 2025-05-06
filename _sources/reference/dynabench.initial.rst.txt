@@ -4,20 +4,11 @@
 .. automodule:: dynabench.initial
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
    
       warn
-   
-   
-
-   
    
    .. rubric:: Classes
 
@@ -30,11 +21,3 @@
       SumOfGaussians
       WrappedGaussians
    
-   
-
-   
-   
-   
-
-
-

@@ -4,8 +4,8 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.model &mdash; dynabench 0.4.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+  <title>dynabench.model &mdash; dynabench 0.4.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
       <link rel="stylesheet" type="text/css" href="../_static/dynabench.css?v=cb3fec7a" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=c87aa342"></script>
+        <script src="../_static/documentation_options.js?v=ff822928"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/design-tabs.js?v=36754332"></script>
@@ -119,13 +119,16 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.model.CNN" title="dynabench.model.CNN"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CNN</span></code></a>(input_size, output_size[, ...])</p></td>
 <td><p>Simple 2D CNN model for grid data.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.model.NeuralPDE" title="dynabench.model.NeuralPDE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NeuralPDE</span></code></a>(input_dim[, hidden_channels, ...])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">FourierNeuralOperator</span></code>(n_layers, n_modes, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.model.NeuralPDE" title="dynabench.model.NeuralPDE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NeuralPDE</span></code></a>(input_dim[, hidden_channels, ...])</p></td>
 <td><p>Neural PDE model for grid data.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.model.PointTransformerV1" title="dynabench.model.PointTransformerV1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PointTransformerV1</span></code></a>(input_dim, num_points[, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.model.PointTransformerV1" title="dynabench.model.PointTransformerV1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PointTransformerV1</span></code></a>(input_dim, output_dim, ...)</p></td>
 <td><p>Point Transformer model V1 form the Paper [Point Transformer](<a class="reference external" href="https://arxiv.org/abs/2012.09164">https://arxiv.org/abs/2012.09164</a>).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.model.ResNet" title="dynabench.model.ResNet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ResNet</span></code></a>(input_size, output_size[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.model.ResNet" title="dynabench.model.ResNet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ResNet</span></code></a>(input_size, output_size[, ...])</p></td>
 <td><p>Simple 2D ResNet model for grid data.</p></td>
 </tr>
 </tbody>
@@ -209,7 +212,7 @@ The model has been taken from <a class="reference external" href="https://arxiv.
 
 <dl class="py class">
 <dt class="sig sig-object py" id="dynabench.model.PointTransformerV1">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.model.</span></span><span class="sig-name descname"><span class="pre">PointTransformerV1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_blocks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_neighbors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformer_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">512</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/model/point/point_transformer/_v1.html#PointTransformerV1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.model.PointTransformerV1" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.model.</span></span><span class="sig-name descname"><span class="pre">PointTransformerV1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_blocks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_neighbors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformer_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">512</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/model/point/point_transformer/_v1.html#PointTransformerV1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.model.PointTransformerV1" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
 <p>Point Transformer model V1 form the Paper [Point Transformer](<a class="reference external" href="https://arxiv.org/abs/2012.09164">https://arxiv.org/abs/2012.09164</a>).
 The model is unchanged to the original implementation in the [Git](<a class="reference external" href="https://github.com/qq456cvb/Point-Transformers">https://github.com/qq456cvb/Point-Transformers</a>).
@@ -287,10 +290,10 @@ registered hooks while the latter silently ignores them.</p>
 <p class="rubric">Modules</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="dynabench.model.grind.html#module-dynabench.model.grind" title="dynabench.model.grind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dynabench.model.grind</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="dynabench.model.grind.html#module-dynabench.model.grind" title="dynabench.model.grind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">grind</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="dynabench.model.utils.html#module-dynabench.model.utils" title="dynabench.model.utils"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dynabench.model.utils</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="dynabench.model.utils.html#module-dynabench.model.utils" title="dynabench.model.utils"><code class="xref py py-obj docutils literal notranslate"><span class="pre">utils</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>

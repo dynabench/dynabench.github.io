@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.model.point.point_transformer._v1 &mdash; dynabench 0.4.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
+  <title>dynabench.model.point.point_transformer._v1 &mdash; dynabench 0.4.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/dynabench.css?v=cb3fec7a" />
@@ -16,7 +16,7 @@
   
         <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../../_static/documentation_options.js?v=c87aa342"></script>
+        <script src="../../../../../_static/documentation_options.js?v=ff822928"></script>
         <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../../../_static/design-tabs.js?v=36754332"></script>
@@ -102,14 +102,14 @@
 <span class="c1"># SOFTWARE.</span>
 
 
-<span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
-<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">._utils</span> <span class="kn">import</span> <span class="n">PointNetFeaturePropagation</span><span class="p">,</span> <span class="n">PointNetSetAbstraction</span><span class="p">,</span> <span class="n">index_points</span><span class="p">,</span> <span class="n">square_distance</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">PointNetFeaturePropagation</span><span class="p">,</span> <span class="n">PointNetSetAbstraction</span><span class="p">,</span> <span class="n">index_points</span><span class="p">,</span> <span class="n">square_distance</span>
 
-<span class="k">class</span> <span class="nc">TransformerBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d_points</span><span class="p">,</span> <span class="n">d_model</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TransformerBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d_points</span><span class="p">,</span> <span class="n">d_model</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">d_points</span><span class="p">,</span> <span class="n">d_model</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">d_model</span><span class="p">,</span> <span class="n">d_points</span><span class="p">)</span>
@@ -129,7 +129,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span>
         
     <span class="c1"># xyz: b x n x 3, features: b x n x f</span>
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xyz</span><span class="p">,</span> <span class="n">features</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xyz</span><span class="p">,</span> <span class="n">features</span><span class="p">):</span>
         <span class="n">dists</span> <span class="o">=</span> <span class="n">square_distance</span><span class="p">(</span><span class="n">xyz</span><span class="p">,</span> <span class="n">xyz</span><span class="p">)</span>
         <span class="n">knn_idx</span> <span class="o">=</span> <span class="n">dists</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">]</span>  <span class="c1"># b x n x k</span>
         <span class="n">knn_xyz</span> <span class="o">=</span> <span class="n">index_points</span><span class="p">(</span><span class="n">xyz</span><span class="p">,</span> <span class="n">knn_idx</span><span class="p">)</span>
@@ -148,22 +148,22 @@
         <span class="k">return</span> <span class="n">res</span><span class="p">,</span> <span class="n">attn</span>
 
 
-<span class="k">class</span> <span class="nc">TransitionDown</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">nneighbor</span><span class="p">,</span> <span class="n">channels</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TransitionDown</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">nneighbor</span><span class="p">,</span> <span class="n">channels</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sa</span> <span class="o">=</span> <span class="n">PointNetSetAbstraction</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">nneighbor</span><span class="p">,</span> <span class="n">channels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">channels</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">group_all</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">knn</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xyz</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xyz</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sa</span><span class="p">(</span><span class="n">xyz</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">TransitionUp</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim1</span><span class="p">,</span> <span class="n">dim2</span><span class="p">,</span> <span class="n">dim_out</span><span class="p">):</span>
-        <span class="k">class</span> <span class="nc">SwapAxes</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-            <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TransitionUp</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim1</span><span class="p">,</span> <span class="n">dim2</span><span class="p">,</span> <span class="n">dim_out</span><span class="p">):</span>
+        <span class="k">class</span><span class="w"> </span><span class="nc">SwapAxes</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+            <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
                 <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
             
-            <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -183,15 +183,15 @@
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fp</span> <span class="o">=</span> <span class="n">PointNetFeaturePropagation</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">[])</span>
     
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xyz1</span><span class="p">,</span> <span class="n">points1</span><span class="p">,</span> <span class="n">xyz2</span><span class="p">,</span> <span class="n">points2</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xyz1</span><span class="p">,</span> <span class="n">points1</span><span class="p">,</span> <span class="n">xyz2</span><span class="p">,</span> <span class="n">points2</span><span class="p">):</span>
         <span class="n">feats1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">points1</span><span class="p">)</span>
         <span class="n">feats2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">points2</span><span class="p">)</span>
         <span class="n">feats1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="p">(</span><span class="n">xyz2</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">xyz1</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="kc">None</span><span class="p">,</span> <span class="n">feats1</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">feats1</span> <span class="o">+</span> <span class="n">feats2</span>
         
 
-<span class="k">class</span> <span class="nc">Backbone</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npoints</span><span class="p">,</span> <span class="n">nblocks</span><span class="p">,</span> <span class="n">nneighbor</span><span class="p">,</span> <span class="n">d_points</span><span class="p">,</span> <span class="n">transformer_dim</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Backbone</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npoints</span><span class="p">,</span> <span class="n">nblocks</span><span class="p">,</span> <span class="n">nneighbor</span><span class="p">,</span> <span class="n">d_points</span><span class="p">,</span> <span class="n">transformer_dim</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="c1">#npoints, nblocks, nneighbor, n_c, d_points = cfg.num_point, cfg.model.nblocks, cfg.model.nneighbor, cfg.num_class, cfg.input_dim</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
@@ -208,7 +208,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">transformers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TransformerBlock</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">transformer_dim</span><span class="p">,</span> <span class="n">nneighbor</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nblocks</span> <span class="o">=</span> <span class="n">nblocks</span>
     
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
         <span class="n">xyz</span> <span class="o">=</span> <span class="n">p</span>
         <span class="n">points</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformer1</span><span class="p">(</span><span class="n">xyz</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
 
@@ -222,7 +222,7 @@
 
 <div class="viewcode-block" id="PointTransformerV1">
 <a class="viewcode-back" href="../../../../../reference/dynabench.model.html#dynabench.model.PointTransformerV1">[docs]</a>
-<span class="k">class</span> <span class="nc">PointTransformerV1</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PointTransformerV1</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Point Transformer model V1 form the Paper [Point Transformer](https://arxiv.org/abs/2012.09164).</span>
 <span class="sd">        The model is unchanged to the original implementation in the [Git](https://github.com/qq456cvb/Point-Transformers).</span>
@@ -246,8 +246,9 @@
 <span class="sd">        input_dim: int</span>
 <span class="sd">            The dimension of the input data.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
                  <span class="n">input_dim</span><span class="p">,</span> 
+                 <span class="n">output_dim</span><span class="p">,</span>
                  <span class="n">num_points</span><span class="p">,</span> 
                  <span class="n">num_blocks</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> 
                  <span class="n">num_neighbors</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
@@ -275,12 +276,12 @@
             <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
             <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>
             <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
-            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">)</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">)</span>
         <span class="p">)</span>
     
 <div class="viewcode-block" id="PointTransformerV1.forward">
 <a class="viewcode-back" href="../../../../../reference/dynabench.model.html#dynabench.model.PointTransformerV1.forward">[docs]</a>
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
         <span class="c1"># batching</span>
         <span class="n">batched</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">dim</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>

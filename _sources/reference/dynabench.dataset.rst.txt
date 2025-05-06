@@ -4,34 +4,24 @@
 .. automodule:: dynabench.dataset
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
    
       download_equation
    
-   
-
-   
-   
    .. rubric:: Classes
 
    .. autosummary::
    
+      BaseListMovingWindowIterator
+      BaseListSimulationIterator
+      Compose
       DynabenchIterator
       DynabenchSimulationIterator
+      EdgeList
       EquationMovingWindowIterator
+      EquationSimulationIterator
+      Grid2Cloud
+      KNNGraph
    
-   
-
-   
-   
-   
-
-
-

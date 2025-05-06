@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; dynabench 0.4.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+  <title>Index &mdash; dynabench 0.4.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
       <link rel="stylesheet" type="text/css" href="_static/dynabench.css?v=cb3fec7a" />
@@ -16,7 +16,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=c87aa342"></script>
+        <script src="_static/documentation_options.js?v=ff822928"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/design-tabs.js?v=36754332"></script>
@@ -114,16 +114,14 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/dynabench.equation.html#dynabench.equation.BaseEquation">BaseEquation (class in dynabench.equation)</a>
 </li>
-      <li><a href="reference/dynabench.solver.html#dynabench.solver.BaseSolver">BaseSolver (class in dynabench.solver)</a>
+      <li><a href="reference/dynabench.dataset.html#dynabench.dataset.BaseListMovingWindowIterator">BaseListMovingWindowIterator (class in dynabench.dataset)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/dynabench.model.utils.html#dynabench.model.utils.GridIterativeWrapper.batch_first">batch_first (dynabench.model.utils.GridIterativeWrapper attribute)</a>
-
-      <ul>
-        <li><a href="reference/dynabench.model.utils.html#dynabench.model.utils.PointIterativeWrapper.batch_first">(dynabench.model.utils.PointIterativeWrapper attribute)</a>
+      <li><a href="reference/dynabench.dataset.html#dynabench.dataset.BaseListSimulationIterator">BaseListSimulationIterator (class in dynabench.dataset)</a>
 </li>
-      </ul></li>
+      <li><a href="reference/dynabench.solver.html#dynabench.solver.BaseSolver">BaseSolver (class in dynabench.solver)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -132,10 +130,20 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/dynabench.equation.html#dynabench.equation.CahnHilliardEquation">CahnHilliardEquation (class in dynabench.equation)</a>
 </li>
-      <li><a href="reference/dynabench.model.html#dynabench.model.CNN">CNN (class in dynabench.model)</a>
+      <li><a href="reference/dynabench.dataset.html#dynabench.dataset.Grid2Cloud.check_if_valid">check_if_valid() (dynabench.dataset.Grid2Cloud method)</a>
+
+      <ul>
+        <li><a href="reference/dynabench.dataset.html#dynabench.dataset.KNNGraph.check_if_valid">(dynabench.dataset.KNNGraph method)</a>
+</li>
+      </ul></li>
+      <li><a href="reference/dynabench.model.utils.html#dynabench.model.utils.CloudRolloutWrapper">CloudRolloutWrapper (class in dynabench.model.utils)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/dynabench.model.html#dynabench.model.CNN">CNN (class in dynabench.model)</a>
+</li>
+      <li><a href="reference/dynabench.dataset.html#dynabench.dataset.Compose">Compose (class in dynabench.dataset)</a>
+</li>
       <li><a href="reference/dynabench.initial.html#dynabench.initial.Composite">Composite (class in dynabench.initial)</a>
 </li>
       <li><a href="reference/dynabench.initial.html#dynabench.initial.Constant">Constant (class in dynabench.initial)</a>
@@ -222,12 +230,16 @@
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/dynabench.dataset.html#dynabench.dataset.EdgeList">EdgeList (class in dynabench.dataset)</a>
+</li>
       <li><a href="reference/dynabench.dataset.html#dynabench.dataset.EquationMovingWindowIterator">EquationMovingWindowIterator (class in dynabench.dataset)</a>
 </li>
       <li><a href="reference/dynabench.equation.html#dynabench.equation.BaseEquation.equations">equations (dynabench.equation.BaseEquation property)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/dynabench.dataset.html#dynabench.dataset.EquationSimulationIterator">EquationSimulationIterator (class in dynabench.dataset)</a>
+</li>
       <li><a href="reference/dynabench.equation.html#dynabench.equation.BaseEquation.export_as_pypde_equation">export_as_pypde_equation() (dynabench.equation.BaseEquation method)</a>
 </li>
       <li><a href="reference/dynabench.grid.html#dynabench.grid.Grid.export_as_pypde_grid">export_as_pypde_grid() (dynabench.grid.Grid method)</a>
@@ -253,9 +265,7 @@
 </li>
         <li><a href="reference/dynabench.model.html#dynabench.model.ResNet.forward">(dynabench.model.ResNet method)</a>
 </li>
-        <li><a href="reference/dynabench.model.utils.html#dynabench.model.utils.GridIterativeWrapper.forward">(dynabench.model.utils.GridIterativeWrapper method)</a>, <a href="reference/dynabench.model.utils.html#id0">[1]</a>
-</li>
-        <li><a href="reference/dynabench.model.utils.html#dynabench.model.utils.PointIterativeWrapper.forward">(dynabench.model.utils.PointIterativeWrapper method)</a>, <a href="reference/dynabench.model.utils.html#id1">[1]</a>
+        <li><a href="reference/dynabench.model.utils.html#dynabench.model.utils.RolloutWrapper.forward">(dynabench.model.utils.RolloutWrapper method)</a>, <a href="reference/dynabench.model.utils.html#id0">[1]</a>
 </li>
       </ul></li>
   </ul></td>
@@ -282,6 +292,8 @@
         <li><a href="reference/dynabench.initial.html#dynabench.initial.WrappedGaussians.generate">(dynabench.initial.WrappedGaussians method)</a>
 </li>
       </ul></li>
+      <li><a href="reference/dynabench.solver.html#dynabench.solver.BaseSolver.generate_descriptors">generate_descriptors() (dynabench.solver.BaseSolver method)</a>
+</li>
       <li><a href="reference/dynabench.solver.html#dynabench.solver.BaseSolver.generate_filename">generate_filename() (dynabench.solver.BaseSolver method)</a>
 </li>
       <li><a href="reference/dynabench.model.grind.html#dynabench.model.grind.FourierInterpolator.generate_fourier_basis">generate_fourier_basis() (dynabench.model.grind.FourierInterpolator method)</a>
@@ -292,8 +304,6 @@
 </li>
       <li><a href="reference/dynabench.model.grind.html#dynabench.model.grind.GrIND.generate_interpolation_points">generate_interpolation_points() (dynabench.model.grind.GrIND method)</a>
 </li>
-      <li><a href="reference/dynabench.dataset.html#dynabench.dataset.EquationMovingWindowIterator.get_full_simulation_data">get_full_simulation_data() (dynabench.dataset.EquationMovingWindowIterator method)</a>
-</li>
       <li><a href="reference/dynabench.grid.html#dynabench.grid.Grid.get_meshgrid">get_meshgrid() (dynabench.grid.Grid method)</a>
 </li>
       <li><a href="reference/dynabench.grid.html#dynabench.grid.Grid.get_random_point">get_random_point() (dynabench.grid.Grid method)</a>
@@ -302,7 +312,9 @@
 </li>
       <li><a href="reference/dynabench.grid.html#dynabench.grid.Grid">Grid (class in dynabench.grid)</a>
 </li>
-      <li><a href="reference/dynabench.model.utils.html#dynabench.model.utils.GridIterativeWrapper">GridIterativeWrapper (class in dynabench.model.utils)</a>
+      <li><a href="reference/dynabench.dataset.html#dynabench.dataset.Grid2Cloud">Grid2Cloud (class in dynabench.dataset)</a>
+</li>
+      <li><a href="reference/dynabench.model.utils.html#dynabench.model.utils.GridRolloutWrapper">GridRolloutWrapper (class in dynabench.model.utils)</a>
 </li>
       <li><a href="reference/dynabench.model.grind.html#dynabench.model.grind.GrIND">GrIND (class in dynabench.model.grind)</a>
 </li>
@@ -319,6 +331,10 @@
 
 <h2 id="K">K</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/dynabench.dataset.html#dynabench.dataset.KNNGraph">KNNGraph (class in dynabench.dataset)</a>
+</li>
+  </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/dynabench.equation.html#dynabench.equation.KuramotoSivashinskyEquation">KuramotoSivashinskyEquation (class in dynabench.equation)</a>
 </li>
@@ -352,12 +368,6 @@
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/dynabench.model.utils.html#dynabench.model.utils.GridIterativeWrapper.model">model (dynabench.model.utils.GridIterativeWrapper attribute)</a>
-
-      <ul>
-        <li><a href="reference/dynabench.model.utils.html#dynabench.model.utils.PointIterativeWrapper.model">(dynabench.model.utils.PointIterativeWrapper attribute)</a>
-</li>
-      </ul></li>
       <li>
     module
 
@@ -421,12 +431,10 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/dynabench.model.utils.html#dynabench.model.utils.PointIterativeWrapper">PointIterativeWrapper (class in dynabench.model.utils)</a>
+      <li><a href="reference/dynabench.model.html#dynabench.model.PointTransformerV1">PointTransformerV1 (class in dynabench.model)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/dynabench.model.html#dynabench.model.PointTransformerV1">PointTransformerV1 (class in dynabench.model)</a>
-</li>
       <li><a href="reference/dynabench.solver.html#dynabench.solver.PyPDESolver">PyPDESolver (class in dynabench.solver)</a>
 </li>
   </ul></td>
@@ -437,11 +445,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/dynabench.initial.html#dynabench.initial.RandomUniform">RandomUniform (class in dynabench.initial)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/dynabench.model.html#dynabench.model.ResNet">ResNet (class in dynabench.model)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/dynabench.equation.html#dynabench.equation.BaseEquation.rhs">rhs (dynabench.equation.BaseEquation property)</a>
+</li>
+      <li><a href="reference/dynabench.model.utils.html#dynabench.model.utils.RolloutWrapper">RolloutWrapper (class in dynabench.model.utils)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -455,15 +465,17 @@
 </li>
       <li><a href="reference/dynabench.equation.html#dynabench.equation.BaseEquation.simplify_equation">simplify_equation() (dynabench.equation.BaseEquation method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/dynabench.solver.html#dynabench.solver.BaseSolver.solve">solve() (dynabench.solver.BaseSolver method)</a>
 
       <ul>
         <li><a href="reference/dynabench.solver.html#dynabench.solver.PyPDESolver.solve">(dynabench.solver.PyPDESolver method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/dynabench.model.grind.html#dynabench.model.grind.FourierInterpolator.solve_for_fourier_coefficients">solve_for_fourier_coefficients() (dynabench.model.grind.FourierInterpolator method)</a>
+</li>
+      <li><a href="reference/dynabench.solver.html#dynabench.solver.PyPDESolver.solve_single">solve_single() (dynabench.solver.PyPDESolver method)</a>
 </li>
       <li><a href="reference/dynabench.initial.html#dynabench.initial.SumOfGaussians">SumOfGaussians (class in dynabench.initial)</a>
 </li>

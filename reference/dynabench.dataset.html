@@ -4,8 +4,8 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.dataset &mdash; dynabench 0.4.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+  <title>dynabench.dataset &mdash; dynabench 0.4.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
       <link rel="stylesheet" type="text/css" href="../_static/dynabench.css?v=cb3fec7a" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=c87aa342"></script>
+        <script src="../_static/documentation_options.js?v=ff822928"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/design-tabs.js?v=36754332"></script>
@@ -56,10 +56,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../results.html">Benchmark Results</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">dynabench.dataset</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dynabench.dataset.BaseListMovingWindowIterator"><code class="docutils literal notranslate"><span class="pre">BaseListMovingWindowIterator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dynabench.dataset.BaseListSimulationIterator"><code class="docutils literal notranslate"><span class="pre">BaseListSimulationIterator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dynabench.dataset.Compose"><code class="docutils literal notranslate"><span class="pre">Compose</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dynabench.dataset.DynabenchIterator"><code class="docutils literal notranslate"><span class="pre">DynabenchIterator</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dynabench.dataset.DynabenchSimulationIterator"><code class="docutils literal notranslate"><span class="pre">DynabenchSimulationIterator</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dynabench.dataset.EquationMovingWindowIterator"><code class="docutils literal notranslate"><span class="pre">EquationMovingWindowIterator</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dynabench.dataset.EquationMovingWindowIterator.get_full_simulation_data"><code class="docutils literal notranslate"><span class="pre">EquationMovingWindowIterator.get_full_simulation_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dynabench.dataset.EdgeList"><code class="docutils literal notranslate"><span class="pre">EdgeList</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dynabench.dataset.EquationMovingWindowIterator"><code class="docutils literal notranslate"><span class="pre">EquationMovingWindowIterator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dynabench.dataset.EquationSimulationIterator"><code class="docutils literal notranslate"><span class="pre">EquationSimulationIterator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dynabench.dataset.Grid2Cloud"><code class="docutils literal notranslate"><span class="pre">Grid2Cloud</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.dataset.Grid2Cloud.check_if_valid"><code class="docutils literal notranslate"><span class="pre">Grid2Cloud.check_if_valid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dynabench.dataset.KNNGraph"><code class="docutils literal notranslate"><span class="pre">KNNGraph</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.dataset.KNNGraph.check_if_valid"><code class="docutils literal notranslate"><span class="pre">KNNGraph.check_if_valid()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#dynabench.dataset.download_equation"><code class="docutils literal notranslate"><span class="pre">download_equation()</span></code></a></li>
@@ -113,21 +123,93 @@
 <p class="rubric">Classes</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.dataset.DynabenchIterator" title="dynabench.dataset.DynabenchIterator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DynabenchIterator</span></code></a>([split, equation, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.dataset.BaseListMovingWindowIterator" title="dynabench.dataset.BaseListMovingWindowIterator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseListMovingWindowIterator</span></code></a>(data_paths, ...)</p></td>
+<td><p>Iterator for arbitrary equations generated using the dynabench solver.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.dataset.BaseListSimulationIterator" title="dynabench.dataset.BaseListSimulationIterator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseListSimulationIterator</span></code></a>(data_paths, ...)</p></td>
+<td><p>Iterates over full simulations.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.dataset.Compose" title="dynabench.dataset.Compose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Compose</span></code></a>(transforms)</p></td>
+<td><p>Compose function for combining multiple transforms.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.dataset.DynabenchIterator" title="dynabench.dataset.DynabenchIterator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DynabenchIterator</span></code></a>(split, equation, ...)</p></td>
 <td><p>Iterator for the Dynabench dataset.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.dataset.DynabenchSimulationIterator" title="dynabench.dataset.DynabenchSimulationIterator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DynabenchSimulationIterator</span></code></a>([split, ...])</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.dataset.DynabenchSimulationIterator" title="dynabench.dataset.DynabenchSimulationIterator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DynabenchSimulationIterator</span></code></a>(split, equation, ...)</p></td>
+<td><p>Iterator for the Dynabench dataset.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.dataset.EquationMovingWindowIterator" title="dynabench.dataset.EquationMovingWindowIterator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EquationMovingWindowIterator</span></code></a>(data_path, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.dataset.EdgeList" title="dynabench.dataset.EdgeList"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EdgeList</span></code></a>(k)</p></td>
+<td><p>Create an edge list graph (src, dst) to use with PyG.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.dataset.EquationMovingWindowIterator" title="dynabench.dataset.EquationMovingWindowIterator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EquationMovingWindowIterator</span></code></a>(eq_dir, ...)</p></td>
 <td><p>Iterator for arbitrary equations generated using the dynabench solver.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.dataset.EquationSimulationIterator" title="dynabench.dataset.EquationSimulationIterator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EquationSimulationIterator</span></code></a>(eq_dir, ...)</p></td>
+<td><p>Iterator for full equations generated using the dynabench solver.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.dataset.Grid2Cloud" title="dynabench.dataset.Grid2Cloud"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Grid2Cloud</span></code></a>()</p></td>
+<td><p>Create a Cloud item from a grid data item</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.dataset.KNNGraph" title="dynabench.dataset.KNNGraph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KNNGraph</span></code></a>(k)</p></td>
+<td><p>Create a KNN graph from the cloud data.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py class">
-<dt class="sig sig-object py" id="dynabench.dataset.DynabenchIterator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.dataset.</span></span><span class="sig-name descname"><span class="pre">DynabenchIterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">split</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'train'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'wave'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'cloud'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'low'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lookback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squeeze_lookback_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rollout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">download</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/_dynabench.html#DynabenchIterator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.DynabenchIterator" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="dynabench.dataset.BaseListMovingWindowIterator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.dataset.</span></span><span class="sig-name descname"><span class="pre">BaseListMovingWindowIterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">data_paths:</span> <span class="pre">~typing.List[str],</span> <span class="pre">lookback:</span> <span class="pre">int,</span> <span class="pre">rollout:</span> <span class="pre">int,</span> <span class="pre">squeeze_lookback_dim:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True,</span> <span class="pre">is_batched:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False,</span> <span class="pre">transforms:</span> <span class="pre">~dynabench.dataset._transforms.BaseTransform</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">dtype:</span> <span class="pre">~numpy.dtype</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'numpy.float32'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/_base.html#BaseListMovingWindowIterator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.BaseListMovingWindowIterator" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Iterator for arbitrary equations generated using the dynabench solver. Each sample returned by the __getitem__ method is a tuple of
+(data_input, data_target, points), where data_input is the input data of shape (L, F, H, W), data_target is the target data of shape (R, F, H, W), and points are the points in the grid of shape (H, W, 2).
+In this context L corresponds to the lookback parameter and R corresponds to the rollout parameter. H and W are the height and width of the grid, respectively. F is the number of variables in the equation system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_paths</strong> (<em>str</em>) – List of paths to the files containing the simulation data.</p></li>
+<li><p><strong>lookback</strong> (<em>int</em>) – Number of time steps to look back. This corresponds to the L parameter.</p></li>
+<li><p><strong>rollout</strong> (<em>int</em>) – Number of time steps to predict. This corresponds to the R parameter.</p></li>
+<li><p><strong>squeeze_lookback_dim</strong> (<em>bool</em>) – Whether to squeeze the lookback dimension. Defaults to False. If lookback &gt; 1 has no effect.</p></li>
+<li><p><strong>is_batched</strong> (<em>bool</em>) – Whether the data is batched. Defaults to False. If True, the data is expected to be of shape (B, L, F, H, W), where B is the batch size.</p></li>
+<li><p><strong>dtype</strong> (<em>np.dtype</em>) – Data type of the input data. Defaults to np.float32.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dynabench.dataset.BaseListSimulationIterator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.dataset.</span></span><span class="sig-name descname"><span class="pre">BaseListSimulationIterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">data_paths:</span> <span class="pre">~typing.List[str],</span> <span class="pre">is_batched:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False,</span> <span class="pre">transforms:</span> <span class="pre">~dynabench.dataset._transforms.BaseTransform</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">dtype:</span> <span class="pre">~numpy.dtype</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'numpy.float32'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/_base.html#BaseListSimulationIterator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.BaseListSimulationIterator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Iterates over full simulations. Each sample returned by the __getitem__ method is a tuple of
+(data, points), where data is the simulation data of shape (T, F, H, W) and points are the points in the grid of shape (H, W, 2).
+In this context T corresponds to the number of time steps, H and W are the height and width of the grid, respectively. F is the number of variables in the equation system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_paths</strong> (<em>str</em>) – List of paths to the files containing the simulation data.</p></li>
+<li><p><strong>lookback</strong> (<em>int</em>) – Number of time steps to look back. This corresponds to the L parameter.</p></li>
+<li><p><strong>rollout</strong> (<em>int</em>) – Number of time steps to predict. This corresponds to the R parameter.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dynabench.dataset.Compose">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.dataset.</span></span><span class="sig-name descname"><span class="pre">Compose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transforms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">BaseTransform</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/_transforms.html#Compose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.Compose" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></p>
+<p>Compose function for combining multiple transforms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>transforms</strong> (<em>List</em><em>[</em><em>BaseTransform</em><em>]</em>) – List of transforms to be applied to the data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dynabench.dataset.DynabenchIterator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.dataset.</span></span><span class="sig-name descname"><span class="pre">DynabenchIterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">split:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'train'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equation:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'wave'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'cloud'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'low'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_path:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lookback:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squeeze_lookback_dim:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rollout:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transforms:</span> <span class="pre">~dynabench.dataset._transforms.BaseTransform</span> <span class="pre">=</span> <span class="pre">DefaultTransform{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype:</span> <span class="pre">~numpy.dtype</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'numpy.float32'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">download:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/_dynabench.html#DynabenchIterator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.DynabenchIterator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dynabench.dataset.BaseListMovingWindowIterator" title="dynabench.dataset._base.BaseListMovingWindowIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseListMovingWindowIterator</span></code></a></p>
 <p>Iterator for the Dynabench dataset. This iterator will iterate over each simulation in the dataset,
 by moving a window over the simulation data.
 The window size is defined by the lookback and rollout parameters, which define the number of timesteps
@@ -155,39 +237,130 @@ Full resolution uses the full simulation grid of shape (64x64) that has been use
 
 <dl class="py class">
 <dt class="sig sig-object py" id="dynabench.dataset.DynabenchSimulationIterator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.dataset.</span></span><span class="sig-name descname"><span class="pre">DynabenchSimulationIterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">split</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'train'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'wave'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'cloud'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'low'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">download</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/_dynabench.html#DynabenchSimulationIterator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.DynabenchSimulationIterator" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.dataset.</span></span><span class="sig-name descname"><span class="pre">DynabenchSimulationIterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">split:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'train'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equation:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'wave'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'cloud'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'low'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transforms:</span> <span class="pre">~dynabench.dataset._transforms.BaseTransform</span> <span class="pre">=</span> <span class="pre">DefaultTransform{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_path:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">download:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype:</span> <span class="pre">~numpy.dtype</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'numpy.float32'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/_dynabench.html#DynabenchSimulationIterator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.DynabenchSimulationIterator" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Iterator for the Dynabench dataset. This iterator will iterate all the simulations in the dataset, returning the full simulation as a single sample.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>split</strong> (<em>str</em>) – The split of the dataset to use. Can be “train”, “val” or “test”.</p></li>
+<li><p><strong>equation</strong> (<em>str</em>) – The equation to use. Can be “advection”, “burgers”, “gasdynamics”, “kuramotosivashinsky”, “reactiondiffustion” or “wave”.</p></li>
+<li><p><strong>structure</strong> (<em>str</em>) – The structure of the dataset. Can be “cloud” or “grid”.</p></li>
+<li><p><strong>resolution</strong> (<em>str</em>) – The resolution of the dataset. Can be <em>low</em>, <em>medium</em>, <em>high</em> or <em>full</em>.
+Low resolution corresponds to 225 points in total (aranged in a 15x15 grid for the grid structure).
+Medium resolution corresponds to 484 points in total (aranged in a 22x22 grid for the grid structure).
+High resolution corresponds to 900 points in total (aranged in a 30x30 grid for the grid structure).
+Full resolution uses the full simulation grid of shape (64x64) that has been used to numerically solve the simulations.</p></li>
+<li><p><strong>base_path</strong> (<em>str</em>) – Location where the data is stored. Defaults to “data”.</p></li>
+<li><p><strong>download</strong> (<em>int</em>) – Whether to download the data. Defaults to False.</p></li>
+<li><p><strong>dtype</strong> (<em>np.dtype</em>) – Data type of the input data. Defaults to np.float32.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dynabench.dataset.EdgeList">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.dataset.</span></span><span class="sig-name descname"><span class="pre">EdgeList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/_transforms.html#EdgeList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.EdgeList" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dynabench.dataset.Compose" title="dynabench.dataset._transforms.Compose"><code class="xref py py-class docutils literal notranslate"><span class="pre">Compose</span></code></a></p>
+<p>Create an edge list graph (src, dst) to use with PyG.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_item</strong> (<em>CloudItem</em>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>data_item with edge_list as knn_graph</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>CloudItem</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="dynabench.dataset.EquationMovingWindowIterator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.dataset.</span></span><span class="sig-name descname"><span class="pre">EquationMovingWindowIterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lookback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rollout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/_equation.html#EquationMovingWindowIterator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.EquationMovingWindowIterator" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.dataset.</span></span><span class="sig-name descname"><span class="pre">EquationMovingWindowIterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eq_dir:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lookback:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rollout:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_simulations:</span> <span class="pre">~typing.List[str]</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squeeze_lookback_dim:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_batched:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transforms:</span> <span class="pre">~dynabench.dataset._transforms.BaseTransform</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype:</span> <span class="pre">~numpy.dtype</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'numpy.float32'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/_equation.html#EquationMovingWindowIterator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.EquationMovingWindowIterator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dynabench.dataset.BaseListMovingWindowIterator" title="dynabench.dataset._base.BaseListMovingWindowIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseListMovingWindowIterator</span></code></a></p>
 <p>Iterator for arbitrary equations generated using the dynabench solver. Each sample returned by the __getitem__ method is a tuple of
 (data_input, data_target, points), where data_input is the input data of shape (L, F, H, W), data_target is the target data of shape (R, F, H, W), and points are the points in the grid of shape (H, W, 2).
 In this context L corresponds to the lookback parameter and R corresponds to the rollout parameter. H and W are the height and width of the grid, respectively. F is the number of variables in the equation system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data_path</strong> (<em>str</em>) – Path to the data file in h5 format.</p></li>
+<li><p><strong>eq_dir</strong> (<em>str</em>) – Path to the directory where the generated simulations are stored.</p></li>
 <li><p><strong>lookback</strong> (<em>int</em>) – Number of time steps to look back. This corresponds to the L parameter.</p></li>
 <li><p><strong>rollout</strong> (<em>int</em>) – Number of time steps to predict. This corresponds to the R parameter.</p></li>
+<li><p><strong>squeeze_lookback_dim</strong> (<em>bool</em>) – Whether to squeeze the lookback dimension. Defaults to False. If lookback &gt; 1 has no effect.</p></li>
+<li><p><strong>is_batched</strong> (<em>bool</em>) – Whether the data is batched. Defaults to False. If True, the data is expected to be of shape (B, L, F, H, W), where B is the batch size.</p></li>
+<li><p><strong>dtype</strong> (<em>np.dtype</em>) – Data type of the input data. Defaults to np.float32.</p></li>
+<li><p><strong>selected_simulations</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of selected simulation names to load. If None, all simulations in the directory are loaded.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="dynabench.dataset.EquationMovingWindowIterator.get_full_simulation_data">
-<span class="sig-name descname"><span class="pre">get_full_simulation_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/_equation.html#EquationMovingWindowIterator.get_full_simulation_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.EquationMovingWindowIterator.get_full_simulation_data" title="Link to this definition"></a></dt>
-<dd><p>This method returns the full simulation data from the data file, along with the points in the grid.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dynabench.dataset.EquationSimulationIterator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.dataset.</span></span><span class="sig-name descname"><span class="pre">EquationSimulationIterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eq_dir:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_simulations:</span> <span class="pre">~typing.List[str]</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_batched:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transforms:</span> <span class="pre">~dynabench.dataset._transforms.BaseTransform</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype:</span> <span class="pre">~numpy.dtype</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'numpy.float32'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/_equation.html#EquationSimulationIterator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.EquationSimulationIterator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dynabench.dataset.BaseListSimulationIterator" title="dynabench.dataset._base.BaseListSimulationIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseListSimulationIterator</span></code></a></p>
+<p>Iterator for full equations generated using the dynabench solver. Each sample returned by the __getitem__ method is a tuple of
+(data_input, points), where data_input is the input data of shape (L, F, H, W), data_target is the target data of shape (R, F, H, W), and points are the points in the grid of shape (H, W, 2).
+In this context L corresponds to the lookback parameter and R corresponds to the rollout parameter. H and W are the height and width of the grid, respectively. F is the number of variables in the equation system.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The data and the points. The data has shape (T, F, H, W) and the points have shape (H, W, 2), where T is the number of time steps, F is the number of variables, H and W are the height and width of the grid, respectively.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>np.ndarray, np.ndarray</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eq_dir</strong> (<em>str</em>) – Path to the directory where the generated simulations are stored.</p></li>
+<li><p><strong>is_batched</strong> (<em>bool</em>) – Whether the data is batched. Defaults to False. If True, the data is expected to be of shape (B, L, F, H, W), where B is the batch size.</p></li>
+<li><p><strong>dtype</strong> (<em>np.dtype</em>) – Data type of the input data. Defaults to np.float32.</p></li>
+<li><p><strong>selected_simulations</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of selected simulation names to load. If None, all simulations in the directory are loaded.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dynabench.dataset.Grid2Cloud">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.dataset.</span></span><span class="sig-name descname"><span class="pre">Grid2Cloud</span></span><a class="reference internal" href="../_modules/dynabench/dataset/_transforms.html#Grid2Cloud"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.Grid2Cloud" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></p>
+<p>Create a Cloud item from a grid data item</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_item</strong> (<em>GridItem</em>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>data_item with cloud shape</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>CloudItem</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dynabench.dataset.Grid2Cloud.check_if_valid">
+<span class="sig-name descname"><span class="pre">check_if_valid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/_transforms.html#Grid2Cloud.check_if_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.Grid2Cloud.check_if_valid" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dynabench.dataset.KNNGraph">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.dataset.</span></span><span class="sig-name descname"><span class="pre">KNNGraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/_transforms.html#KNNGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.KNNGraph" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></p>
+<p>Create a KNN graph from the cloud data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_item</strong> (<em>CloudItem</em>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>data_item with knn_graph</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>CloudItem</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dynabench.dataset.KNNGraph.check_if_valid">
+<span class="sig-name descname"><span class="pre">check_if_valid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/_transforms.html#KNNGraph.check_if_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.KNNGraph.check_if_valid" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

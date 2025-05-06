@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.model._grid.neuralpde &mdash; dynabench 0.3.2 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+  <title>dynabench.model._grid.neuralpde &mdash; dynabench 0.4.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/dynabench.css?v=cb3fec7a" />
@@ -16,7 +16,7 @@
   
         <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../_static/documentation_options.js?v=71d9d8e6"></script>
+        <script src="../../../../_static/documentation_options.js?v=ff822928"></script>
         <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../../_static/design-tabs.js?v=36754332"></script>
@@ -48,7 +48,8 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../about.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../start.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../guide.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../papers.html">Papers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../results.html">Benchmark Results</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../api.html">API reference</a></li>
 </ul>
@@ -78,17 +79,17 @@
            <div itemprop="articleBody">
              
   <h1>Source code for dynabench.model._grid.neuralpde</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
-<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
-<span class="kn">from</span> <span class="nn">torchdiffeq</span> <span class="kn">import</span> <span class="n">odeint_adjoint</span><span class="p">,</span> <span class="n">odeint</span>
-<span class="kn">from</span> <span class="nn">.cnn</span> <span class="kn">import</span> <span class="n">CNN</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torchdiffeq</span><span class="w"> </span><span class="kn">import</span> <span class="n">odeint_adjoint</span><span class="p">,</span> <span class="n">odeint</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.cnn</span><span class="w"> </span><span class="kn">import</span> <span class="n">CNN</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
 
 <div class="viewcode-block" id="NeuralPDE">
 <a class="viewcode-back" href="../../../../reference/dynabench.model.html#dynabench.model.NeuralPDE">[docs]</a>
-<span class="k">class</span> <span class="nc">NeuralPDE</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">NeuralPDE</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Neural PDE model for grid data. The model combines a CNN with a differentiable ODE solver to learn the dynamics of the data using the method of lines. The CNN is used to approximate the spatial derivatives of the data, while the ODE solver is used to approximate the temporal evolution of the data.</span>
 <span class="sd">        The model has been taken from `NeuralPDE: Modelling Dynamical Systems from Data &lt;https://arxiv.org/abs/2111.07671&gt;`_ by Dulny et al.</span>
@@ -107,7 +108,7 @@
 <span class="sd">            Whether to use the adjoint method for backpropagation. Default is True.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">input_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                  <span class="n">hidden_channels</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span>
                  <span class="n">hidden_layers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
@@ -127,12 +128,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">solver</span> <span class="o">=</span> <span class="n">solver</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">use_adjoint</span> <span class="o">=</span> <span class="n">use_adjoint</span>
 
-    <span class="k">def</span> <span class="nf">_ode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_ode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     
 <div class="viewcode-block" id="NeuralPDE.forward">
 <a class="viewcode-back" href="../../../../reference/dynabench.model.html#dynabench.model.NeuralPDE.forward">[docs]</a>
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
                 <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> 
                 <span class="n">t_eval</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]):</span>
 <span class="w">        </span>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.model._grid.resnet &mdash; dynabench 0.3.2 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+  <title>dynabench.model._grid.resnet &mdash; dynabench 0.4.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/dynabench.css?v=cb3fec7a" />
@@ -16,7 +16,7 @@
   
         <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../_static/documentation_options.js?v=71d9d8e6"></script>
+        <script src="../../../../_static/documentation_options.js?v=ff822928"></script>
         <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../../_static/design-tabs.js?v=36754332"></script>
@@ -48,7 +48,8 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../about.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../start.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../guide.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../papers.html">Papers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../results.html">Benchmark Results</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../api.html">API reference</a></li>
 </ul>
@@ -78,12 +79,12 @@
            <div itemprop="articleBody">
              
   <h1>Source code for dynabench.model._grid.resnet</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
-<span class="kn">import</span> <span class="nn">torch</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span>
 
-<span class="k">class</span> <span class="nc">BottleneckResBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BottleneckResBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Bottleneck Residual Block for ResNet model. Consists of 3 convolutional layers with kernel size 1, k and 1 respectively. </span>
 <span class="sd">        The bottleneck design is used to reduce the number of parameters in the model.</span>
@@ -102,7 +103,7 @@
 <span class="sd">        activation : str</span>
 <span class="sd">            Activation function to use. Can be one of `torch.nn activation functions &lt;https://pytorch.org/docs/stable/nn.html#non-linear-activations-weighted-sum-nonlinearity&gt;`_. Default is &#39;relu&#39;.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">channels</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span><span class="p">,</span>
                  <span class="n">padding</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;same&#39;</span><span class="p">,</span>
                  <span class="n">padding_mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;circular&#39;</span><span class="p">,</span>
@@ -114,7 +115,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">conv3</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">channels</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="n">channels</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">nn</span><span class="p">,</span> <span class="n">activation</span><span class="p">)()</span>
         
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Forward pass of the model. Should not be called directly, instead call the model instance.</span>
 
@@ -138,7 +139,7 @@
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">x</span>
 
-<span class="k">class</span> <span class="nc">ResBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ResBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Simple Residual Block for ResNet model. Consists of 2 convolutional layers with kernel size k. </span>
 <span class="sd">        The input is added to the output of the second convolutional layer.</span>
@@ -158,7 +159,7 @@
 <span class="sd">            Activation function to use. Can be one of `torch.nn activation functions &lt;https://pytorch.org/docs/stable/nn.html#non-linear-activations-weighted-sum-nonlinearity&gt;`_. Default is &#39;relu&#39;.</span>
 <span class="sd">            </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">channels</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span>
                  <span class="n">padding</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;same&#39;</span><span class="p">,</span>
                  <span class="n">padding_mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;circular&#39;</span><span class="p">,</span>
@@ -169,7 +170,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">channels</span><span class="p">,</span> <span class="n">channels</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="n">padding</span><span class="p">,</span> <span class="n">padding_mode</span><span class="o">=</span><span class="n">padding_mode</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">nn</span><span class="p">,</span> <span class="n">activation</span><span class="p">)()</span>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Forward pass of the model. Should not be called directly, instead call the model instance.</span>
 
@@ -193,7 +194,7 @@
 
 <div class="viewcode-block" id="ResNet">
 <a class="viewcode-back" href="../../../../reference/dynabench.model.html#dynabench.model.ResNet">[docs]</a>
-<span class="k">class</span> <span class="nc">ResNet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ResNet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Simple 2D ResNet model for grid data.</span>
 
@@ -218,7 +219,7 @@
 <span class="sd">        activation : str</span>
 <span class="sd">            Activation function to use. Can be one of `torch.nn activation functions &lt;https://pytorch.org/docs/stable/nn.html#non-linear-activations-weighted-sum-nonlinearity&gt;`_. Default is &#39;relu&#39;.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">input_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> 
                  <span class="n">output_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                  <span class="n">resblock_layers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
@@ -245,7 +246,7 @@
 
 <div class="viewcode-block" id="ResNet.forward">
 <a class="viewcode-back" href="../../../../reference/dynabench.model.html#dynabench.model.ResNet.forward">[docs]</a>
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Forward pass of the model. Should not be called directly, instead call the model instance.</span>
 

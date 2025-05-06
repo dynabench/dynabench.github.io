@@ -4,15 +4,6 @@
 .. automodule:: dynabench.solver
 
    
-   
-   
-
-   
-   
-   
-
-   
-   
    .. rubric:: Classes
 
    .. autosummary::
@@ -20,11 +11,3 @@
       BaseSolver
       PyPDESolver
    
-   
-
-   
-   
-   
-
-
-

@@ -4,8 +4,8 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.model.utils &mdash; dynabench 0.4.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+  <title>dynabench.model.utils &mdash; dynabench 0.4.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
       <link rel="stylesheet" type="text/css" href="../_static/dynabench.css?v=cb3fec7a" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=c87aa342"></script>
+        <script src="../_static/documentation_options.js?v=ff822928"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/design-tabs.js?v=36754332"></script>
@@ -64,8 +64,9 @@
 <li class="toctree-l3"><a class="reference internal" href="dynabench.model.html#dynabench.model.ResNet"><code class="docutils literal notranslate"><span class="pre">ResNet</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="dynabench.model.grind.html">dynabench.model.grind</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">dynabench.model.utils</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dynabench.model.utils.GridIterativeWrapper"><code class="docutils literal notranslate"><span class="pre">GridIterativeWrapper</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dynabench.model.utils.PointIterativeWrapper"><code class="docutils literal notranslate"><span class="pre">PointIterativeWrapper</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.model.utils.CloudRolloutWrapper"><code class="docutils literal notranslate"><span class="pre">CloudRolloutWrapper</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.model.utils.GridRolloutWrapper"><code class="docutils literal notranslate"><span class="pre">GridRolloutWrapper</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.model.utils.RolloutWrapper"><code class="docutils literal notranslate"><span class="pre">RolloutWrapper</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -108,115 +109,59 @@
 <p class="rubric">Classes</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.model.utils.GridIterativeWrapper" title="dynabench.model.utils.GridIterativeWrapper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GridIterativeWrapper</span></code></a>(model[, batch_first])</p></td>
-<td><p>Wrapper class for iterative grid-based model evaluation.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.model.utils.CloudRolloutWrapper" title="dynabench.model.utils.CloudRolloutWrapper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CloudRolloutWrapper</span></code></a>(model[, batch_first, ...])</p></td>
+<td><p>Alias for <a href="#id1"><span class="problematic" id="id2">`</span></a>dynabench.model.utils.RolloutWrapper with structure=&quot;cloud&quot;</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.model.utils.PointIterativeWrapper" title="dynabench.model.utils.PointIterativeWrapper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PointIterativeWrapper</span></code></a>(model[, batch_first])</p></td>
-<td><p>Wrapper class for iterative point-based model evaluation.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.model.utils.GridRolloutWrapper" title="dynabench.model.utils.GridRolloutWrapper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GridRolloutWrapper</span></code></a>(model[, batch_first, ...])</p></td>
+<td><p>Alias for <a href="#id3"><span class="problematic" id="id4">`</span></a>dynabench.model.utils.RolloutWrapper with structure=&quot;grid&quot;</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.model.utils.RolloutWrapper" title="dynabench.model.utils.RolloutWrapper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RolloutWrapper</span></code></a>(model[, structure, ...])</p></td>
+<td><p>Wrapper class for iterative model evaluation.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py class">
-<dt class="sig sig-object py" id="dynabench.model.utils.GridIterativeWrapper">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.model.utils.</span></span><span class="sig-name descname"><span class="pre">GridIterativeWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_first</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/model/utils.html#GridIterativeWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.model.utils.GridIterativeWrapper" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="dynabench.model.utils.CloudRolloutWrapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.model.utils.</span></span><span class="sig-name descname"><span class="pre">CloudRolloutWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_first</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lookback_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_lookback_squeezed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/model/utils.html#CloudRolloutWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.model.utils.CloudRolloutWrapper" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dynabench.model.utils.RolloutWrapper" title="dynabench.model.utils.RolloutWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">RolloutWrapper</span></code></a></p>
+<p>Alias for <a href="#id5"><span class="problematic" id="id6">`</span></a>dynabench.model.utils.RolloutWrapper with structure=”cloud”</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dynabench.model.utils.GridRolloutWrapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.model.utils.</span></span><span class="sig-name descname"><span class="pre">GridRolloutWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_first</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lookback_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_lookback_squeezed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/model/utils.html#GridRolloutWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.model.utils.GridRolloutWrapper" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dynabench.model.utils.RolloutWrapper" title="dynabench.model.utils.RolloutWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">RolloutWrapper</span></code></a></p>
+<p>Alias for <a href="#id7"><span class="problematic" id="id8">`</span></a>dynabench.model.utils.RolloutWrapper with structure=”grid”</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dynabench.model.utils.RolloutWrapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.model.utils.</span></span><span class="sig-name descname"><span class="pre">RolloutWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'grid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_first</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lookback_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_lookback_squeezed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/model/utils.html#RolloutWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.model.utils.RolloutWrapper" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
-<p>Wrapper class for iterative grid-based model evaluation.</p>
+<p>Wrapper class for iterative model evaluation.
+This class is designed to perform iterative evaluation of models by calling the model multiple times at different time points.
+It can be used for both point-based and grid-based models.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>model</strong> (<em>torch.nn.Module</em>) – The model to be wrapped and iteratively evaluated.</p></li>
-<li><p><strong>batch_first</strong> (<em>bool</em><em>, </em><em>default True</em>) – If True, the first dimension of the input tensor is considered as the batch dimension.</p></li>
+<li><p><strong>batch_first</strong> (<em>bool</em><em>, </em><em>default True</em>) – If True, the first dimension of the input tensor is considered as the batch dimension. If False, the first dimension is the rollout dimension.</p></li>
+<li><p><strong>feature_dim</strong> (<em>int</em><em>, </em><em>default -1</em>) – The id of the feature dimension.</p></li>
+<li><p><strong>lookback_dim</strong> (<em>int</em><em>, </em><em>default 1</em>) – The id of the lookback dimension.</p></li>
+<li><p><strong>structure</strong> (<em>str</em><em>, </em><em>default 'grid'</em>) – The structure of the input data. Can be either ‘grid’ or ‘cloud’.</p></li>
+<li><p><strong>is_lookback_squeezed</strong> (<em>bool</em><em>, </em><em>default False</em>) – If True, the lookback dimension is squeezed. If True, the lookback dimension parameter is ignored.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dynabench.model.utils.GridIterativeWrapper.model">
-<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#dynabench.model.utils.GridIterativeWrapper.model" title="Link to this definition"></a></dt>
-<dd><p>The wrapped model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>torch.nn.Module</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dynabench.model.utils.GridIterativeWrapper.batch_first">
-<span class="sig-name descname"><span class="pre">batch_first</span></span><a class="headerlink" href="#dynabench.model.utils.GridIterativeWrapper.batch_first" title="Link to this definition"></a></dt>
-<dd><p>Indicates if the first dimension of the input tensor is the batch dimension.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py method">
-<dt class="sig sig-object py" id="dynabench.model.utils.GridIterativeWrapper.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_eval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[1]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="../_modules/dynabench/model/utils.html#GridIterativeWrapper.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.model.utils.GridIterativeWrapper.forward" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="dynabench.model.utils.RolloutWrapper.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_eval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[1]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="../_modules/dynabench/model/utils.html#RolloutWrapper.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.model.utils.RolloutWrapper.forward" title="Link to this definition"></a></dt>
 <dd><p>Perform iterative evaluation of the model at specified time points.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id0">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_eval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[1]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/model/utils.html#GridIterativeWrapper.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
-<dd><p>Define the computation performed at every call.</p>
-<p>Should be overridden by all subclasses.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Although the recipe for forward pass needs to be defined within
-this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
-instead of this since the former takes care of running the
-registered hooks while the latter silently ignores them.</p>
-</div>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="dynabench.model.utils.PointIterativeWrapper">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.model.utils.</span></span><span class="sig-name descname"><span class="pre">PointIterativeWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_first</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/model/utils.html#PointIterativeWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.model.utils.PointIterativeWrapper" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
-<p>Wrapper class for iterative point-based model evaluation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>model</strong> (<em>torch.nn.Module</em>) – The model to be wrapped and iteratively evaluated.</p></li>
-<li><p><strong>batch_first</strong> (<em>bool</em><em>, </em><em>default True</em>) – If True, the first dimension of the input tensor is considered as the batch dimension.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dynabench.model.utils.PointIterativeWrapper.model">
-<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#dynabench.model.utils.PointIterativeWrapper.model" title="Link to this definition"></a></dt>
-<dd><p>The wrapped model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>torch.nn.Module</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dynabench.model.utils.PointIterativeWrapper.batch_first">
-<span class="sig-name descname"><span class="pre">batch_first</span></span><a class="headerlink" href="#dynabench.model.utils.PointIterativeWrapper.batch_first" title="Link to this definition"></a></dt>
-<dd><p>Indicates if the first dimension of the input tensor is the batch dimension.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="dynabench.model.utils.PointIterativeWrapper.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_eval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[1]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="../_modules/dynabench/model/utils.html#PointIterativeWrapper.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.model.utils.PointIterativeWrapper.forward" title="Link to this definition"></a></dt>
-<dd><p>Perform iterative evaluation of the model at specified time points.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="id1">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_eval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[1]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/model/utils.html#PointIterativeWrapper.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_eval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[1]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/model/utils.html#RolloutWrapper.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
 <dd><p>Define the computation performed at every call.</p>
 <p>Should be overridden by all subclasses.</p>
 <div class="admonition note">

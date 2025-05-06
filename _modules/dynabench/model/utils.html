@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.model.utils &mdash; dynabench 0.4.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+  <title>dynabench.model.utils &mdash; dynabench 0.4.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/dynabench.css?v=cb3fec7a" />
@@ -16,7 +16,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=c87aa342"></script>
+        <script src="../../../_static/documentation_options.js?v=ff822928"></script>
         <script src="../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
@@ -79,108 +79,147 @@
            <div itemprop="articleBody">
              
   <h1>Source code for dynabench.model.utils</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
 
-<div class="viewcode-block" id="PointIterativeWrapper">
-<a class="viewcode-back" href="../../../reference/dynabench.model.utils.html#dynabench.model.utils.PointIterativeWrapper">[docs]</a>
-<span class="k">class</span> <span class="nc">PointIterativeWrapper</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">einops</span>
+
+<div class="viewcode-block" id="RolloutWrapper">
+<a class="viewcode-back" href="../../../reference/dynabench.model.utils.html#dynabench.model.utils.RolloutWrapper">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">RolloutWrapper</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Wrapper class for iterative point-based model evaluation.</span>
+<span class="sd">    Wrapper class for iterative model evaluation.</span>
+<span class="sd">    This class is designed to perform iterative evaluation of models by calling the model multiple times at different time points.</span>
+<span class="sd">    It can be used for both point-based and grid-based models.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    model : torch.nn.Module</span>
 <span class="sd">        The model to be wrapped and iteratively evaluated.</span>
 <span class="sd">    batch_first : bool, default True</span>
-<span class="sd">        If True, the first dimension of the input tensor is considered as the batch dimension.</span>
+<span class="sd">        If True, the first dimension of the input tensor is considered as the batch dimension. If False, the first dimension is the rollout dimension.</span>
+<span class="sd">    feature_dim: int, default -1</span>
+<span class="sd">        The id of the feature dimension. </span>
+<span class="sd">    lookback_dim: int, default 1</span>
+<span class="sd">        The id of the lookback dimension. </span>
+<span class="sd">    structure : str, default &#39;grid&#39;</span>
+<span class="sd">        The structure of the input data. Can be either &#39;grid&#39; or &#39;cloud&#39;.</span>
+<span class="sd">    is_lookback_squeezed : bool, default False</span>
+<span class="sd">        If True, the lookback dimension is squeezed. If True, the lookback dimension parameter is ignored.</span>
 
-<span class="sd">    Attributes</span>
-<span class="sd">    ----------</span>
-<span class="sd">    model : torch.nn.Module</span>
-<span class="sd">        The wrapped model.</span>
-<span class="sd">    batch_first : bool</span>
-<span class="sd">        Indicates if the first dimension of the input tensor is the batch dimension.</span>
 
 <span class="sd">    Methods</span>
 <span class="sd">    -------</span>
 <span class="sd">    forward(x: torch.Tensor, p: torch.Tensor, t_eval: List[float] = [1]) -&gt; torch.Tensor</span>
 <span class="sd">        Perform iterative evaluation of the model at specified time points.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
                  <span class="n">model</span><span class="p">,</span>
-                 <span class="n">batch_first</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+                 <span class="n">structure</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;grid&#39;</span><span class="p">,</span>
+                 <span class="n">batch_first</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">lookback_dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                 <span class="n">is_lookback_squeezed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">structure</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;grid&#39;</span><span class="p">,</span> <span class="s1">&#39;cloud&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Structure must be either &#39;grid&#39; or &#39;cloud&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">structure</span> <span class="o">=</span> <span class="n">structure</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">batch_first</span> <span class="o">=</span> <span class="n">batch_first</span>
-
-<div class="viewcode-block" id="PointIterativeWrapper.forward">
-<a class="viewcode-back" href="../../../reference/dynabench.model.utils.html#dynabench.model.utils.PointIterativeWrapper.forward">[docs]</a>
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature_dim</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">structure</span> <span class="o">==</span> <span class="s1">&#39;grid&#39;</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">lookback_dim</span> <span class="o">=</span> <span class="n">lookback_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_lookback_squeezed</span> <span class="o">=</span> <span class="n">is_lookback_squeezed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span> <span class="o">=</span> <span class="s1">&#39;abcdefghijklmnopqrstuvwxyz&#39;</span>
+        
+<div class="viewcode-block" id="RolloutWrapper.forward">
+<a class="viewcode-back" href="../../../reference/dynabench.model.utils.html#dynabench.model.utils.RolloutWrapper.forward">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
                 <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="c1"># features</span>
-                <span class="n">p</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="c1"># point coordinates</span>
+                <span class="n">p</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="c1"># point coordinates</span>
                 <span class="n">t_eval</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
         
         <span class="n">rollout</span> <span class="o">=</span> <span class="p">[]</span>
-
         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_eval</span><span class="p">:</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-            <span class="n">rollout</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">x_stacked_lookback</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stack_lookback</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># Merge lookback with the feature dimension</span>
+            
+            <span class="n">x_single</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_single_step</span><span class="p">(</span><span class="n">x_stacked_lookback</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="c1"># Call the model once</span>
+            
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrap_input_with_lookback</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_single</span><span class="p">)</span> <span class="c1"># Wrap the input with the new prediction</span>
+            
+            <span class="n">rollout</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_single</span><span class="p">)</span>
+            
+            
+        <span class="n">rollout_dim</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_first</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">rollout</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="n">rollout_dim</span><span class="p">)</span></div>
 
-        <span class="n">dim</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_first</span> <span class="k">else</span> <span class="mi">0</span>
-        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">rollout</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="n">dim</span><span class="p">)</span></div>
-</div>
-
+            
+    <span class="k">def</span><span class="w"> </span><span class="nf">_stack_lookback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span> <span class="o">==</span> <span class="s2">&quot;grid&quot;</span><span class="p">:</span>
+            <span class="n">expr</span> <span class="o">=</span> <span class="s1">&#39;batch lookback feature ... -&gt; batch (lookback feature) ...&#39;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span> <span class="o">==</span> <span class="s2">&quot;cloud&quot;</span><span class="p">:</span>
+            <span class="c1"># Generate einops expression for cloud structure</span>
+            <span class="n">expr</span> <span class="o">=</span> <span class="s1">&#39;batch lookback points feature -&gt; batch points (lookback feature)&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Structure must be either &#39;grid&#39; or &#39;cloud&#39;&quot;</span><span class="p">)</span>    
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_lookback_squeezed</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">einops</span><span class="o">.</span><span class="n">rearrange</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">x</span> 
     
+    <span class="k">def</span><span class="w"> </span><span class="nf">_single_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">p</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">x_single</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x_single</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x_single</span>
+                
 
-<div class="viewcode-block" id="GridIterativeWrapper">
-<a class="viewcode-back" href="../../../reference/dynabench.model.utils.html#dynabench.model.utils.GridIterativeWrapper">[docs]</a>
-<span class="k">class</span> <span class="nc">GridIterativeWrapper</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_wrap_input_with_lookback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_previous</span><span class="p">,</span> <span class="n">x_pred_single</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_lookback_squeezed</span><span class="p">:</span>
+            <span class="n">x_single_unstacked_loockback</span> <span class="o">=</span> <span class="n">einops</span><span class="o">.</span><span class="n">rearrange</span><span class="p">(</span><span class="n">x_pred_single</span><span class="p">,</span> <span class="s2">&quot;batch ... -&gt; batch () ...&quot;</span><span class="p">)</span> <span class="c1"># add dummy dim for lookback in pred</span>
+            <span class="n">x_next</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">x_previous</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">x_single_unstacked_loockback</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lookback_dim</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x_next</span> <span class="o">=</span> <span class="n">x_pred_single</span>
+        <span class="k">return</span> <span class="n">x_next</span></div>
+
+
+<div class="viewcode-block" id="CloudRolloutWrapper">
+<a class="viewcode-back" href="../../../reference/dynabench.model.utils.html#dynabench.model.utils.CloudRolloutWrapper">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CloudRolloutWrapper</span><span class="p">(</span><span class="n">RolloutWrapper</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Wrapper class for iterative grid-based model evaluation.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    model : torch.nn.Module</span>
-<span class="sd">        The model to be wrapped and iteratively evaluated.</span>
-<span class="sd">    batch_first : bool, default True</span>
-<span class="sd">        If True, the first dimension of the input tensor is considered as the batch dimension.</span>
-
-<span class="sd">    Attributes</span>
-<span class="sd">    ----------</span>
-<span class="sd">    model : torch.nn.Module</span>
-<span class="sd">        The wrapped model.</span>
-<span class="sd">    batch_first : bool</span>
-<span class="sd">        Indicates if the first dimension of the input tensor is the batch dimension.</span>
-
-<span class="sd">    Methods</span>
-<span class="sd">    -------</span>
-<span class="sd">    forward(x: torch.Tensor, t_eval: List[float] = [1]) -&gt; torch.Tensor</span>
-<span class="sd">        Perform iterative evaluation of the model at specified time points.</span>
+<span class="sd">        Alias for `dynabench.model.utils.RolloutWrapper with structure=&quot;cloud&quot;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">model</span><span class="p">,</span>
-                 <span class="n">batch_first</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">batch_first</span> <span class="o">=</span> <span class="n">batch_first</span>
+                 <span class="n">batch_first</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">lookback_dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                 <span class="n">is_lookback_squeezed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> 
+                         <span class="n">structure</span><span class="o">=</span><span class="s2">&quot;cloud&quot;</span><span class="p">,</span> 
+                         <span class="n">batch_first</span><span class="o">=</span><span class="n">batch_first</span><span class="p">,</span>
+                         <span class="n">lookback_dim</span><span class="o">=</span><span class="n">lookback_dim</span><span class="p">,</span>
+                         <span class="n">is_lookback_squeezed</span><span class="o">=</span><span class="n">is_lookback_squeezed</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="GridIterativeWrapper.forward">
-<a class="viewcode-back" href="../../../reference/dynabench.model.utils.html#dynabench.model.utils.GridIterativeWrapper.forward">[docs]</a>
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
-                <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="c1"># features</span>
-                <span class="n">t_eval</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
         
-        <span class="n">rollout</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_eval</span><span class="p">:</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="n">rollout</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-        <span class="n">dim</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_first</span> <span class="k">else</span> <span class="mi">0</span>
-        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">rollout</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="n">dim</span><span class="p">)</span></div>
-</div>
+<div class="viewcode-block" id="GridRolloutWrapper">
+<a class="viewcode-back" href="../../../reference/dynabench.model.utils.html#dynabench.model.utils.GridRolloutWrapper">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GridRolloutWrapper</span><span class="p">(</span><span class="n">RolloutWrapper</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Alias for `dynabench.model.utils.RolloutWrapper with structure=&quot;grid&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">model</span><span class="p">,</span>
+                 <span class="n">batch_first</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">lookback_dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                 <span class="n">is_lookback_squeezed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> 
+                         <span class="n">structure</span><span class="o">=</span><span class="s2">&quot;grid&quot;</span><span class="p">,</span> 
+                         <span class="n">batch_first</span><span class="o">=</span><span class="n">batch_first</span><span class="p">,</span>
+                         <span class="n">lookback_dim</span><span class="o">=</span><span class="n">lookback_dim</span><span class="p">,</span>
+                         <span class="n">is_lookback_squeezed</span><span class="o">=</span><span class="n">is_lookback_squeezed</span><span class="p">)</span></div>
 
 </pre></div>
 

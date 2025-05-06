@@ -4,8 +4,8 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Example 2: Cahn-Hilliard Equation &mdash; dynabench 0.4.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+  <title>Example 2: Cahn-Hilliard Equation &mdash; dynabench 0.4.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
       <link rel="stylesheet" type="text/css" href="../_static/dynabench.css?v=cb3fec7a" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=c87aa342"></script>
+        <script src="../_static/documentation_options.js?v=ff822928"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/design-tabs.js?v=36754332"></script>
@@ -121,7 +121,7 @@ and the initial condition of the system. We will use the PyPDESolver to solve th
 <section id="define-the-cahn-hilliard-equation">
 <span id="define-equation"></span><h2>Define the Cahn-Hilliard equation<a class="headerlink" href="#define-the-cahn-hilliard-equation" title="Link to this heading"></a></h2>
 <p>Let’s start by defining the Cahn-Hilliard equation. We will use the <a class="reference internal" href="../reference/dynabench.equation.html#dynabench.equation.CahnHilliardEquation" title="dynabench.equation.CahnHilliardEquation"><code class="xref py py-class docutils literal notranslate"><span class="pre">dynabench.equation.CahnHilliardEquation</span></code></a> class to define the Cahn-Hilliard equation.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dynabench.equation</span> <span class="kn">import</span> <span class="n">CahnHilliardEquation</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dynabench.equation</span><span class="w"> </span><span class="kn">import</span> <span class="n">CahnHilliardEquation</span>
 
 <span class="c1"># Create an instance of the CahnHilliardEquation class with default parameters</span>
 <span class="n">pde_equation</span> <span class="o">=</span> <span class="n">CahnHilliardEquation</span><span class="p">()</span>
@@ -139,7 +139,7 @@ The parameters of the Cahn-Hilliard equation can be modified by passing the desi
 <span id="define-grid"></span><h2>Define the grid<a class="headerlink" href="#define-the-grid" title="Link to this heading"></a></h2>
 <p>Next, we will define the grid on which the data for the Cahn-Hilliard equation will be generated.
 We will use the <a class="reference internal" href="../reference/dynabench.grid.html#dynabench.grid.Grid" title="dynabench.grid.Grid"><code class="xref py py-class docutils literal notranslate"><span class="pre">dynabench.grid.Grid</span></code></a> class to define the grid.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dynabench.grid</span> <span class="kn">import</span> <span class="n">Grid</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dynabench.grid</span><span class="w"> </span><span class="kn">import</span> <span class="n">Grid</span>
 
 <span class="c1"># Create an instance of grid with default parameters</span>
 <span class="n">grid</span> <span class="o">=</span> <span class="n">Grid</span><span class="p">(</span><span class="n">grid_limits</span><span class="o">=</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">64</span><span class="p">)),</span> <span class="n">grid_size</span><span class="o">=</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">))</span>
@@ -149,7 +149,7 @@ We will use the <a class="reference internal" href="../reference/dynabench.grid.
 which specifies the limits of the grid in each dimension.
 The grid_size parameter specifies the number of grid points in each dimension.</p>
 <p>In this case, as dx = dy = 1, the <a class="reference internal" href="../reference/dynabench.grid.html#dynabench.grid.UnitGrid" title="dynabench.grid.UnitGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">dynabench.grid.UnitGrid</span></code></a> class can be used to define the same grid:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dynabench.grid</span> <span class="kn">import</span> <span class="n">UnitGrid</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dynabench.grid</span><span class="w"> </span><span class="kn">import</span> <span class="n">UnitGrid</span>
 
 <span class="c1"># Create an instance of a unit grid</span>
 <span class="n">grid</span> <span class="o">=</span> <span class="n">UnitGrid</span><span class="p">(</span><span class="n">grid_size</span><span class="o">=</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">))</span>
@@ -161,7 +161,7 @@ The grid_size parameter specifies the number of grid points in each dimension.</
 <p>Next, we will define the initial condition of the system.
 We will use the <a class="reference internal" href="../reference/dynabench.initial.html#dynabench.initial.RandomUniform" title="dynabench.initial.RandomUniform"><code class="xref py py-class docutils literal notranslate"><span class="pre">dynabench.initial.RandomUniform</span></code></a> class to generate
 an initial condition with random fluctuations drawn from a uniform distribution.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dynabench.initial</span> <span class="kn">import</span> <span class="n">RandomUniform</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dynabench.initial</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomUniform</span>
 
 <span class="c1"># generate an initial condition as a sum of 5 gaussians</span>
 <span class="n">intitial</span> <span class="o">=</span> <span class="n">RandomUniform</span><span class="p">()</span>
@@ -171,7 +171,7 @@ an initial condition with random fluctuations drawn from a uniform distribution.
 <section id="solve-the-cahn-hilliard-equation">
 <span id="solve"></span><h2>Solve the Cahn-Hilliard equation<a class="headerlink" href="#solve-the-cahn-hilliard-equation" title="Link to this heading"></a></h2>
 <p>Finally, we will solve the Cahn-Hilliard equation with the initial condition on the grid using the PyPDESolver.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dynabench.solver</span> <span class="kn">import</span> <span class="n">PyPDESolver</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dynabench.solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">PyPDESolver</span>
 
 <span class="c1"># Solve the Cahn-Hilliard equation with the initial condition</span>
 <span class="n">solver</span> <span class="o">=</span> <span class="n">PyPDESolver</span><span class="p">(</span><span class="n">equation</span><span class="o">=</span><span class="n">pde_equation</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span> <span class="n">initial_generator</span><span class="o">=</span><span class="n">intitial</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s2">&quot;RK23&quot;</span><span class="p">})</span>
@@ -186,10 +186,10 @@ Additionally, the random_state parameter can be used to set the random seed with
 <section id="summary">
 <span id="summary-cahnhiliard"></span><h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
 <p>Overall the code for generating data for the Cahn-Hilliard equation is as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dynabench.equation</span> <span class="kn">import</span> <span class="n">CahnHilliardEquation</span>
-<span class="kn">from</span> <span class="nn">dynabench.initial</span> <span class="kn">import</span> <span class="n">RandomUniform</span>
-<span class="kn">from</span> <span class="nn">dynabench.grid</span> <span class="kn">import</span> <span class="n">Grid</span><span class="p">,</span> <span class="n">UnitGrid</span>
-<span class="kn">from</span> <span class="nn">dynabench.solver</span> <span class="kn">import</span> <span class="n">PyPDESolver</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dynabench.equation</span><span class="w"> </span><span class="kn">import</span> <span class="n">CahnHilliardEquation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dynabench.initial</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomUniform</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dynabench.grid</span><span class="w"> </span><span class="kn">import</span> <span class="n">Grid</span><span class="p">,</span> <span class="n">UnitGrid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dynabench.solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">PyPDESolver</span>
 
 <span class="c1"># Create an instance of the CahnHilliardEquation class with default parameters</span>
 <span class="n">pde_equation</span> <span class="o">=</span> <span class="n">CahnHilliardEquation</span><span class="p">()</span>
