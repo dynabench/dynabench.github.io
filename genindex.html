@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; dynabench 0.4.2 documentation</title>
+  <title>Index &mdash; dynabench 0.4.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
@@ -16,7 +16,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=ff822928"></script>
+        <script src="_static/documentation_options.js?v=5bfaad31"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/design-tabs.js?v=36754332"></script>
@@ -96,6 +96,7 @@
  | <a href="#P"><strong>P</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
  | <a href="#U"><strong>U</strong></a>
  | <a href="#V"><strong>V</strong></a>
  | <a href="#W"><strong>W</strong></a>
@@ -122,6 +123,8 @@
 </li>
       <li><a href="reference/dynabench.solver.html#dynabench.solver.BaseSolver">BaseSolver (class in dynabench.solver)</a>
 </li>
+      <li><a href="reference/dynabench.dataset.transforms.html#dynabench.dataset.transforms.BaseTransform">BaseTransform (class in dynabench.dataset.transforms)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -130,10 +133,10 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/dynabench.equation.html#dynabench.equation.CahnHilliardEquation">CahnHilliardEquation (class in dynabench.equation)</a>
 </li>
-      <li><a href="reference/dynabench.dataset.html#dynabench.dataset.Grid2Cloud.check_if_valid">check_if_valid() (dynabench.dataset.Grid2Cloud method)</a>
+      <li><a href="reference/dynabench.dataset.transforms.html#dynabench.dataset.transforms.EdgeListFromKNN.check_if_valid">check_if_valid() (dynabench.dataset.transforms.EdgeListFromKNN method)</a>
 
       <ul>
-        <li><a href="reference/dynabench.dataset.html#dynabench.dataset.KNNGraph.check_if_valid">(dynabench.dataset.KNNGraph method)</a>
+        <li><a href="reference/dynabench.dataset.transforms.html#dynabench.dataset.transforms.KNNGraph.check_if_valid">(dynabench.dataset.transforms.KNNGraph method)</a>
 </li>
       </ul></li>
       <li><a href="reference/dynabench.model.utils.html#dynabench.model.utils.CloudRolloutWrapper">CloudRolloutWrapper (class in dynabench.model.utils)</a>
@@ -142,7 +145,7 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/dynabench.model.html#dynabench.model.CNN">CNN (class in dynabench.model)</a>
 </li>
-      <li><a href="reference/dynabench.dataset.html#dynabench.dataset.Compose">Compose (class in dynabench.dataset)</a>
+      <li><a href="reference/dynabench.dataset.transforms.html#dynabench.dataset.transforms.Compose">Compose (class in dynabench.dataset.transforms)</a>
 </li>
       <li><a href="reference/dynabench.initial.html#dynabench.initial.Composite">Composite (class in dynabench.initial)</a>
 </li>
@@ -154,6 +157,8 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/dynabench.dataset.transforms.html#dynabench.dataset.transforms.DefaultTransform">DefaultTransform (class in dynabench.dataset.transforms)</a>
+</li>
       <li><a href="reference/dynabench.equation.html#dynabench.equation.DiffusionEquation">DiffusionEquation (class in dynabench.equation)</a>
 </li>
       <li><a href="reference/dynabench.dataset.html#dynabench.dataset.download_equation">download_equation() (in module dynabench.dataset)</a>
@@ -170,6 +175,13 @@
 </li>
       </ul></li>
       <li>
+    dynabench.dataset.transforms
+
+      <ul>
+        <li><a href="reference/dynabench.dataset.transforms.html#module-dynabench.dataset.transforms">module</a>
+</li>
+      </ul></li>
+      <li>
     dynabench.equation
 
       <ul>
@@ -183,6 +195,8 @@
         <li><a href="reference/dynabench.grid.html#module-dynabench.grid">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     dynabench.initial
 
@@ -190,8 +204,6 @@
         <li><a href="reference/dynabench.initial.html#module-dynabench.initial">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     dynabench.model
 
@@ -230,14 +242,16 @@
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/dynabench.dataset.html#dynabench.dataset.EdgeList">EdgeList (class in dynabench.dataset)</a>
+      <li><a href="reference/dynabench.dataset.transforms.html#dynabench.dataset.transforms.EdgeList">EdgeList (class in dynabench.dataset.transforms)</a>
+</li>
+      <li><a href="reference/dynabench.dataset.transforms.html#dynabench.dataset.transforms.EdgeListFromKNN">EdgeListFromKNN (class in dynabench.dataset.transforms)</a>
 </li>
       <li><a href="reference/dynabench.dataset.html#dynabench.dataset.EquationMovingWindowIterator">EquationMovingWindowIterator (class in dynabench.dataset)</a>
 </li>
-      <li><a href="reference/dynabench.equation.html#dynabench.equation.BaseEquation.equations">equations (dynabench.equation.BaseEquation property)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/dynabench.equation.html#dynabench.equation.BaseEquation.equations">equations (dynabench.equation.BaseEquation property)</a>
+</li>
       <li><a href="reference/dynabench.dataset.html#dynabench.dataset.EquationSimulationIterator">EquationSimulationIterator (class in dynabench.dataset)</a>
 </li>
       <li><a href="reference/dynabench.equation.html#dynabench.equation.BaseEquation.export_as_pypde_equation">export_as_pypde_equation() (dynabench.equation.BaseEquation method)</a>
@@ -265,7 +279,7 @@
 </li>
         <li><a href="reference/dynabench.model.html#dynabench.model.ResNet.forward">(dynabench.model.ResNet method)</a>
 </li>
-        <li><a href="reference/dynabench.model.utils.html#dynabench.model.utils.RolloutWrapper.forward">(dynabench.model.utils.RolloutWrapper method)</a>, <a href="reference/dynabench.model.utils.html#id0">[1]</a>
+        <li><a href="reference/dynabench.model.utils.html#dynabench.model.utils.RolloutWrapper.forward">(dynabench.model.utils.RolloutWrapper method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -312,7 +326,7 @@
 </li>
       <li><a href="reference/dynabench.grid.html#dynabench.grid.Grid">Grid (class in dynabench.grid)</a>
 </li>
-      <li><a href="reference/dynabench.dataset.html#dynabench.dataset.Grid2Cloud">Grid2Cloud (class in dynabench.dataset)</a>
+      <li><a href="reference/dynabench.dataset.transforms.html#dynabench.dataset.transforms.Grid2Cloud">Grid2Cloud (class in dynabench.dataset.transforms)</a>
 </li>
       <li><a href="reference/dynabench.model.utils.html#dynabench.model.utils.GridRolloutWrapper">GridRolloutWrapper (class in dynabench.model.utils)</a>
 </li>
@@ -332,7 +346,7 @@
 <h2 id="K">K</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/dynabench.dataset.html#dynabench.dataset.KNNGraph">KNNGraph (class in dynabench.dataset)</a>
+      <li><a href="reference/dynabench.dataset.transforms.html#dynabench.dataset.transforms.KNNGraph">KNNGraph (class in dynabench.dataset.transforms)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -373,6 +387,8 @@
 
       <ul>
         <li><a href="reference/dynabench.dataset.html#module-dynabench.dataset">dynabench.dataset</a>
+</li>
+        <li><a href="reference/dynabench.dataset.transforms.html#module-dynabench.dataset.transforms">dynabench.dataset.transforms</a>
 </li>
         <li><a href="reference/dynabench.equation.html#module-dynabench.equation">dynabench.equation</a>
 </li>
@@ -478,6 +494,14 @@
       <li><a href="reference/dynabench.solver.html#dynabench.solver.PyPDESolver.solve_single">solve_single() (dynabench.solver.PyPDESolver method)</a>
 </li>
       <li><a href="reference/dynabench.initial.html#dynabench.initial.SumOfGaussians">SumOfGaussians (class in dynabench.initial)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/dynabench.dataset.transforms.html#dynabench.dataset.transforms.ToDict">ToDict (class in dynabench.dataset.transforms)</a>
 </li>
   </ul></td>
 </tr></table>

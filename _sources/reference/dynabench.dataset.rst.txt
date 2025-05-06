@@ -16,12 +16,15 @@
    
       BaseListMovingWindowIterator
       BaseListSimulationIterator
-      Compose
       DynabenchIterator
       DynabenchSimulationIterator
-      EdgeList
       EquationMovingWindowIterator
       EquationSimulationIterator
-      Grid2Cloud
-      KNNGraph
    
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   transforms
