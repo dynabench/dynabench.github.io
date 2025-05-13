@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.dataset.transforms &mdash; dynabench 0.4.3 documentation</title>
+  <title>dynabench.dataset.transforms &mdash; dynabench 0.4.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=5bfaad31"></script>
+        <script src="../_static/documentation_options.js?v=90733dfc"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/design-tabs.js?v=36754332"></script>
@@ -70,8 +70,12 @@
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.dataset.transforms.EdgeList"><code class="docutils literal notranslate"><span class="pre">EdgeList</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.dataset.transforms.EdgeListFromKNN"><code class="docutils literal notranslate"><span class="pre">EdgeListFromKNN</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.dataset.transforms.Grid2Cloud"><code class="docutils literal notranslate"><span class="pre">Grid2Cloud</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.dataset.transforms.GridDownsampleFFT"><code class="docutils literal notranslate"><span class="pre">GridDownsampleFFT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.dataset.transforms.GridDownsampleFactor"><code class="docutils literal notranslate"><span class="pre">GridDownsampleFactor</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.dataset.transforms.KNNGraph"><code class="docutils literal notranslate"><span class="pre">KNNGraph</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.dataset.transforms.PointSampling"><code class="docutils literal notranslate"><span class="pre">PointSampling</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.dataset.transforms.ToDict"><code class="docutils literal notranslate"><span class="pre">ToDict</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.dataset.transforms.TypeCaster"><code class="docutils literal notranslate"><span class="pre">TypeCaster</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -133,7 +137,7 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#dynabench.dataset.transforms.BaseTransform" title="dynabench.dataset.transforms.BaseTransform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseTransform</span></code></a>(**kwargs)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">CloudDataItem</span></code>(x[, y, pos, knn_graph])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">CloudDataItem</span></code>(x[, y, pos, neighbors, ...])</p></td>
 <td><p>Data class for 2D grid data.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#dynabench.dataset.transforms.Compose" title="dynabench.dataset.transforms.Compose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Compose</span></code></a>(transforms)</p></td>
@@ -157,17 +161,29 @@
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">GridDataItem</span></code>(x[, y, pos])</p></td>
 <td><p>Data class for grid data.</p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.dataset.transforms.GridDownsampleFFT" title="dynabench.dataset.transforms.GridDownsampleFFT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GridDownsampleFFT</span></code></a>([target_size])</p></td>
+<td><p>Downsample the grid to a smaller size using FFT.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.dataset.transforms.GridDownsampleFactor" title="dynabench.dataset.transforms.GridDownsampleFactor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GridDownsampleFactor</span></code></a>([factor])</p></td>
+<td><p>Downsample the grid by a factor.</p></td>
+</tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Iterable</span></code>()</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">KDTree</span></code>(data[, leafsize, compact_nodes, ...])</p></td>
 <td><p>kd-tree for quick nearest-neighbor lookup.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.dataset.transforms.KNNGraph" title="dynabench.dataset.transforms.KNNGraph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KNNGraph</span></code></a>(k)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.dataset.transforms.KNNGraph" title="dynabench.dataset.transforms.KNNGraph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KNNGraph</span></code></a>(k[, grid_limits])</p></td>
 <td><p>Create a KNN graph from the cloud data.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.dataset.transforms.ToDict" title="dynabench.dataset.transforms.ToDict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ToDict</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.dataset.transforms.PointSampling" title="dynabench.dataset.transforms.PointSampling"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PointSampling</span></code></a>([num_points])</p></td>
+<td><p>Point sampling transform for the dataset.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.dataset.transforms.ToDict" title="dynabench.dataset.transforms.ToDict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ToDict</span></code></a>()</p></td>
 <td><p>Convert the data item to a dictionary.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.dataset.transforms.TypeCaster" title="dynabench.dataset.transforms.TypeCaster"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TypeCaster</span></code></a>(dtype)</p></td>
+<td><p>Cast the data item to the correct type.</p></td>
 </tr>
 </tbody>
 </table>
@@ -268,8 +284,32 @@ Iterates over transformations and applies them to the data item.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="dynabench.dataset.transforms.GridDownsampleFFT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.dataset.transforms.</span></span><span class="sig-name descname"><span class="pre">GridDownsampleFFT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1.0,</span> <span class="pre">1.0)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/transforms.html#GridDownsampleFFT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.transforms.GridDownsampleFFT" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dynabench.dataset.transforms.BaseTransform" title="dynabench.dataset.transforms.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>Downsample the grid to a smaller size using FFT.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>target_size</strong> (<em>Tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Target size of the grid.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dynabench.dataset.transforms.GridDownsampleFactor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.dataset.transforms.</span></span><span class="sig-name descname"><span class="pre">GridDownsampleFactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/transforms.html#GridDownsampleFactor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.transforms.GridDownsampleFactor" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dynabench.dataset.transforms.BaseTransform" title="dynabench.dataset.transforms.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>Downsample the grid by a factor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>factor</strong> (<em>int</em>) – Factor by which to downsample the grid.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="dynabench.dataset.transforms.KNNGraph">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.dataset.transforms.</span></span><span class="sig-name descname"><span class="pre">KNNGraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/transforms.html#KNNGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.transforms.KNNGraph" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.dataset.transforms.</span></span><span class="sig-name descname"><span class="pre">KNNGraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_limits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1.0,</span> <span class="pre">1.0)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/transforms.html#KNNGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.transforms.KNNGraph" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#dynabench.dataset.transforms.BaseTransform" title="dynabench.dataset.transforms.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
 <p>Create a KNN graph from the cloud data.</p>
 <dl class="field-list simple">
@@ -291,6 +331,21 @@ Iterates over transformations and applies them to the data item.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="dynabench.dataset.transforms.PointSampling">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.dataset.transforms.</span></span><span class="sig-name descname"><span class="pre">PointSampling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">900</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/transforms.html#PointSampling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.transforms.PointSampling" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dynabench.dataset.transforms.BaseTransform" title="dynabench.dataset.transforms.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>Point sampling transform for the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_points</strong> (<em>int</em>) – Number of points to sample.</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – Number of nearest neighbors to use for the KNN graph.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="dynabench.dataset.transforms.ToDict">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.dataset.transforms.</span></span><span class="sig-name descname"><span class="pre">ToDict</span></span><a class="reference internal" href="../_modules/dynabench/dataset/transforms.html#ToDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.transforms.ToDict" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#dynabench.dataset.transforms.BaseTransform" title="dynabench.dataset.transforms.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
@@ -306,6 +361,13 @@ Iterates over transformations and applies them to the data item.</p>
 <dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dynabench.dataset.transforms.TypeCaster">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.dataset.transforms.</span></span><span class="sig-name descname"><span class="pre">TypeCaster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dtype:</span> <span class="pre">~numpy.dtype</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'numpy.float32'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/dataset/transforms.html#TypeCaster"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.dataset.transforms.TypeCaster" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dynabench.dataset.transforms.BaseTransform" title="dynabench.dataset.transforms.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>Cast the data item to the correct type. (In place!!!)</p>
 </dd></dl>
 
 </section>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; dynabench 0.4.3 documentation</title>
+  <title>Index &mdash; dynabench 0.4.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
@@ -16,7 +16,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=5bfaad31"></script>
+        <script src="_static/documentation_options.js?v=90733dfc"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/design-tabs.js?v=36754332"></script>
@@ -104,6 +104,10 @@
 </div>
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/dynabench.equation.html#dynabench.equation.AdvectionDiffusionEquation">AdvectionDiffusionEquation (class in dynabench.equation)</a>
+</li>
+  </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/dynabench.equation.html#dynabench.equation.AdvectionEquation">AdvectionEquation (class in dynabench.equation)</a>
 </li>
@@ -248,12 +252,22 @@
 </li>
       <li><a href="reference/dynabench.dataset.html#dynabench.dataset.EquationMovingWindowIterator">EquationMovingWindowIterator (class in dynabench.dataset)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/dynabench.equation.html#dynabench.equation.BaseEquation.equations">equations (dynabench.equation.BaseEquation property)</a>
 </li>
       <li><a href="reference/dynabench.dataset.html#dynabench.dataset.EquationSimulationIterator">EquationSimulationIterator (class in dynabench.dataset)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/dynabench.equation.html#dynabench.equation.AdvectionDiffusionEquation.export_as_dedalus_equation">export_as_dedalus_equation() (dynabench.equation.AdvectionDiffusionEquation method)</a>
+
+      <ul>
+        <li><a href="reference/dynabench.equation.html#dynabench.equation.AdvectionEquation.export_as_dedalus_equation">(dynabench.equation.AdvectionEquation method)</a>
+</li>
+        <li><a href="reference/dynabench.equation.html#dynabench.equation.BaseEquation.export_as_dedalus_equation">(dynabench.equation.BaseEquation method)</a>
+</li>
+        <li><a href="reference/dynabench.equation.html#dynabench.equation.SimpleBurgersEquation.export_as_dedalus_equation">(dynabench.equation.SimpleBurgersEquation method)</a>
+</li>
+      </ul></li>
       <li><a href="reference/dynabench.equation.html#dynabench.equation.BaseEquation.export_as_pypde_equation">export_as_pypde_equation() (dynabench.equation.BaseEquation method)</a>
 </li>
       <li><a href="reference/dynabench.grid.html#dynabench.grid.Grid.export_as_pypde_grid">export_as_pypde_grid() (dynabench.grid.Grid method)</a>
@@ -312,10 +326,10 @@
 </li>
       <li><a href="reference/dynabench.model.grind.html#dynabench.model.grind.FourierInterpolator.generate_fourier_basis">generate_fourier_basis() (dynabench.model.grind.FourierInterpolator method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/dynabench.model.grind.html#dynabench.model.grind.FourierInterpolator.generate_fourier_ks">generate_fourier_ks() (dynabench.model.grind.FourierInterpolator method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/dynabench.model.grind.html#dynabench.model.grind.GrIND.generate_interpolation_points">generate_interpolation_points() (dynabench.model.grind.GrIND method)</a>
 </li>
       <li><a href="reference/dynabench.grid.html#dynabench.grid.Grid.get_meshgrid">get_meshgrid() (dynabench.grid.Grid method)</a>
@@ -327,6 +341,10 @@
       <li><a href="reference/dynabench.grid.html#dynabench.grid.Grid">Grid (class in dynabench.grid)</a>
 </li>
       <li><a href="reference/dynabench.dataset.transforms.html#dynabench.dataset.transforms.Grid2Cloud">Grid2Cloud (class in dynabench.dataset.transforms)</a>
+</li>
+      <li><a href="reference/dynabench.dataset.transforms.html#dynabench.dataset.transforms.GridDownsampleFactor">GridDownsampleFactor (class in dynabench.dataset.transforms)</a>
+</li>
+      <li><a href="reference/dynabench.dataset.transforms.html#dynabench.dataset.transforms.GridDownsampleFFT">GridDownsampleFFT (class in dynabench.dataset.transforms)</a>
 </li>
       <li><a href="reference/dynabench.model.utils.html#dynabench.model.utils.GridRolloutWrapper">GridRolloutWrapper (class in dynabench.model.utils)</a>
 </li>
@@ -447,10 +465,12 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/dynabench.model.html#dynabench.model.PointTransformerV1">PointTransformerV1 (class in dynabench.model)</a>
+      <li><a href="reference/dynabench.dataset.transforms.html#dynabench.dataset.transforms.PointSampling">PointSampling (class in dynabench.dataset.transforms)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/dynabench.model.html#dynabench.model.PointTransformerV1">PointTransformerV1 (class in dynabench.model)</a>
+</li>
       <li><a href="reference/dynabench.solver.html#dynabench.solver.PyPDESolver">PyPDESolver (class in dynabench.solver)</a>
 </li>
   </ul></td>
@@ -502,6 +522,10 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/dynabench.dataset.transforms.html#dynabench.dataset.transforms.ToDict">ToDict (class in dynabench.dataset.transforms)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/dynabench.dataset.transforms.html#dynabench.dataset.transforms.TypeCaster">TypeCaster (class in dynabench.dataset.transforms)</a>
 </li>
   </ul></td>
 </tr></table>

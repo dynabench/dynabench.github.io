@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.equation &mdash; dynabench 0.4.3 documentation</title>
+  <title>dynabench.equation &mdash; dynabench 0.4.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=5bfaad31"></script>
+        <script src="../_static/documentation_options.js?v=90733dfc"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/design-tabs.js?v=36754332"></script>
@@ -58,15 +58,21 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="dynabench.dataset.html">dynabench.dataset</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">dynabench.equation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dynabench.equation.AdvectionDiffusionEquation"><code class="docutils literal notranslate"><span class="pre">AdvectionDiffusionEquation</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.AdvectionDiffusionEquation.export_as_dedalus_equation"><code class="docutils literal notranslate"><span class="pre">AdvectionDiffusionEquation.export_as_dedalus_equation()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#dynabench.equation.AdvectionEquation"><code class="docutils literal notranslate"><span class="pre">AdvectionEquation</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.AdvectionEquation.linear_terms"><code class="docutils literal notranslate"><span class="pre">AdvectionEquation.linear_terms</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.AdvectionEquation.nonlinear_terms"><code class="docutils literal notranslate"><span class="pre">AdvectionEquation.nonlinear_terms</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.AdvectionEquation.export_as_dedalus_equation"><code class="docutils literal notranslate"><span class="pre">AdvectionEquation.export_as_dedalus_equation()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#dynabench.equation.BaseEquation"><code class="docutils literal notranslate"><span class="pre">BaseEquation</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.BaseEquation.linear_terms"><code class="docutils literal notranslate"><span class="pre">BaseEquation.linear_terms</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.BaseEquation.nonlinear_terms"><code class="docutils literal notranslate"><span class="pre">BaseEquation.nonlinear_terms</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.BaseEquation.equations"><code class="docutils literal notranslate"><span class="pre">BaseEquation.equations</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.BaseEquation.export_as_dedalus_equation"><code class="docutils literal notranslate"><span class="pre">BaseEquation.export_as_dedalus_equation()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.BaseEquation.export_as_pypde_equation"><code class="docutils literal notranslate"><span class="pre">BaseEquation.export_as_pypde_equation()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.BaseEquation.lhs"><code class="docutils literal notranslate"><span class="pre">BaseEquation.lhs</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.BaseEquation.name"><code class="docutils literal notranslate"><span class="pre">BaseEquation.name</span></code></a></li>
@@ -95,6 +101,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#dynabench.equation.SimpleBurgersEquation"><code class="docutils literal notranslate"><span class="pre">SimpleBurgersEquation</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.SimpleBurgersEquation.linear_terms"><code class="docutils literal notranslate"><span class="pre">SimpleBurgersEquation.linear_terms</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.SimpleBurgersEquation.nonlinear_terms"><code class="docutils literal notranslate"><span class="pre">SimpleBurgersEquation.nonlinear_terms</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynabench.equation.SimpleBurgersEquation.export_as_dedalus_equation"><code class="docutils literal notranslate"><span class="pre">SimpleBurgersEquation.export_as_dedalus_equation()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#dynabench.equation.WaveEquation"><code class="docutils literal notranslate"><span class="pre">WaveEquation</span></code></a><ul>
@@ -154,44 +161,76 @@
 <p class="rubric">Classes</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.equation.AdvectionEquation" title="dynabench.equation.AdvectionEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AdvectionEquation</span></code></a>([c_x, c_y, evolution_rate])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.equation.AdvectionDiffusionEquation" title="dynabench.equation.AdvectionDiffusionEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AdvectionDiffusionEquation</span></code></a>([c_x, c_y, D_x, ...])</p></td>
+<td><p>Advection-Diffusion Equation in 2D.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.equation.AdvectionEquation" title="dynabench.equation.AdvectionEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AdvectionEquation</span></code></a>([c_x, c_y, evolution_rate])</p></td>
 <td><p>Advection equation in 2D.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.equation.BaseEquation" title="dynabench.equation.BaseEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseEquation</span></code></a>([equations, parameters, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.equation.BaseEquation" title="dynabench.equation.BaseEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseEquation</span></code></a>([equations, parameters, ...])</p></td>
 <td><p>Base class for all equations.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.equation.CahnHilliardEquation" title="dynabench.equation.CahnHilliardEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CahnHilliardEquation</span></code></a>([D, gamma, evolution_rate])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.equation.CahnHilliardEquation" title="dynabench.equation.CahnHilliardEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CahnHilliardEquation</span></code></a>([D, gamma, evolution_rate])</p></td>
 <td><p>Cahn-Hilliard equation in 2D.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.equation.DiffusionEquation" title="dynabench.equation.DiffusionEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DiffusionEquation</span></code></a>([D, evolution_rate])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.equation.DiffusionEquation" title="dynabench.equation.DiffusionEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DiffusionEquation</span></code></a>([D, evolution_rate])</p></td>
 <td><p>Diffusion equation in 2D.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Eq</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Eq</span></code></p></td>
 <td><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Equality</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.equation.FitzhughNagumoEquation" title="dynabench.equation.FitzhughNagumoEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FitzhughNagumoEquation</span></code></a>([stimulus, a, b, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.equation.FitzhughNagumoEquation" title="dynabench.equation.FitzhughNagumoEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FitzhughNagumoEquation</span></code></a>([stimulus, a, b, ...])</p></td>
 <td><p>FitzHugh–Nagumo model with diffusive coupling given by the following equations:</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Function</span></code>(*args)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Function</span></code>(*args)</p></td>
 <td><p>Base class for applied mathematical functions.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.equation.KuramotoSivashinskyEquation" title="dynabench.equation.KuramotoSivashinskyEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KuramotoSivashinskyEquation</span></code></a>([evolution_rate])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.equation.KuramotoSivashinskyEquation" title="dynabench.equation.KuramotoSivashinskyEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KuramotoSivashinskyEquation</span></code></a>([evolution_rate])</p></td>
 <td><p>Kuramoto-Sivashinsky equation in 2D.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PDE</span></code>(rhs, *[, bc, bc_ops, post_step_hook, ...])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PDE</span></code>(rhs, *[, bc, bc_ops, post_step_hook, ...])</p></td>
 <td><p>PDE defined by mathematical expressions.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.equation.SimpleBurgersEquation" title="dynabench.equation.SimpleBurgersEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SimpleBurgersEquation</span></code></a>([nu, evolution_rate])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.equation.SimpleBurgersEquation" title="dynabench.equation.SimpleBurgersEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SimpleBurgersEquation</span></code></a>([nu, evolution_rate])</p></td>
 <td><p>Simple Burgers equation in 2D.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Symbol</span></code>(name, **assumptions)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Symbol</span></code>(name, **assumptions)</p></td>
 <td><p>Symbol class is used to create symbolic variables.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#dynabench.equation.WaveEquation" title="dynabench.equation.WaveEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WaveEquation</span></code></a>([c, evolution_rate])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dynabench.equation.WaveEquation" title="dynabench.equation.WaveEquation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WaveEquation</span></code></a>([c, evolution_rate])</p></td>
 <td><p>Wave equation in 2D.</p></td>
 </tr>
 </tbody>
 </table>
+<dl class="py class">
+<dt class="sig sig-object py" id="dynabench.equation.AdvectionDiffusionEquation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.equation.</span></span><span class="sig-name descname"><span class="pre">AdvectionDiffusionEquation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D_y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evolution_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/equation.html#AdvectionDiffusionEquation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.equation.AdvectionDiffusionEquation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dynabench.equation.BaseEquation" title="dynabench.equation.BaseEquation"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEquation</span></code></a></p>
+<p>Advection-Diffusion Equation in 2D. The equation is given by:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial u}{\partial t} = c_x \frac{\partial u}{\partial x} + c_y \frac{\partial u}{\partial y} + D_x \frac{\partial^2 u}{\partial x^2} + D_y \frac{\partial^2 u}{\partial y^2}\]</div>
+<p>where D is the diffusion coefficient.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>parameters</strong> (<em>dict</em><em>, </em><em>default {D: 1}</em>) – Dictionary of parameters for the equations.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dynabench.equation.AdvectionDiffusionEquation.export_as_dedalus_equation">
+<span class="sig-name descname"><span class="pre">export_as_dedalus_equation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/equation.html#AdvectionDiffusionEquation.export_as_dedalus_equation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.equation.AdvectionDiffusionEquation.export_as_dedalus_equation" title="Link to this definition"></a></dt>
+<dd><p>Export the equation as a Dedalus-compatible equation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The LHS and RHS of the equations with Dedalus-compatible operators.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tuple[List[str], List[str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="dynabench.equation.AdvectionEquation">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dynabench.equation.</span></span><span class="sig-name descname"><span class="pre">AdvectionEquation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evolution_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/equation.html#AdvectionEquation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.equation.AdvectionEquation" title="Link to this definition"></a></dt>
@@ -223,6 +262,20 @@
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dynabench.equation.AdvectionEquation.export_as_dedalus_equation">
+<span class="sig-name descname"><span class="pre">export_as_dedalus_equation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/equation.html#AdvectionEquation.export_as_dedalus_equation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.equation.AdvectionEquation.export_as_dedalus_equation" title="Link to this definition"></a></dt>
+<dd><p>Export the equation as a Dedalus equation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The LHS and RHS of the equations with Dedalus-compatible operators.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tuple[List[str], List[str]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -270,6 +323,11 @@ py-pde library.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">equations</span></span><a class="headerlink" href="#dynabench.equation.BaseEquation.equations" title="Link to this definition"></a></dt>
 <dd><p>Get the equations of the equation.</p>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dynabench.equation.BaseEquation.export_as_dedalus_equation">
+<span class="sig-name descname"><span class="pre">export_as_dedalus_equation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/equation.html#BaseEquation.export_as_dedalus_equation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.equation.BaseEquation.export_as_dedalus_equation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="dynabench.equation.BaseEquation.export_as_pypde_equation">
@@ -478,6 +536,20 @@ py-pde library.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dynabench.equation.SimpleBurgersEquation.export_as_dedalus_equation">
+<span class="sig-name descname"><span class="pre">export_as_dedalus_equation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dynabench/equation.html#SimpleBurgersEquation.export_as_dedalus_equation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynabench.equation.SimpleBurgersEquation.export_as_dedalus_equation" title="Link to this definition"></a></dt>
+<dd><p>Export the equation as a Dedalus-compatible equation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The LHS and RHS of the equations with Dedalus-compatible operators.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tuple[List[str], List[str]]</p>
 </dd>
 </dl>
 </dd></dl>

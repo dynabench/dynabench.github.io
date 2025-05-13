@@ -15,6 +15,7 @@
 
    .. autosummary::
    
+      AdvectionDiffusionEquation
       AdvectionEquation
       BaseEquation
       CahnHilliardEquation

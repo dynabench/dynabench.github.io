@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.equation &mdash; dynabench 0.4.3 documentation</title>
+  <title>dynabench.equation &mdash; dynabench 0.4.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
@@ -16,7 +16,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=5bfaad31"></script>
+        <script src="../../_static/documentation_options.js?v=90733dfc"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/design-tabs.js?v=36754332"></script>
@@ -193,6 +193,12 @@
         <span class="k">return</span> <span class="n">eq</span></div>
 
     
+<div class="viewcode-block" id="BaseEquation.export_as_dedalus_equation">
+<a class="viewcode-back" href="../../reference/dynabench.equation.html#dynabench.equation.BaseEquation.export_as_dedalus_equation">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">export_as_dedalus_equation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Dedalus export needs to be implemented for each equation separately (for now).&quot;</span><span class="p">)</span></div>
+
+    
 <div class="viewcode-block" id="BaseEquation.simplify_equation">
 <a class="viewcode-back" href="../../reference/dynabench.equation.html#dynabench.equation.BaseEquation.simplify_equation">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">simplify_equation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eq</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -332,7 +338,74 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c_x</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">c_y</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">evolution_rate</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;c_x&#39;</span><span class="p">:</span> <span class="n">c_x</span><span class="p">,</span> <span class="s1">&#39;c_y&#39;</span><span class="p">:</span> <span class="n">c_y</span><span class="p">}</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">equations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dt(u) = -c_x*d_dx(u)-c_y*d_dy(u)&quot;</span><span class="p">],</span> <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">evolution_rate</span><span class="o">=</span><span class="n">evolution_rate</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">equations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dt(u) = -c_x*d_dx(u)-c_y*d_dy(u)&quot;</span><span class="p">],</span> <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">evolution_rate</span><span class="o">=</span><span class="n">evolution_rate</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="AdvectionEquation.export_as_dedalus_equation">
+<a class="viewcode-back" href="../../reference/dynabench.equation.html#dynabench.equation.AdvectionEquation.export_as_dedalus_equation">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">export_as_dedalus_equation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Export the equation as a Dedalus equation.</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            Tuple[List[str], List[str]]</span>
+<span class="sd">                The LHS and RHS of the equations with Dedalus-compatible operators.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">lhs_dedalus</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;dt(u) + c_x*dx(u) + c_y*dy(u)&quot;</span><span class="p">]</span>
+        <span class="n">rhs_dedalus</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">lhs_dedalus</span><span class="p">,</span> <span class="n">rhs_dedalus</span></div>
+</div>
+
+
+<div class="viewcode-block" id="AdvectionDiffusionEquation">
+<a class="viewcode-back" href="../../reference/dynabench.equation.html#dynabench.equation.AdvectionDiffusionEquation">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">AdvectionDiffusionEquation</span><span class="p">(</span><span class="n">BaseEquation</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Advection-Diffusion Equation in 2D. The equation is given by:</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            \\frac{\\partial u}{\\partial t} = c_x \\frac{\\partial u}{\\partial x} + c_y \\frac{\\partial u}{\\partial y} + D_x \\frac{\\partial^2 u}{\\partial x^2} + D_y \\frac{\\partial^2 u}{\\partial y^2}</span>
+
+<span class="sd">        where D is the diffusion coefficient.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        parameters : dict, default {D: 1}</span>
+<span class="sd">            Dictionary of parameters for the equations.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+                 <span class="n">c_x</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+                 <span class="n">c_y</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+                 <span class="n">D_x</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+                 <span class="n">D_y</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+                 <span class="n">evolution_rate</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> 
+                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;c_x&quot;</span><span class="p">:</span> <span class="n">c_x</span><span class="p">,</span>
+            <span class="s2">&quot;c_y&quot;</span><span class="p">:</span> <span class="n">c_y</span><span class="p">,</span>
+            <span class="s2">&quot;D_x&quot;</span><span class="p">:</span> <span class="n">D_x</span><span class="p">,</span>
+            <span class="s2">&quot;D_y&quot;</span><span class="p">:</span> <span class="n">D_y</span>
+        <span class="p">}</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">equations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dt(u) = c_x * d_dx(u) + c_y * d_dy(u) + D_x * d2_dx2(u) + D_y * d2_dy2(u)&quot;</span><span class="p">],</span> <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">evolution_rate</span><span class="o">=</span><span class="n">evolution_rate</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="AdvectionDiffusionEquation.export_as_dedalus_equation">
+<a class="viewcode-back" href="../../reference/dynabench.equation.html#dynabench.equation.AdvectionDiffusionEquation.export_as_dedalus_equation">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">export_as_dedalus_equation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Export the equation as a Dedalus-compatible equation.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Tuple[List[str], List[str]]</span>
+<span class="sd">            The LHS and RHS of the equations with Dedalus-compatible operators.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">lhs_dedalus</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;dt(u) - c_x*dx(u) - c_y*dy(u) - D_x*dx(dx(u)) - D_y*dy(dy(u))&quot;</span><span class="p">]</span>
+        <span class="n">rhs_dedalus</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">lhs_dedalus</span><span class="p">,</span> <span class="n">rhs_dedalus</span></div>
+</div>
 
 
 <div class="viewcode-block" id="WaveEquation">
@@ -477,7 +550,24 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nu</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">evolution_rate</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;nu&#39;</span><span class="p">:</span> <span class="n">nu</span><span class="p">}</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">equations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dt(u) = -u*(d_dx(u)+d_dy(u))+nu*laplace(u)&quot;</span><span class="p">],</span> <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">evolution_rate</span><span class="o">=</span><span class="n">evolution_rate</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">equations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dt(u) = -u*(d_dx(u)+d_dy(u))+nu*laplace(u)&quot;</span><span class="p">],</span> <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">evolution_rate</span><span class="o">=</span><span class="n">evolution_rate</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SimpleBurgersEquation.export_as_dedalus_equation">
+<a class="viewcode-back" href="../../reference/dynabench.equation.html#dynabench.equation.SimpleBurgersEquation.export_as_dedalus_equation">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">export_as_dedalus_equation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Export the equation as a Dedalus-compatible equation.</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            Tuple[List[str], List[str]]</span>
+<span class="sd">                The LHS and RHS of the equations with Dedalus-compatible operators.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">lhs_dedalus</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;dt(u) - nu*(dx(dx(u)) + dy(dy(u)))&quot;</span><span class="p">]</span>
+        <span class="n">rhs_dedalus</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;u*dx(u) + u*dy(u)&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">lhs_dedalus</span><span class="p">,</span> <span class="n">rhs_dedalus</span></div>
+</div>
 
 
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dynabench.dataset.transforms &mdash; dynabench 0.4.3 documentation</title>
+  <title>dynabench.dataset.transforms &mdash; dynabench 0.4.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
@@ -16,7 +16,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=5bfaad31"></script>
+        <script src="../../../_static/documentation_options.js?v=90733dfc"></script>
         <script src="../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
@@ -81,7 +81,7 @@
   <h1>Source code for dynabench.dataset.transforms</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Iterable</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">einops</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -228,7 +228,7 @@
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_item</span><span class="p">:</span> <span class="n">DataItem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_data</span><span class="p">(</span><span class="n">data_item</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">data_item</span><span class="o">.</span><span class="vm">__dict__</span></div>
+        <span class="k">return</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data_item</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">}</span></div>
 
 
 <div class="viewcode-block" id="KNNGraph">
@@ -246,36 +246,45 @@
 <span class="sd">    CloudItem</span>
 <span class="sd">        data_item with knn_graph</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">grid_limits</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid_limits</span> <span class="o">=</span> <span class="n">grid_limits</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_item</span><span class="p">:</span> <span class="n">CloudDataItem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CloudDataItem</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_data</span><span class="p">(</span><span class="n">data_item</span><span class="p">)</span>
 
         <span class="n">points</span> <span class="o">=</span> <span class="n">data_item</span><span class="o">.</span><span class="n">pos</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid_limits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid_limits</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
         <span class="n">points_padded</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
                <span class="p">(</span><span class="n">points</span><span class="p">,</span>
-                <span class="n">points</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
-                <span class="n">points</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> 
-                <span class="n">points</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> 
-                <span class="n">points</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
-                <span class="n">points</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span>
-                <span class="n">points</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
-                <span class="n">points</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
-                <span class="n">points</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+                <span class="n">points</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid_limits</span><span class="p">,</span>
+                <span class="n">points</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid_limits</span><span class="p">,</span>
+                <span class="n">points</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid_limits</span><span class="p">,</span>
+                <span class="n">points</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid_limits</span><span class="p">,</span>
+                <span class="n">points</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid_limits</span><span class="p">,</span>
+                <span class="n">points</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid_limits</span><span class="p">,</span>
+                <span class="n">points</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid_limits</span><span class="p">,</span>
+                <span class="n">points</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid_limits</span><span class="p">,</span>
                 <span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
         <span class="n">tree</span> <span class="o">=</span> <span class="n">KDTree</span><span class="p">(</span><span class="n">points_padded</span><span class="p">)</span>
-        <span class="n">distances</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="c1"># remove the first column, which is the point itself</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">%</span> <span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">neighbors</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">neighbors</span> <span class="o">=</span> <span class="n">neighbors</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="c1"># remove the first column, which is the point itself</span>
+        
+        <span class="c1"># calculate distances</span>
+        <span class="n">neighbor_points</span> <span class="o">=</span> <span class="n">points_padded</span><span class="p">[</span><span class="n">neighbors</span><span class="p">]</span>
+        <span class="n">points_unsqueezed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">distances</span> <span class="o">=</span> <span class="n">neighbor_points</span> <span class="o">-</span> <span class="n">points_unsqueezed</span>
+        
+        <span class="n">neighbors</span> <span class="o">=</span> <span class="n">neighbors</span> <span class="o">%</span> <span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="k">return</span> <span class="n">CloudDataItem</span><span class="p">(</span>
             <span class="n">x</span><span class="o">=</span><span class="n">data_item</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
             <span class="n">y</span><span class="o">=</span><span class="n">data_item</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
             <span class="n">pos</span><span class="o">=</span><span class="n">data_item</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span>
-            <span class="n">knn_graph</span><span class="o">=</span><span class="n">n</span><span class="p">,</span>
+            <span class="n">neighbors</span><span class="o">=</span><span class="n">neighbors</span><span class="p">,</span>
+            <span class="n">distances</span><span class="o">=</span><span class="n">distances</span><span class="p">,</span>
         <span class="p">)</span>
     
 <div class="viewcode-block" id="KNNGraph.check_if_valid">
@@ -318,18 +327,20 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_data</span><span class="p">(</span><span class="n">data_item</span><span class="p">)</span>
 
-        <span class="n">knn_graph</span> <span class="o">=</span> <span class="n">data_item</span><span class="o">.</span><span class="n">knn_graph</span>
-        <span class="n">num_points</span> <span class="o">=</span> <span class="n">knn_graph</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">k</span> <span class="o">=</span> <span class="n">knn_graph</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">neighbors</span> <span class="o">=</span> <span class="n">data_item</span><span class="o">.</span><span class="n">neighbors</span>
+        <span class="n">num_points</span> <span class="o">=</span> <span class="n">neighbors</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">neighbors</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">src</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_points</span><span class="p">),</span> <span class="n">k</span><span class="p">)</span>
-        <span class="n">dst</span> <span class="o">=</span> <span class="n">knn_graph</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="n">dst</span> <span class="o">=</span> <span class="n">neighbors</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
         <span class="n">edge_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">((</span><span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         
         <span class="k">return</span> <span class="n">CloudDataItem</span><span class="p">(</span>
             <span class="n">x</span><span class="o">=</span><span class="n">data_item</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
             <span class="n">y</span><span class="o">=</span><span class="n">data_item</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
             <span class="n">pos</span><span class="o">=</span><span class="n">data_item</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span>
-            <span class="n">knn_graph</span><span class="o">=</span><span class="n">edge_list</span><span class="p">,</span>
+            <span class="n">neighbors</span><span class="o">=</span><span class="n">data_item</span><span class="o">.</span><span class="n">neighbors</span><span class="p">,</span>
+            <span class="n">distances</span><span class="o">=</span><span class="n">data_item</span><span class="o">.</span><span class="n">distances</span><span class="p">,</span>
+            <span class="n">edgelist</span><span class="o">=</span><span class="n">edge_list</span><span class="p">,</span>
         <span class="p">)</span>
     
 <div class="viewcode-block" id="EdgeListFromKNN.check_if_valid">
@@ -356,6 +367,157 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">transforms</span><span class="o">=</span><span class="p">[</span><span class="n">KNNGraph</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">),</span> <span class="n">EdgeListFromKNN</span><span class="p">()])</span></div>
+
+
+<div class="viewcode-block" id="TypeCaster">
+<a class="viewcode-back" href="../../../reference/dynabench.dataset.transforms.html#dynabench.dataset.transforms.TypeCaster">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TypeCaster</span><span class="p">(</span><span class="n">BaseTransform</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Cast the data item to the correct type. (In place!!!)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>        
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="n">dtype</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_item</span><span class="p">:</span> <span class="n">DataItem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataItem</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_data</span><span class="p">(</span><span class="n">data_item</span><span class="p">)</span>
+        <span class="n">data_item</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">data_item</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">data_item</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">data_item</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">data_item</span><span class="p">,</span> <span class="s1">&#39;pos&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">data_item</span><span class="o">.</span><span class="n">pos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data_item</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">data_item</span><span class="o">.</span><span class="n">pos</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+            
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">data_item</span><span class="p">,</span> <span class="s1">&#39;distances&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">data_item</span><span class="o">.</span><span class="n">distances</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data_item</span><span class="o">.</span><span class="n">distances</span> <span class="o">=</span> <span class="n">data_item</span><span class="o">.</span><span class="n">distances</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">data_item</span></div>
+
+    
+<div class="viewcode-block" id="GridDownsampleFactor">
+<a class="viewcode-back" href="../../../reference/dynabench.dataset.transforms.html#dynabench.dataset.transforms.GridDownsampleFactor">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GridDownsampleFactor</span><span class="p">(</span><span class="n">BaseTransform</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Downsample the grid by a factor.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        factor : int</span>
+<span class="sd">            Factor by which to downsample the grid.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">factor</span> <span class="o">=</span> <span class="n">factor</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_item</span><span class="p">:</span> <span class="n">DataItem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataItem</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_data</span><span class="p">(</span><span class="n">data_item</span><span class="p">)</span>
+
+        <span class="c1"># Downsample the grid</span>
+        <span class="k">if</span> <span class="n">data_item</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">downsampled_x</span> <span class="o">=</span> <span class="n">data_item</span><span class="o">.</span><span class="n">x</span><span class="p">[:,</span> <span class="p">::</span><span class="bp">self</span><span class="o">.</span><span class="n">factor</span><span class="p">,</span> <span class="p">::</span><span class="bp">self</span><span class="o">.</span><span class="n">factor</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">downsampled_x</span> <span class="o">=</span> <span class="n">data_item</span><span class="o">.</span><span class="n">x</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">::</span><span class="bp">self</span><span class="o">.</span><span class="n">factor</span><span class="p">,</span> <span class="p">::</span><span class="bp">self</span><span class="o">.</span><span class="n">factor</span><span class="p">]</span>
+        
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">data_item</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">data_item</span><span class="o">.</span><span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">downsampled_y</span> <span class="o">=</span> <span class="n">data_item</span><span class="o">.</span><span class="n">y</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">::</span><span class="bp">self</span><span class="o">.</span><span class="n">factor</span><span class="p">,</span> <span class="p">::</span><span class="bp">self</span><span class="o">.</span><span class="n">factor</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">downsampled_y</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">data_item</span><span class="p">,</span> <span class="s1">&#39;pos&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">data_item</span><span class="o">.</span><span class="n">pos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">downsampled_pos</span> <span class="o">=</span> <span class="n">data_item</span><span class="o">.</span><span class="n">pos</span><span class="p">[::</span><span class="bp">self</span><span class="o">.</span><span class="n">factor</span><span class="p">,</span> <span class="p">::</span><span class="bp">self</span><span class="o">.</span><span class="n">factor</span><span class="p">]</span>
+
+        <span class="n">data_item</span> <span class="o">=</span> <span class="n">DataItem</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">downsampled_x</span><span class="p">,</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">downsampled_y</span><span class="p">,</span>
+            <span class="n">pos</span><span class="o">=</span><span class="n">downsampled_pos</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">data_item</span></div>
+
+    
+<div class="viewcode-block" id="GridDownsampleFFT">
+<a class="viewcode-back" href="../../../reference/dynabench.dataset.transforms.html#dynabench.dataset.transforms.GridDownsampleFFT">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GridDownsampleFFT</span><span class="p">(</span><span class="n">BaseTransform</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Downsample the grid to a smaller size using FFT.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        target_size : Tuple[int, int]</span>
+<span class="sd">            Target size of the grid.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_size</span> <span class="o">=</span> <span class="n">target_size</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_item</span><span class="p">:</span> <span class="n">DataItem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataItem</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_data</span><span class="p">(</span><span class="n">data_item</span><span class="p">)</span>
+
+        <span class="c1"># Get the original grid size</span>
+        <span class="n">original_size</span> <span class="o">=</span> <span class="n">data_item</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span>
+
+        <span class="c1"># Downsample using FFT</span>
+        <span class="n">downsampled_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft2</span><span class="p">(</span><span class="n">data_item</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target_size</span><span class="p">)</span>
+        <span class="n">downsampled_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">irfft2</span><span class="p">(</span><span class="n">downsampled_x</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">data_item</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">data_item</span><span class="o">.</span><span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">downsampled_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft2</span><span class="p">(</span><span class="n">data_item</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target_size</span><span class="p">)</span>
+            <span class="n">downsampled_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">irfft2</span><span class="p">(</span><span class="n">downsampled_y</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">downsampled_y</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">data_item</span><span class="p">,</span> <span class="s1">&#39;pos&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">data_item</span><span class="o">.</span><span class="n">pos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">downsampled_pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft2</span><span class="p">(</span><span class="n">data_item</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target_size</span><span class="p">)</span>
+            <span class="n">downsampled_pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">irfft2</span><span class="p">(</span><span class="n">downsampled_pos</span><span class="p">)</span>
+
+        <span class="n">data_item</span> <span class="o">=</span> <span class="n">DataItem</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">downsampled_x</span><span class="p">,</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">downsampled_y</span><span class="p">,</span>
+            <span class="n">pos</span><span class="o">=</span><span class="n">downsampled_pos</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">data_item</span></div>
+
+    
+<div class="viewcode-block" id="PointSampling">
+<a class="viewcode-back" href="../../../reference/dynabench.dataset.transforms.html#dynabench.dataset.transforms.PointSampling">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PointSampling</span><span class="p">(</span><span class="n">BaseTransform</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Point sampling transform for the dataset.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        num_points : int</span>
+<span class="sd">            Number of points to sample.</span>
+<span class="sd">        k : int</span>
+<span class="sd">            Number of nearest neighbors to use for the KNN graph.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_points</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">900</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_points</span> <span class="o">=</span> <span class="n">num_points</span>
+        
+        
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_item</span><span class="p">:</span> <span class="n">CloudDataItem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CloudDataItem</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_data</span><span class="p">(</span><span class="n">data_item</span><span class="p">)</span>
+        
+        <span class="n">total_points</span> <span class="o">=</span> <span class="n">data_item</span><span class="o">.</span><span class="n">pos</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">total_points</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_points</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">points</span> <span class="o">=</span> <span class="n">data_item</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">data_item</span><span class="o">.</span><span class="n">y</span><span class="p">[:,</span> <span class="n">indices</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">data_item</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">data_item</span><span class="o">.</span><span class="n">x</span><span class="p">[:,</span> <span class="n">indices</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">data_item</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+        
+
+        <span class="k">return</span> <span class="n">CloudDataItem</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+            <span class="n">pos</span><span class="o">=</span><span class="n">points</span>
+        <span class="p">)</span></div>
 
 </pre></div>
 
